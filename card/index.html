@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NMOS Simple Tools</title>
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@700;800&display=swap');
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      height: 100svh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f0f9ff;
+      font-family: system-ui, sans-serif;
+    }
+
+    /* font-size が全体のスケール基準 */
+    .card {
+      font-size: clamp(14px, 3.5vmin, 22px);
+      width: 21em;
+      background: #ffffff;
+      border-radius: 1.7em;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06), 0 12px 40px rgba(14,165,233,0.12);
+      border: 1px solid #bae6fd;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .card__header {
+      width: 100%;
+      padding: 1.3em 1.4em 1em;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.25em;
+      background: linear-gradient(160deg, #f0f9ff 0%, #ffffff 100%);
+      border-bottom: 1px solid #e0f2fe;
+    }
+
+    .card__logo {
+      font-family: 'Bricolage Grotesque', system-ui, sans-serif;
+      font-size: 0.75em;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      background: linear-gradient(90deg, #0ea5e9, #7c3aed);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-transform: uppercase;
+    }
+
+    .card__title {
+      font-family: 'Bricolage Grotesque', system-ui, sans-serif;
+      font-size: 1.3em;
+      font-weight: 800;
+      color: #0f172a;
+      line-height: 1.2;
+      text-align: center;
+    }
+
+    .card__title span {
+      background: linear-gradient(90deg, #0ea5e9, #7c3aed);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .card__qr {
+      padding: 1.1em 1.4em 0.7em;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.6em;
+    }
+
+    .card__qr img {
+      width: 12em;
+      height: 12em;
+      border-radius: 0.85em;
+      display: block;
+    }
+
+    .card__hint {
+      font-size: 0.75em;
+      color: #94a3b8;
+    }
+
+    .card__tools {
+      width: 100%;
+      padding: 0 1.4em 1.1em;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      gap: 0.85em;
+    }
+
+    .tool-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      opacity: 0.85;
+      transition: opacity 0.15s, transform 0.15s;
+    }
+    .tool-row:hover { opacity: 1; transform: scale(1.1); }
+
+    .tool-row__icon {
+      width: 2.5em;
+      height: 2.5em;
+      border-radius: 0.6em;
+      object-fit: contain;
+    }
+
+    .card__footer {
+      width: 100%;
+      padding: 0.7em 1.1em;
+      border-top: 1px solid #e0f2fe;
+      text-align: center;
+    }
+
+    .card__url {
+      font-size: 0.7em;
+      color: #0ea5e9;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      text-decoration: none;
+    }
+    .card__url:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <div class="card">
+
+    <div class="card__header">
+      <p class="card__logo">NMOS // Simple Tools</p>
+      <h1 class="card__title">Open-source <span>Broadcast Utilities</span></h1>
+    </div>
+
+    <div class="card__qr">
+      <img src="../assets/images/QR.png" alt="QR Code">
+      <p class="card__hint">スキャンしてアクセス</p>
+    </div>
+
+    <div class="card__tools">
+      <a class="tool-row" href="../en/bcc/">
+        <img class="tool-row__icon" src="../assets/icons/bcc.svg" alt="BCC">
+      </a>
+      <a class="tool-row" href="../en/controller/">
+        <img class="tool-row__icon" src="../assets/icons/controller.png" alt="Controller" style="border-radius:9px;">
+      </a>
+      <a class="tool-row" href="../en/port-explorer/">
+        <img class="tool-row__icon" src="../assets/icons/port-explorer.svg" alt="Port Explorer">
+      </a>
+      <a class="tool-row" href="../en/rds-studio/">
+        <img class="tool-row__icon" src="../assets/icons/rds-studio.svg" alt="RDS Studio">
+      </a>
+      <a class="tool-row" href="../en/mmam/">
+        <img class="tool-row__icon" src="../assets/icons/mmam.svg" alt="MMAM">
+      </a>
+    </div>
+
+    <div class="card__footer">
+      <a class="card__url" href="../en/">taqq505.github.io/nmos-simple-tools-web</a>
+    </div>
+
+  </div>
+</body>
+</html>

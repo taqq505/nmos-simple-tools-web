@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="NMOS Simple Tools">
+  <defs>
+    <linearGradient id="g" x1="96" y1="80" x2="416" y2="448" gradientUnits="userSpaceOnUse">
+      <stop offset="0"   stop-color="#4ee7ff"/>
+      <stop offset="0.5" stop-color="#00c4ff"/>
+      <stop offset="1"   stop-color="#2f6bff"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Outer border -->
+  <rect x="88" y="88" width="336" height="336" rx="72"
+        fill="none" stroke="url(#g)" stroke-width="24"/>
+
+  <!--
+    Isometric cube wireframe.
+    Regular hexagon (pointy-top, r=130) + Y-junction from center
+    to top / lower-right / lower-left vertices.
+    Vertices: A(256,126) B(369,191) C(369,321) D(256,386) E(143,321) F(143,191)
+  -->
+  <g stroke="url(#g)" stroke-width="20" stroke-linejoin="round" stroke-linecap="round" fill="none">
+    <polygon points="256,126 369,191 369,321 256,386 143,321 143,191"/>
+    <line x1="256" y1="256" x2="369" y2="191"/>
+    <line x1="256" y1="256" x2="256" y2="386"/>
+    <line x1="256" y1="256" x2="143" y2="191"/>
+  </g>
+
+  <!-- Front vertex dot -->
+  <circle cx="256" cy="256" r="10" fill="url(#g)"/>
+</svg>
