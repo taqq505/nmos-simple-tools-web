@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="MMAM — Media Multicast Address Manager. Docker-based multicast address planning for ST 2110 networks.">
+  <title>MMAM — NMOS Simple Tools</title>
+  <link rel="stylesheet" href="../../assets/css/common.css">
+</head>
+<body>
+  
+
+  <nav class="nav">
+    <div class="nav__inner">
+      <div class="nav__left">
+        <a class="nav__logo" href="../">NMOS<span>//</span> Simple Tools</a>
+        <div class="nav__breadcrumb">
+          <span class="nav__breadcrumb-sep">/</span>
+          <span class="nav__breadcrumb-current">MMAM</span>
+        </div>
+      </div>
+      <div class="nav__links">
+        <a href="../#tools">Tools</a>
+        <a href="../#about">About</a>
+        <a href="https://github.com/taqq505" target="_blank" rel="noopener">GitHub&nbsp;↗</a>
+        <div class="nav__lang">
+          <a href="." class="nav__lang-btn active">EN</a>
+          <span class="nav__lang-sep">|</span>
+          <a href="../../ja/mmam/" class="nav__lang-btn">日本語</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <section class="tool-hero">
+    <div class="container">
+      <div class="tool-hero__content">
+        <div class="tool-hero__info">
+          <img class="tool-hero__icon" src="../../assets/icons/mmam.svg" alt="" width="56" height="56">
+          <h1 class="tool-hero__name">MMAM</h1>
+          <p class="tool-hero__subtitle">Media Multicast Address Manager</p>
+          <div class="tool-hero__tags">
+            <span class="tag">Multicast</span>
+            <span class="tag">Docker</span>
+            <span class="tag">ST 2110</span>
+            <span class="tag">IP Planning</span>
+          </div>
+        </div>
+        <div class="tool-hero__cta">
+          <a class="btn-primary" href="https://taqq505.github.io/mmam-website/" target="_blank" rel="noopener">Open Tool ↗</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ad-slot-wrap">
+    <div class="ad-slot ad-slot--leaderboard">
+      <span class="ad-slot__label">Advertisement</span>
+    </div>
+  </div>
+
+  <section class="tool-desc">
+    <div class="container">
+      <div class="tool-desc__grid">
+        <div class="reveal">
+          <p class="section-label">Overview</p>
+          <h2 class="section-title">Multicast address planning for ST&nbsp;2110</h2>
+          <div class="section-body">
+            <p>MMAM (Media Multicast Address Manager) is a Docker-based web application for planning and tracking multicast address allocations across ST&nbsp;2110 IP media networks. It provides a centralised view of your multicast address space, making it easy to allocate addresses, track which streams are assigned where, and avoid conflicts.</p>
+            <p>IP address planning is one of the most error-prone aspects of ST&nbsp;2110 deployment. MMAM turns a spreadsheet-based process into a structured, queryable system.</p>
+          </div>
+        </div>
+        <div class="reveal">
+          <p class="section-label">Features</p>
+          <ul class="feature-list">
+            <li>Visual multicast address range management</li>
+            <li>Allocate and label addresses per stream or group</li>
+            <li>Conflict detection — prevents duplicate assignments</li>
+            <li>Docker-based — deploy anywhere in minutes</li>
+            <li>Export allocation tables for documentation</li>
+            <li>ST 2110 subnet structure awareness</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ad-slot-wrap" style="display:flex; justify-content:center;">
+    <div class="ad-slot ad-slot--rect" >
+      <span class="ad-slot__label">Advertisement</span>
+    </div>
+  </div>
+
+  <section class="quick-start">
+    <div class="container">
+      <p class="section-label reveal">Quick Start</p>
+      <h2 class="section-title reveal">Deploy with Docker in minutes</h2>
+      <div class="steps">
+        <div class="step reveal">
+          <span class="step__num">01</span>
+          <div class="step__content">
+            <p class="step__title">Clone the repository</p>
+            <p class="step__desc">Clone the MMAM repository from GitHub to your local machine or server.</p>
+          </div>
+        </div>
+        <div class="step reveal">
+          <span class="step__num">02</span>
+          <div class="step__content">
+            <p class="step__title">Configure your subnet</p>
+            <p class="step__desc">Copy <code style="font-family:var(--font-mono);font-size:12px;color:var(--accent)">.env.example</code> to <code style="font-family:var(--font-mono);font-size:12px;color:var(--accent)">.env</code> and set your ST&nbsp;2110 multicast address range and subnet parameters.</p>
+          </div>
+        </div>
+        <div class="step reveal">
+          <span class="step__num">03</span>
+          <div class="step__content">
+            <p class="step__title">Start the container</p>
+            <p class="step__desc">Run <code style="font-family:var(--font-mono);font-size:12px;color:var(--accent)">docker compose up -d</code>. MMAM starts a web server on port 3000 (configurable).</p>
+          </div>
+        </div>
+        <div class="step reveal">
+          <span class="step__num">04</span>
+          <div class="step__content">
+            <p class="step__title">Open in your browser</p>
+            <p class="step__desc">Navigate to <code style="font-family:var(--font-mono);font-size:12px;color:var(--accent)">http://localhost:3000</code>. Add your multicast ranges and start allocating addresses to streams.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="related">
+    <div class="container">
+      <p class="section-label reveal">Related Tools</p>
+      <h2 class="section-title reveal">Explore the suite</h2>
+      <div class="related__grid reveal">
+        <a class="related-card" href="../bcc/">
+          <img class="related-card__icon" src="../../assets/icons/bcc.svg" alt="" width="32" height="32">
+          <p class="related-card__name">NMOS Simple BCC</p>
+          <p class="related-card__sub">Browser-based Connection Controller</p>
+          <p class="related-card__desc">Browser-based IS-04 / IS-05 connection controller with Stream Deck integration.</p>
+          <span class="related-card__arrow">→ View tool</span>
+          <div class="related-card__accent"></div>
+        </a>
+        <a class="related-card" href="../port-explorer/">
+          <img class="related-card__icon" src="../../assets/icons/port-explorer.svg" alt="" width="32" height="32">
+          <p class="related-card__name">NMOS Port Explorer</p>
+          <p class="related-card__sub">IS-04 Resource Inspector</p>
+          <p class="related-card__desc">Browse and inspect NMOS nodes, devices, senders, and receivers with SDP inspection.</p>
+          <span class="related-card__arrow">→ View tool</span>
+          <div class="related-card__accent"></div>
+        </a>
+        <a class="related-card" href="../rds-studio/">
+          <img class="related-card__icon" src="../../assets/icons/rds-studio.svg" alt="" width="32" height="32">
+          <p class="related-card__name">NMOS Simple RDS Studio</p>
+          <p class="related-card__sub">Windows Registry GUI</p>
+          <p class="related-card__desc">Windows tray app for configuring nmos-cpp node settings via the Windows Registry.</p>
+          <span class="related-card__arrow">→ View tool</span>
+          <div class="related-card__accent"></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="ad-slot-wrap">
+    <div class="ad-slot ad-slot--leaderboard">
+      <span class="ad-slot__label">Advertisement</span>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer__inner">
+      <span class="footer__left">NMOS Simple Tools — Open source broadcast utilities</span>
+      <div class="footer__right">
+        <span>IS-04</span> · <span>IS-05</span> · <span>ST 2110</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../../assets/js/common.js"></script>
+</body>
+</html>

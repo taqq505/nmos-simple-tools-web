@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ja" class="lang-ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="NMOS Simple BCC — Stream Deck対応のブラウザベースIS-04 / IS-05コネクションコントローラー。">
+  <title>NMOS Simple BCC — NMOS Simple Tools</title>
+  <link rel="stylesheet" href="../../assets/css/common.css">
+</head>
+<body>
+  
+
+  <nav class="nav">
+    <div class="nav__inner">
+      <div class="nav__left">
+        <a class="nav__logo" href="../">NMOS<span>//</span> Simple Tools</a>
+        <div class="nav__breadcrumb">
+          <span class="nav__breadcrumb-sep">/</span>
+          <span class="nav__breadcrumb-current">BCC</span>
+        </div>
+      </div>
+      <div class="nav__links">
+        <a href="../#tools">ツール</a>
+        <a href="../#about">About</a>
+        <a href="https://github.com/taqq505" target="_blank" rel="noopener">GitHub&nbsp;↗</a>
+        <div class="nav__lang">
+          <a href="../../en/bcc/" class="nav__lang-btn">EN</a>
+          <span class="nav__lang-sep">|</span>
+          <a href="." class="nav__lang-btn active">日本語</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <section class="tool-hero">
+    <div class="container">
+      <div class="tool-hero__content">
+        <div class="tool-hero__info">
+          <img class="tool-hero__icon" src="../../assets/icons/bcc.svg" alt="" width="56" height="56">
+          <h1 class="tool-hero__name">NMOS Simple BCC</h1>
+          <p class="tool-hero__subtitle">Browser-based Connection Controller</p>
+          <div class="tool-hero__tags">
+            <span class="tag">IS-04</span>
+            <span class="tag">IS-05</span>
+            <span class="tag">ST 2110-7</span>
+            <span class="tag">Browser</span>
+            <span class="tag">Stream Deck</span>
+          </div>
+        </div>
+        <div class="tool-hero__cta">
+          <a class="btn-primary" href="https://taqq505.github.io/nmos-patch-gui/" target="_blank" rel="noopener">ツールを開く ↗</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ad-slot-wrap">
+    <div class="ad-slot ad-slot--leaderboard">
+      <span class="ad-slot__label">Advertisement</span>
+    </div>
+  </div>
+
+  <section class="tool-desc">
+    <div class="container">
+      <div class="tool-desc__grid">
+        <div class="reveal">
+          <p class="section-label">概要</p>
+          <h2 class="section-title">ブラウザで完結するコネクション管理</h2>
+          <div class="section-body">
+            <p>NMOS Simple BCC（Browser-based Connection Controller）は、IS-04 / IS-05環境を管理するためのWebアプリケーションです。現代的なWebブラウザで開くだけで、NMOSレジストリに接続してセンダーとレシーバーの制御をすぐに開始できます。</p>
+            <p>Stream Deck連携により、ハードウェアボタンに個別のコネクション操作を割り当てることが可能です。ライブ制作現場でのタクティルな操作に最適です。</p>
+          </div>
+        </div>
+        <div class="reveal">
+          <p class="section-label">主な機能</p>
+          <ul class="feature-list">
+            <li>IS-04レジストリクエリ — ノード・デバイス・センダー・レシーバーの一覧表示</li>
+            <li>IS-05コネクション管理 — コネクションの確立・削除</li>
+            <li>クロスポイント形式のマトリクスビュー</li>
+            <li>WebSocket経由のStream Deck連携</li>
+            <li>インストール不要 — ブラウザのみで動作</li>
+            <li>ST 2110-7冗長系（レッグA・B）対応</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ad-slot-wrap" style="display:flex; justify-content:center;">
+    <div class="ad-slot ad-slot--rect" >
+      <span class="ad-slot__label">Advertisement</span>
+    </div>
+  </div>
+
+  <section class="quick-start">
+    <div class="container">
+      <p class="section-label reveal">クイックスタート</p>
+      <h2 class="section-title reveal">数分で起動・接続できます</h2>
+      <div class="steps">
+        <div class="step reveal">
+          <span class="step__num">01</span>
+          <div class="step__content">
+            <p class="step__title">ブラウザでBCCを開く</p>
+            <p class="step__desc">ツールのURLにアクセスします。インストールやローカルサーバーは不要で、すべてクライアントサイドで動作します。</p>
+          </div>
+        </div>
+        <div class="step reveal">
+          <span class="step__num">02</span>
+          <div class="step__content">
+            <p class="step__title">IS-04レジストリエンドポイントを設定する</p>
+            <p class="step__desc">NMOSクエリAPIのベースURL（例: <code style="font-family:var(--font-mono);font-size:12px;color:var(--accent)">http://registry.local:3211/x-nmos/query/v1.3</code>）を入力します。ノード・センダー・レシーバーが自動的に取得されます。</p>
+          </div>
+        </div>
+        <div class="step reveal">
+          <span class="step__num">03</span>
+          <div class="step__content">
+            <p class="step__title">センダーとレシーバーを選択する</p>
+            <p class="step__desc">左列のセンダーをクリックし、次にレシーバーをクリックしてコネクションダイアログを開きます。確認するとIS-05 PATCHリクエストが実行されます。</p>
+          </div>
+        </div>
+        <div class="step reveal">
+          <span class="step__num">04</span>
+          <div class="step__content">
+            <p class="step__title">（任意）Stream Deckを設定する</p>
+            <p class="step__desc">BCC Stream DeckプラグインをインストールしてWebSocketでペアリングします。センダー/レシーバーの組み合わせをボタンに割り当て、ライブ制作中のワンタッチ切り替えを実現できます。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="related">
+    <div class="container">
+      <p class="section-label reveal">関連ツール</p>
+      <h2 class="section-title reveal">スイートを探索する</h2>
+      <div class="related__grid reveal">
+        <a class="related-card" href="../controller/">
+          <img class="related-card__icon" src="../../assets/icons/controller.svg" alt="" width="32" height="32">
+          <p class="related-card__name">NMOS Simple Controller</p>
+          <p class="related-card__sub">Lightweight NMOS Control Interface</p>
+          <p class="related-card__desc">IS-04リソース管理とIS-05コネクション制御のための軽量インターフェース。</p>
+          <span class="related-card__arrow">→ 詳細を見る</span>
+          <div class="related-card__accent"></div>
+        </a>
+        <a class="related-card" href="../port-explorer/">
+          <img class="related-card__icon" src="../../assets/icons/port-explorer.svg" alt="" width="32" height="32">
+          <p class="related-card__name">NMOS Port Explorer</p>
+          <p class="related-card__sub">IS-04 Resource Inspector</p>
+          <p class="related-card__desc">NMOSノード・デバイス・センダー・レシーバーを閲覧。SDPペイロードの検査も可能。</p>
+          <span class="related-card__arrow">→ 詳細を見る</span>
+          <div class="related-card__accent"></div>
+        </a>
+        <a class="related-card" href="../mmam/">
+          <img class="related-card__icon" src="../../assets/icons/mmam.svg" alt="" width="32" height="32">
+          <p class="related-card__name">MMAM</p>
+          <p class="related-card__sub">Media Multicast Address Manager</p>
+          <p class="related-card__desc">ST&nbsp;2110 IPメディアネットワークのマルチキャストアドレス割り当てを管理・追跡。</p>
+          <span class="related-card__arrow">→ 詳細を見る</span>
+          <div class="related-card__accent"></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="ad-slot-wrap">
+    <div class="ad-slot ad-slot--leaderboard">
+      <span class="ad-slot__label">Advertisement</span>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer__inner">
+      <span class="footer__left">NMOS Simple Tools — オープンソース放送ユーティリティ</span>
+      <div class="footer__right">
+        <span>IS-04</span> · <span>IS-05</span> · <span>ST 2110</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../../assets/js/common.js"></script>
+</body>
+</html>

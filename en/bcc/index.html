@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="NMOS Simple BCC — Browser-based IS-04 / IS-05 connection controller with Stream Deck support.">
+  <title>NMOS Simple BCC — NMOS Simple Tools</title>
+  <link rel="stylesheet" href="../../assets/css/common.css">
+</head>
+<body>
+  
+
+  <!-- Nav -->
+  <nav class="nav">
+    <div class="nav__inner">
+      <div class="nav__left">
+        <a class="nav__logo" href="../">NMOS<span>//</span> Simple Tools</a>
+        <div class="nav__breadcrumb">
+          <span class="nav__breadcrumb-sep">/</span>
+          <span class="nav__breadcrumb-current">BCC</span>
+        </div>
+      </div>
+      <div class="nav__links">
+        <a href="../#tools">Tools</a>
+        <a href="../#about">About</a>
+        <a href="https://github.com/taqq505" target="_blank" rel="noopener">GitHub&nbsp;↗</a>
+        <div class="nav__lang">
+          <a href="." class="nav__lang-btn active">EN</a>
+          <span class="nav__lang-sep">|</span>
+          <a href="../../ja/bcc/" class="nav__lang-btn">日本語</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Tool Hero -->
+  <section class="tool-hero">
+    <div class="container">
+      <div class="tool-hero__content">
+        <div class="tool-hero__info">
+          <img class="tool-hero__icon" src="../../assets/icons/bcc.svg" alt="" width="56" height="56">
+          <h1 class="tool-hero__name">NMOS Simple BCC</h1>
+          <p class="tool-hero__subtitle">Browser-based Connection Controller</p>
+          <div class="tool-hero__tags">
+            <span class="tag">IS-04</span>
+            <span class="tag">IS-05</span>
+            <span class="tag">ST 2110-7</span>
+            <span class="tag">Browser</span>
+            <span class="tag">Stream Deck</span>
+          </div>
+        </div>
+        <div class="tool-hero__cta">
+          <a class="btn-primary" href="https://taqq505.github.io/nmos-patch-gui/" target="_blank" rel="noopener">Open Tool ↗</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ad Slot A -->
+  <div class="ad-slot-wrap">
+    <div class="ad-slot ad-slot--leaderboard">
+      <span class="ad-slot__label">Advertisement</span>
+      <!-- AD SLOT A: 728×90 / responsive -->
+    </div>
+  </div>
+
+  <!-- Description -->
+  <section class="tool-desc">
+    <div class="container">
+      <div class="tool-desc__grid">
+        <div class="reveal">
+          <p class="section-label">Overview</p>
+          <h2 class="section-title">Connection control in the browser</h2>
+          <div class="section-body">
+            <p>NMOS Simple BCC (Browser-based Connection Controller) is a web application for managing IS-04 / IS-05 NMOS environments. Open it in any modern browser and connect to your NMOS registry to start controlling senders and receivers immediately.</p>
+            <p>Stream Deck integration lets operators assign individual connections to hardware buttons — ideal for live production where tactile, one-touch switching is essential.</p>
+          </div>
+        </div>
+        <div class="reveal">
+          <p class="section-label">Features</p>
+          <ul class="feature-list">
+            <li>IS-04 registry query — browse all nodes, devices, senders, receivers</li>
+            <li>IS-05 connection management — establish and remove connections</li>
+            <li>Matrix view for cross-point style connection control</li>
+            <li>Stream Deck integration via WebSocket bridge</li>
+            <li>No installation — runs entirely in the browser</li>
+            <li>ST 2110-7 redundancy support (legs A &amp; B)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ad Slot B -->
+  <div class="ad-slot-wrap" style="display:flex; justify-content:center;">
+    <div class="ad-slot ad-slot--rect" >
+      <span class="ad-slot__label">Advertisement</span>
+      <!-- AD SLOT B: 300×250 medium rectangle -->
+    </div>
+  </div>
+
+  <!-- Quick Start -->
+  <section class="quick-start">
+    <div class="container">
+      <p class="section-label reveal">Quick Start</p>
+      <h2 class="section-title reveal">Up and running in minutes</h2>
+      <div class="steps">
+        <div class="step reveal">
+          <span class="step__num">01</span>
+          <div class="step__content">
+            <p class="step__title">Open BCC in your browser</p>
+            <p class="step__desc">Navigate to the tool URL. No installation or local server required — it runs entirely client-side.</p>
+          </div>
+        </div>
+        <div class="step reveal">
+          <span class="step__num">02</span>
+          <div class="step__content">
+            <p class="step__title">Set your IS-04 registry endpoint</p>
+            <p class="step__desc">Enter your NMOS Query API base URL (e.g. <code style="font-family:var(--font-mono);font-size:12px;color:var(--accent)">http://registry.local:3211/x-nmos/query/v1.3</code>). BCC fetches nodes, senders, and receivers automatically.</p>
+          </div>
+        </div>
+        <div class="step reveal">
+          <span class="step__num">03</span>
+          <div class="step__content">
+            <p class="step__title">Select a sender and receiver</p>
+            <p class="step__desc">Click a sender in the left column, then click a receiver to open the connection dialog. Confirm to activate the IS-05 PATCH request.</p>
+          </div>
+        </div>
+        <div class="step reveal">
+          <span class="step__num">04</span>
+          <div class="step__content">
+            <p class="step__title">(Optional) Configure Stream Deck</p>
+            <p class="step__desc">Install the BCC Stream Deck plugin and pair it over WebSocket. Assign sender/receiver combinations to buttons for one-touch switching during live production.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Related Tools -->
+  <section class="related">
+    <div class="container">
+      <p class="section-label reveal">Related Tools</p>
+      <h2 class="section-title reveal">Explore the suite</h2>
+      <div class="related__grid reveal">
+        <a class="related-card" href="../controller/">
+          <img class="related-card__icon" src="../../assets/icons/controller.svg" alt="" width="32" height="32">
+          <p class="related-card__name">NMOS Simple Controller</p>
+          <p class="related-card__sub">Lightweight NMOS Control Interface</p>
+          <p class="related-card__desc">A streamlined NMOS control interface for IS-04 resource management and IS-05 connection control.</p>
+          <span class="related-card__arrow">→ View tool</span>
+          <div class="related-card__accent"></div>
+        </a>
+        <a class="related-card" href="../port-explorer/">
+          <img class="related-card__icon" src="../../assets/icons/port-explorer.svg" alt="" width="32" height="32">
+          <p class="related-card__name">NMOS Port Explorer</p>
+          <p class="related-card__sub">IS-04 Resource Inspector</p>
+          <p class="related-card__desc">Browse and inspect NMOS nodes, devices, senders, and receivers. View SDP payloads in the browser.</p>
+          <span class="related-card__arrow">→ View tool</span>
+          <div class="related-card__accent"></div>
+        </a>
+        <a class="related-card" href="../mmam/">
+          <img class="related-card__icon" src="../../assets/icons/mmam.svg" alt="" width="32" height="32">
+          <p class="related-card__name">MMAM</p>
+          <p class="related-card__sub">Media Multicast Address Manager</p>
+          <p class="related-card__desc">Plan and track multicast address allocations for your ST 2110 IP media network.</p>
+          <span class="related-card__arrow">→ View tool</span>
+          <div class="related-card__accent"></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ad Slot C -->
+  <div class="ad-slot-wrap">
+    <div class="ad-slot ad-slot--leaderboard">
+      <span class="ad-slot__label">Advertisement</span>
+      <!-- AD SLOT C: 728×90 / responsive -->
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <span class="footer__left">NMOS Simple Tools — Open source broadcast utilities</span>
+      <div class="footer__right">
+        <span>IS-04</span> · <span>IS-05</span> · <span>ST 2110</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../../assets/js/common.js"></script>
+</body>
+</html>

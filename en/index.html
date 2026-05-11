@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="NMOS Simple Tools — Lightweight open-source utilities for ST 2110 / NMOS IS-04 and IS-05 environments.">
+  <title>NMOS Simple Tools</title>
+  <link rel="stylesheet" href="../assets/css/common.css">
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav__inner">
+      <div class="nav__left">
+        <a class="nav__logo" href=".">NMOS<span>//</span> Simple Tools</a>
+      </div>
+      <div class="nav__links">
+        <a href="#tools">Tools</a>
+        <a href="#about">About</a>
+        <a href="https://github.com/taqq505" target="_blank" rel="noopener">GitHub&nbsp;↗</a>
+        <div class="nav__lang">
+          <a href="." class="nav__lang-btn active">EN</a>
+          <span class="nav__lang-sep">|</span>
+          <a href="../ja/" class="nav__lang-btn">日本語</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="container">
+      <h1 class="hero__title">NMOS <span class="g-text">Simple Tools</span></h1>
+      <p class="hero__sub">Open-source utilities for ST&nbsp;2110 / NMOS IS-04 and IS-05 broadcast environments.</p>
+    </div>
+  </section>
+
+  <section class="tools" id="tools">
+    <div class="container">
+      <div class="tools-grid">
+
+        <!-- 01 NMOS Simple BCC -->
+        <div class="tool-card reveal">
+          <div class="tool-card__top">
+            <img class="tool-card__icon" src="../assets/icons/bcc.svg" alt="BCC" width="52" height="52">
+            <span class="tool-card__badge tool-card__badge--live">Live</span>
+          </div>
+          <div>
+            <p class="tool-card__name">NMOS Simple BCC</p>
+            <p class="tool-card__sub">Browser-based Connection Controller</p>
+          </div>
+          <p class="tool-card__desc">IS-04 / IS-05 connection controller. Runs entirely in the browser. Supports Stream Deck integration for one-touch switching.</p>
+          <div class="tool-card__tags">
+            <span class="tag">IS-04</span>
+            <span class="tag">IS-05</span>
+            <span class="tag">ST 2110-7</span>
+            <span class="tag">Stream Deck</span>
+          </div>
+          <div class="tool-card__actions">
+            <a class="btn-open" href="https://taqq505.github.io/nmos-patch-gui/" target="_blank" rel="noopener">Open ↗</a>
+            <a class="btn-gh" href="https://github.com/taqq505/nmos-patch-gui" target="_blank" rel="noopener">GitHub</a>
+            <a class="btn-gh" href="bcc/">Details</a>
+          </div>
+        </div>
+
+        <!-- 02 NMOS Simple Controller (Stream Deck Plugin) -->
+        <div class="tool-card reveal">
+          <div class="tool-card__top">
+            <img class="tool-card__icon" src="../assets/icons/controller.png" alt="Controller" width="52" height="52" style="border-radius:12px;">
+            <span class="tool-card__badge tool-card__badge--live">Live</span>
+          </div>
+          <div>
+            <p class="tool-card__name">NMOS Simple Controller</p>
+            <p class="tool-card__sub">Stream Deck Plugin</p>
+          </div>
+          <p class="tool-card__desc">Elgato Stream Deck plugin for IS-04 / IS-05 connection switching. Control NMOS senders and receivers from Stream Deck hardware buttons.</p>
+          <div class="tool-card__tags">
+            <span class="tag">IS-04</span>
+            <span class="tag">IS-05</span>
+            <span class="tag">Stream Deck</span>
+            <span class="tag">Elgato</span>
+          </div>
+          <div class="tool-card__actions">
+            <a class="btn-open" href="https://github.com/taqq505/nmos-simple-controller-streamdeck/releases/" target="_blank" rel="noopener">Download ↗</a>
+            <a class="btn-gh" href="https://github.com/taqq505/nmos-simple-controller-streamdeck" target="_blank" rel="noopener">GitHub</a>
+            <a class="btn-gh" href="controller/">Details</a>
+          </div>
+        </div>
+
+        <!-- 03 NMOS Port Explorer -->
+        <div class="tool-card reveal">
+          <div class="tool-card__top">
+            <img class="tool-card__icon" src="../assets/icons/port-explorer.svg" alt="Port Explorer" width="52" height="52">
+            <span class="tool-card__badge tool-card__badge--live">Live</span>
+          </div>
+          <div>
+            <p class="tool-card__name">NMOS Port Explorer</p>
+            <p class="tool-card__sub">IS-04 Resource Inspector</p>
+          </div>
+          <p class="tool-card__desc">Find and inspect ports on NMOS devices. Browse nodes, senders, and receivers in real time directly from your browser.</p>
+          <div class="tool-card__tags">
+            <span class="tag">IS-04</span>
+            <span class="tag">SDP</span>
+            <span class="tag">Browser</span>
+          </div>
+          <div class="tool-card__actions">
+            <a class="btn-open" href="https://taqq505.github.io/nmos-port-explorer-gui/" target="_blank" rel="noopener">Open ↗</a>
+            <a class="btn-gh" href="https://github.com/taqq505/nmos-port-explorer-gui" target="_blank" rel="noopener">GitHub</a>
+            <a class="btn-gh" href="port-explorer/">Details</a>
+          </div>
+        </div>
+
+        <!-- 04 NMOS Simple RDS Studio -->
+        <div class="tool-card reveal">
+          <div class="tool-card__top">
+            <img class="tool-card__icon" src="../assets/icons/rds-studio.svg" alt="RDS Studio" width="52" height="52">
+            <span class="tool-card__badge tool-card__badge--live">Live</span>
+          </div>
+          <div>
+            <p class="tool-card__name">NMOS Simple RDS Studio</p>
+            <p class="tool-card__sub">Windows Registry GUI</p>
+          </div>
+          <p class="tool-card__desc">Double-click to launch RDS quickly. Also functions as a dashboard for existing RDS instances.</p>
+          <div class="tool-card__tags">
+            <span class="tag">Windows</span>
+            <span class="tag">nmos-cpp</span>
+            <span class="tag">IS-04</span>
+          </div>
+          <div class="tool-card__actions">
+            <a class="btn-open" href="https://github.com/taqq505/nmos-simple-rds-studio/releases" target="_blank" rel="noopener">Download ↗</a>
+            <a class="btn-gh" href="https://github.com/taqq505/nmos-simple-rds-studio" target="_blank" rel="noopener">GitHub</a>
+            <a class="btn-gh" href="rds-studio/">Details</a>
+          </div>
+        </div>
+
+        <!-- 05 MMAM -->
+        <div class="tool-card reveal">
+          <div class="tool-card__top">
+            <img class="tool-card__icon" src="../assets/icons/mmam.svg" alt="MMAM" width="52" height="52">
+            <span class="tool-card__badge tool-card__badge--live">Live</span>
+          </div>
+          <div>
+            <p class="tool-card__name">MMAM</p>
+            <p class="tool-card__sub">Media Multicast Address Manager</p>
+          </div>
+          <p class="tool-card__desc">Docker-based multicast address manager for ST&nbsp;2110 networks. Conflict detection keeps your allocation plan clean.</p>
+          <div class="tool-card__tags">
+            <span class="tag">Multicast</span>
+            <span class="tag">Docker</span>
+            <span class="tag">ST 2110</span>
+          </div>
+          <div class="tool-card__actions">
+            <a class="btn-open" href="https://taqq505.github.io/mmam-website/" target="_blank" rel="noopener">Open ↗</a>
+            <a class="btn-gh" href="https://github.com/taqq505/mmam-docker" target="_blank" rel="noopener">GitHub</a>
+            <a class="btn-gh" href="mmam/">Details</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="ad-slot-wrap ad-slot-wrap--center">
+    <div class="ad-slot ad-slot--rect">
+      <span class="ad-slot__label">Advertisement</span>
+    </div>
+  </div>
+
+  <section class="about" id="about">
+    <div class="container">
+      <div class="about__grid">
+        <div class="reveal">
+          <p class="section-label">About</p>
+          <h2 class="section-title">Purpose-built for broadcast IP</h2>
+          <div class="section-body">
+            <p>NMOS Simple Tools is a collection of open-source utilities for engineers working with ST&nbsp;2110 and NMOS environments. Each tool is lightweight, browser-based where possible, and deployable without complex infrastructure.</p>
+            <p>Complement your existing NMOS ecosystem — run what you need.</p>
+          </div>
+        </div>
+        <div class="reveal">
+          <p class="section-label">Spec Compliance</p>
+          <div class="spec-list">
+            <div class="spec-item">
+              <span class="spec-item__label">IS-04</span>
+              <span class="spec-item__desc">NMOS Discovery &amp; Registration</span>
+            </div>
+            <div class="spec-item">
+              <span class="spec-item__label">IS-05</span>
+              <span class="spec-item__desc">NMOS Connection Management</span>
+            </div>
+            <div class="spec-item">
+              <span class="spec-item__label">ST&nbsp;2110</span>
+              <span class="spec-item__desc">SMPTE Professional Media over Managed IP Networks</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ad-slot-wrap">
+    <div class="ad-slot ad-slot--leaderboard">
+      <span class="ad-slot__label">Advertisement</span>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer__inner">
+      <span class="footer__left">NMOS Simple Tools — Open source broadcast utilities</span>
+      <div class="footer__right">
+        <span>IS-04</span> · <span>IS-05</span> · <span>ST 2110</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/common.js"></script>
+</body>
+</html>
