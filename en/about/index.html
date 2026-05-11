@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="About NMOS Simple Tools — Built by taqq505.">
+  <title>About — NMOS Simple Tools</title>
+  <link rel="stylesheet" href="../../assets/css/common.css">
+  <style>
+    .author-card {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      padding: 28px;
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+    }
+    .author-card__avatar {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      border: 2px solid var(--border);
+    }
+    .author-card__name {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 700;
+      background: linear-gradient(90deg, var(--grad-from), var(--grad-to));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 4px;
+    }
+    .author-card__role {
+      font-size: 13px;
+      color: var(--text-3);
+      margin-bottom: 14px;
+    }
+    .author-card__links { display: flex; gap: 8px; }
+
+    .tool-list {
+      display: flex;
+      flex-direction: column;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+    .tool-list-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg-2);
+      transition: background 0.2s;
+      color: inherit;
+    }
+    .tool-list-item:last-child { border-bottom: none; }
+    .tool-list-item:hover { background: var(--bg-3); }
+    .tool-list-item__icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 9px;
+      flex-shrink: 0;
+    }
+    .tool-list-item__name {
+      font-family: var(--font-display);
+      font-size: 14px;
+      font-weight: 700;
+      background: linear-gradient(90deg, var(--grad-from), var(--grad-to));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      flex: 1;
+    }
+    .tool-list-item__sub {
+      font-size: 12px;
+      color: var(--text-3);
+      flex: 1;
+    }
+    .tool-list-item__arrow {
+      font-size: 12px;
+      color: var(--text-3);
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav__inner">
+      <div class="nav__left">
+        <a class="nav__logo" href="../">NMOS<span>//</span> Simple Tools</a>
+        <div class="nav__breadcrumb">
+          <span class="nav__breadcrumb-sep">/</span>
+          <span class="nav__breadcrumb-current">About</span>
+        </div>
+      </div>
+      <div class="nav__links">
+        <a href="../#tools">Tools</a>
+        <a href="../#about">About</a>
+        <a href="https://github.com/taqq505" target="_blank" rel="noopener">GitHub&nbsp;↗</a>
+        <div class="nav__lang">
+          <a href="." class="nav__lang-btn active">EN</a>
+          <span class="nav__lang-sep">|</span>
+          <a href="../../ja/about/" class="nav__lang-btn">日本語</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <section class="tool-hero">
+    <div class="container">
+      <div class="tool-hero__content">
+        <div class="tool-hero__info">
+          <h1 class="tool-hero__name">About</h1>
+          <p class="tool-hero__subtitle">NMOS Simple Tools — Who built it</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="tool-desc" style="border-bottom: 1px solid var(--border);">
+    <div class="container">
+      <div class="tool-desc__grid">
+
+        <div class="reveal">
+          <p class="section-label">Developer</p>
+          <div class="author-card">
+            <img class="author-card__avatar"
+                 src="https://github.com/taqq505.png"
+                 alt="taqq505"
+                 width="72" height="72">
+            <div>
+              <p class="author-card__name">taqq505</p>
+              <p class="author-card__role">Broadcast Engineer &amp; Developer</p>
+              <div class="author-card__links">
+                <a class="btn-open" href="https://github.com/taqq505" target="_blank" rel="noopener">GitHub ↗</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="reveal">
+          <p class="section-label">Background</p>
+          <div class="section-body">
+            <p>NMOS Simple Tools is a set of open-source utilities built to fill the gap between enterprise NMOS solutions and day-to-day broadcast engineering workflows.</p>
+            <p>Each tool is designed around a specific real-world problem: browser-based connection control, hardware switching via Stream Deck, resource inspection, node configuration, and IP address planning — all without requiring complex infrastructure or commercial software.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="related" style="border-bottom: 1px solid var(--border);">
+    <div class="container">
+      <p class="section-label reveal">Tools</p>
+      <h2 class="section-title reveal">Built by taqq505</h2>
+      <div class="tool-list reveal">
+        <a class="tool-list-item" href="../bcc/">
+          <img class="tool-list-item__icon" src="../../assets/icons/bcc.svg" alt="" width="36" height="36">
+          <span class="tool-list-item__name">NMOS Simple BCC</span>
+          <span class="tool-list-item__sub">Browser-based Connection Controller</span>
+          <span class="tool-list-item__arrow">→</span>
+        </a>
+        <a class="tool-list-item" href="../controller/">
+          <img class="tool-list-item__icon" src="../../assets/icons/controller.png" alt="" width="36" height="36" style="border-radius:9px;">
+          <span class="tool-list-item__name">NMOS Simple Controller</span>
+          <span class="tool-list-item__sub">Stream Deck Plugin</span>
+          <span class="tool-list-item__arrow">→</span>
+        </a>
+        <a class="tool-list-item" href="../port-explorer/">
+          <img class="tool-list-item__icon" src="../../assets/icons/port-explorer.svg" alt="" width="36" height="36">
+          <span class="tool-list-item__name">NMOS Port Explorer</span>
+          <span class="tool-list-item__sub">IS-04 Resource Inspector</span>
+          <span class="tool-list-item__arrow">→</span>
+        </a>
+        <a class="tool-list-item" href="../rds-studio/">
+          <img class="tool-list-item__icon" src="../../assets/icons/rds-studio.svg" alt="" width="36" height="36">
+          <span class="tool-list-item__name">NMOS Simple RDS Studio</span>
+          <span class="tool-list-item__sub">Windows Registry GUI</span>
+          <span class="tool-list-item__arrow">→</span>
+        </a>
+        <a class="tool-list-item" href="../mmam/">
+          <img class="tool-list-item__icon" src="../../assets/icons/mmam.svg" alt="" width="36" height="36">
+          <span class="tool-list-item__name">MMAM</span>
+          <span class="tool-list-item__sub">Media Multicast Address Manager</span>
+          <span class="tool-list-item__arrow">→</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="ad-slot-wrap">
+    <div class="ad-slot ad-slot--leaderboard">
+      <span class="ad-slot__label">Advertisement</span>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer__inner">
+      <span class="footer__left">NMOS Simple Tools — Open source broadcast utilities</span>
+      <div class="footer__right">
+        <span>IS-04</span> · <span>IS-05</span> · <span>ST 2110</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../../assets/js/common.js"></script>
+</body>
+</html>

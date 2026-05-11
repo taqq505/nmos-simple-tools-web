@@ -174,32 +174,41 @@ img { display: block; max-width: 100%; }
 /* ─── Hero (Hub) ─── */
 
 .hero {
-  padding-top: calc(var(--nav-height) + 56px);
-  padding-bottom: 48px;
+  padding-top: calc(var(--nav-height) + 20px);
+  padding-bottom: 20px;
   border-bottom: 1px solid var(--border);
+}
+
+.hero__inner {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
 }
 
 .hero__title {
   font-family: var(--font-display);
-  font-size: clamp(36px, 5vw, 56px);
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  line-height: 1.0;
+  font-size: clamp(20px, 2.5vw, 26px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
   color: var(--text-1);
-  margin-bottom: 12px;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .hero__sub {
-  font-size: 16px;
+  font-size: 13px;
   font-weight: 300;
-  color: var(--text-2);
+  color: var(--text-3);
   max-width: 480px;
 }
 
 /* ─── Tools Grid (Launcher) ─── */
 
 .tools {
-  padding: 40px 0 56px;
+  padding: 24px 0 56px;
 }
 
 .tools-grid {
@@ -733,8 +742,7 @@ img { display: block; max-width: 100%; }
 }
 .reveal.visible { opacity: 1; transform: translateY(0); }
 
-.hero__title { animation: fadeUp 0.5s ease both; animation-delay: 0.05s; }
-.hero__sub   { animation: fadeUp 0.5s ease both; animation-delay: 0.15s; }
+/* hero は即表示 — アニメーションなし */
 
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(14px); }
