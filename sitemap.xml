@@ -121,4 +121,21 @@
     <priority>0.5</priority>
   </url>
 
+  <url>
+    <loc>https://taqq505.github.io/nmos-simple-tools-web/en/privacy/</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://taqq505.github.io/nmos-simple-tools-web/ja/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://taqq505.github.io/nmos-simple-tools-web/en/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://taqq505.github.io/nmos-simple-tools-web/en/privacy/"/>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://taqq505.github.io/nmos-simple-tools-web/ja/privacy/</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://taqq505.github.io/nmos-simple-tools-web/ja/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://taqq505.github.io/nmos-simple-tools-web/en/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://taqq505.github.io/nmos-simple-tools-web/en/privacy/"/>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
 </urlset>
