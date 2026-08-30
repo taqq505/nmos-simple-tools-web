@@ -281,6 +281,12 @@ img { display: block; max-width: 100%; }
   -webkit-text-fill-color: transparent;
   background-clip: text;
   margin-bottom: 2px;
+  display: inline-block;
+  text-decoration: none;
+}
+
+.tool-card__name:visited {
+  color: inherit;
 }
 
 .tool-card__sub {

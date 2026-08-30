@@ -3,8 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="NMOS Simple RDS Studio — Windowsレジストリ経由でnmos-cppノード設定を管理するGUIトレイアプリ。">
+  <meta name="description" content="NMOS Simple RDS Studio — AMWA IS-04 Registration & Discovery Systemを1つの.exeで起動できるWindows用ポータブルアプリ + 監視ダッシュボード。">
   <title>NMOS Simple RDS Studio — NMOS Simple Tools</title>
+  <link rel="canonical" href="https://taqq505.github.io/nmos-simple-tools-web/ja/rds-studio/">
+  <link rel="alternate" hreflang="ja" href="https://taqq505.github.io/nmos-simple-tools-web/ja/rds-studio/">
+  <link rel="alternate" hreflang="en" href="https://taqq505.github.io/nmos-simple-tools-web/en/rds-studio/">
+  <link rel="alternate" hreflang="x-default" href="https://taqq505.github.io/nmos-simple-tools-web/en/rds-studio/">
   <link rel="stylesheet" href="../../assets/css/common.css">
   <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
 </head>
@@ -39,12 +43,12 @@
         <div class="tool-hero__info">
           <img class="tool-hero__icon" src="../../assets/icons/rds-studio.svg" alt="" width="56" height="56">
           <h1 class="tool-hero__name">NMOS Simple RDS Studio</h1>
-          <p class="tool-hero__subtitle">Windows Registry GUI</p>
+          <p class="tool-hero__subtitle">ポータブルIS-04レジストリ + 監視ダッシュボード</p>
           <div class="tool-hero__tags">
             <span class="tag">IS-04</span>
             <span class="tag">Windows</span>
             <span class="tag">nmos-cpp</span>
-            <span class="tag">Tray App</span>
+            <span class="tag">Electron</span>
           </div>
         </div>
         <div class="tool-hero__cta"><a class="btn-primary" href="https://github.com/taqq505/nmos-simple-rds-studio/releases" target="_blank" rel="noopener">Download ↗</a></div>
@@ -63,23 +67,31 @@
       <div class="tool-desc__grid">
         <div class="reveal">
           <p class="section-label">概要</p>
-          <h2 class="section-title">nmos-cpp設定をGUIで管理</h2>
+          <h2 class="section-title">1ファイルでRDSが立ち上がる</h2>
           <div class="section-body">
-            <p>NMOS Simple RDS StudioはWindowsシステムトレイアプリケーションで、Windowsレジストリに保存されたnmos-cppのNMOSノード設定を管理するGUIを提供します。レジストリキーを手動で編集する代わりに、RDS Studioが設定を構造化された読みやすい形式で表示します。</p>
-            <p>nmos-cppをNMOSノード実装として使用するWindows ST&nbsp;2110インフラ向けに設計されており、レジストリエディタへのアクセスを必要とせずに初期展開や再設定を簡素化します。</p>
+            <p>NMOS Simple RDS Studioは、AMWA IS-04 Registration &amp; Discovery SystemをWindows PC上でそのまま起動できる、1つのポータブル.exeです。プロダクション品質のIS-04レジストリである<a href="https://github.com/sony/nmos-cpp" target="_blank" rel="noopener">sony/nmos-cpp</a>と、Electronベースのリアルタイム監視ダッシュボードを1本のexeにまとめています。サーバー構築も設定ファイルの編集もインストールも不要 — ダウンロードしてダブルクリックするだけで、NMOSネットワークにRDSが立ち上がります。</p>
+            <p>すでに稼働中のRDSがある場合は、新しくレジストリを起動せずに読み取り専用モニターとして接続することもできます。スプラッシュ画面がmDNSでネットワーク上のRDSを自動検出し、ワンクリックで接続可能です。どちらのモードでも、ノード・センダー・レシーバー・フロー・コネクションマップをダッシュボードでリアルタイムに確認でき、生のJSONを読む必要はありません。</p>
           </div>
         </div>
         <div class="reveal">
-          <p class="section-label">予定機能</p>
+          <p class="section-label">主な機能</p>
           <ul class="feature-list">
-            <li>システムトレイ常駐 — いつでもアクセス可能</li>
-            <li>すべてのnmos-cppレジストリキーのGUIエディタ</li>
-            <li>ノードアイデンティティ設定（ラベル・説明・タグ）</li>
-            <li>レジストリパスとIS-04エンドポイント設定</li>
-            <li>設定プロファイルのインポート/エクスポート</li>
-            <li>Windows 10 / 11対応</li>
+            <li>nmos-cpp-registryバイナリを同梱した1つのポータブル.exe — セットアップ不要</li>
+            <li>ウィザードでネットワークインターフェース・ポート・ドメイン・プライオリティを設定してRDSを起動</li>
+            <li>Overview・Map・Nodes・Senders/Receivers・Flowsなどリアルタイム監視ダッシュボード</li>
+            <li>WebSocketによるライブ更新（非対応時はインターバルポーリングに自動フォールバック）</li>
+            <li>mDNSで既存RDSを自動検出し、読み取り専用モニターとして接続（Monitorモード）</li>
+            <li>Ctrl+Kのグローバル検索、ダークモード、ノード登録/切断のトースト通知</li>
           </ul>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="tool-screenshot">
+    <div class="container">
+      <div class="screenshot-frame reveal">
+        <img src="../../assets/images/rds-studio.png" alt="NMOS Simple RDS Studio スクリーンショット" loading="lazy">
       </div>
     </div>
   </section>
@@ -93,13 +105,34 @@
   <section class="quick-start">
     <div class="container">
       <p class="section-label reveal">クイックスタート</p>
-      <h2 class="section-title reveal">開発中 — 近日公開予定</h2>
+      <h2 class="section-title reveal">ダウンロードしてダブルクリック</h2>
       <div class="steps">
         <div class="step reveal">
-          <span class="step__num">—</span>
+          <span class="step__num">01</span>
           <div class="step__content">
-            <p class="step__title">このツールは開発中です</p>
-            <p class="step__desc">NMOS Simple RDS Studioは現在開発中です。GitHubリポジトリをフォローしてインストーラーリリースのアナウンスをお待ちください。</p>
+            <p class="step__title">.exeをダウンロード</p>
+            <p class="step__desc">GitHub Releasesページから最新のポータブル.exeを取得します。インストール不要、Windows x64対応（ARM64もx64エミュレーションで動作）。</p>
+          </div>
+        </div>
+        <div class="step reveal">
+          <span class="step__num">02</span>
+          <div class="step__content">
+            <p class="step__title">起動してモードを選択</p>
+            <p class="step__desc">ダブルクリックで起動し、新しくRDSを立ち上げる「Launch」か、既存RDSに接続する「Monitor」を選択します。</p>
+          </div>
+        </div>
+        <div class="step reveal">
+          <span class="step__num">03</span>
+          <div class="step__content">
+            <p class="step__title">（Launchモードの場合）ネットワークを設定</p>
+            <p class="step__desc">ウィザードでネットワークインターフェース・ポート・ドメイン・プライオリティを設定します。初回起動時はWindowsファイアウォールの許可ダイアログが表示されるので、プライベート・パブリック両方にチェックしてください。</p>
+          </div>
+        </div>
+        <div class="step reveal">
+          <span class="step__num">04</span>
+          <div class="step__content">
+            <p class="step__title">ダッシュボードで監視</p>
+            <p class="step__desc">Overviewでノード・センダー・レシーバー・フローの状況を確認し、Mapで接続関係を可視化。Ctrl+Kでリソースを横断検索できます。</p>
           </div>
         </div>
       </div>

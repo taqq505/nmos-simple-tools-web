@@ -3,8 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="NMOS Port Explorer — NMOSノード・デバイス・センダー・レシーバーを閲覧するIS-04リソースインスペクター。">
+  <meta name="description" content="NMOS Port Explorer — ターゲットをポートスキャンしてNMOS API（IS-04/IS-05）エンドポイントを発見するブラウザベースツール。">
   <title>NMOS Port Explorer — NMOS Simple Tools</title>
+  <link rel="canonical" href="https://taqq505.github.io/nmos-simple-tools-web/ja/port-explorer/">
+  <link rel="alternate" hreflang="ja" href="https://taqq505.github.io/nmos-simple-tools-web/ja/port-explorer/">
+  <link rel="alternate" hreflang="en" href="https://taqq505.github.io/nmos-simple-tools-web/en/port-explorer/">
+  <link rel="alternate" hreflang="x-default" href="https://taqq505.github.io/nmos-simple-tools-web/en/port-explorer/">
   <link rel="stylesheet" href="../../assets/css/common.css">
   <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
 </head>
@@ -39,10 +43,11 @@
         <div class="tool-hero__info">
           <img class="tool-hero__icon" src="../../assets/icons/port-explorer.svg" alt="" width="56" height="56">
           <h1 class="tool-hero__name">NMOS Port Explorer</h1>
-          <p class="tool-hero__subtitle">IS-04 Resource Inspector— NMOS機器のポートを探す</p>
+          <p class="tool-hero__subtitle">NMOS APIポート・エンドポイントスキャナー</p>
           <div class="tool-hero__tags">
             <span class="tag">IS-04</span>
-            <span class="tag">SDP</span>
+            <span class="tag">IS-05</span>
+            <span class="tag">Scanner</span>
             <span class="tag">Browser</span>
           </div>
         </div>
@@ -62,23 +67,32 @@
       <div class="tool-desc__grid">
         <div class="reveal">
           <p class="section-label">概要</p>
-          <h2 class="section-title">IS-04リソースをブラウザで検査</h2>
+          <h2 class="section-title">ターゲットをスキャンしてNMOS APIを発見</h2>
           <div class="section-body">
-            <p>NMOS Port ExplorerはブラウザベースのIS-04リソースインスペクターです。NMOS Query APIを指定するだけで、ノード・デバイス・センダー・レシーバーのリソースツリー全体をすぐに閲覧でき、関連するすべてのパラメータを確認できます。</p>
-            <p>SDPペイロードの検査機能は、ST&nbsp;2110ストリーム設定のトラブルシューティングやシステムインテグレーション時のIS-04登録データ検証に特に役立ちます。</p>
+            <p>NMOS Port Explorerは、指定したIPアドレスまたはホスト名に対して複数のポートをスキャンし、Node・Registry（Query / Registration）・ConnectionといったNMOS APIエンドポイントを自動検出するブラウザベースのツールです。検出した各ポートについて、プロトコル・対応バージョン・応答ステータス・NMOSらしさのスコアを一覧表示します。</p>
+            <p>機器のポート構成が不明な場合や、ネットワーク上に想定外のNMOSサービスが公開されていないかを確認したいシステムインテグレーション・監査の場面で特に役立ちます。ツール内には「所有または許可されたシステムでのみ使用してください」という注意書きが常に表示されます。</p>
           </div>
         </div>
         <div class="reveal">
-          <p class="section-label">予定機能</p>
+          <p class="section-label">主な機能</p>
           <ul class="feature-list">
-            <li>IS-04リソースツリーの完全ナビゲーション</li>
-            <li>フィールドレベルの分解表示付きSDPビューア</li>
-            <li>全リソースタイプを横断した検索・フィルタリング</li>
-            <li>センダー/レシーバーパラメータの差分表示</li>
-            <li>リソーススナップショットのJSONエクスポート</li>
-            <li>インストール不要 — ブラウザベース</li>
+            <li>ターゲットのIP/ホスト名に対し、ポートリストまたは範囲を指定してスキャン</li>
+            <li>Node・Registry（Query / Registration）・Connection APIなどのNMOSエンドポイントを検出</li>
+            <li>ポートごとにプロトコル・対応IS-04/IS-05バージョン・稼働状態を表示</li>
+            <li>検出結果の「NMOSらしさ」スコアで優先度の高い候補を可視化</li>
+            <li>ベースURL/エンドポイントをワンクリックで開く、またはURLをコピー</li>
+            <li>大規模なポート範囲向けに同時実行数・タイムアウトなどの性能設定が可能</li>
+            <li>インストール不要 — ブラウザベースで動作</li>
           </ul>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="tool-screenshot">
+    <div class="container">
+      <div class="screenshot-frame reveal">
+        <img src="../../assets/images/port-explorer.png" alt="NMOS Port Explorer スクリーンショット" loading="lazy">
       </div>
     </div>
   </section>
@@ -92,13 +106,34 @@
   <section class="quick-start">
     <div class="container">
       <p class="section-label reveal">クイックスタート</p>
-      <h2 class="section-title reveal">開発中 — 近日公開予定</h2>
+      <h2 class="section-title reveal">スキャンを開始する</h2>
       <div class="steps">
         <div class="step reveal">
-          <span class="step__num">—</span>
+          <span class="step__num">01</span>
           <div class="step__content">
-            <p class="step__title">このツールは開発中です</p>
-            <p class="step__desc">NMOS Port Explorerは現在開発中です。GitHubリポジトリをフォローしてリリースアナウンスをお待ちください。</p>
+            <p class="step__title">ブラウザでPort Explorerを開く</p>
+            <p class="step__desc">インストール不要です。ツールのURLにアクセスするだけですぐに使い始められます。</p>
+          </div>
+        </div>
+        <div class="step reveal">
+          <span class="step__num">02</span>
+          <div class="step__content">
+            <p class="step__title">ターゲットを指定</p>
+            <p class="step__desc">スキャン対象のIPアドレスまたはホスト名を入力します。</p>
+          </div>
+        </div>
+        <div class="step reveal">
+          <span class="step__num">03</span>
+          <div class="step__content">
+            <p class="step__title">ポートを設定</p>
+            <p class="step__desc">カンマ区切りのポートリスト、または範囲指定でスキャン対象ポートを設定します。必要に応じてNMOS Settings・Performance Settingsも調整できます。</p>
+          </div>
+        </div>
+        <div class="step reveal">
+          <span class="step__num">04</span>
+          <div class="step__content">
+            <p class="step__title">スキャンを実行して結果を確認</p>
+            <p class="step__desc">「Start Exploration」をクリックすると、検出されたエンドポイントのプロトコル・バージョン・ステータスが一覧表示されます。各行のリンクからベースURLやエンドポイントを直接開いたり、URLをコピーできます。</p>
           </div>
         </div>
       </div>

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <url>
+    <loc>https://taqq505.github.io/nmos-simple-tools-web/en/</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://taqq505.github.io/nmos-simple-tools-web/ja/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://taqq505.github.io/nmos-simple-tools-web/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://taqq505.github.io/nmos-simple-tools-web/en/"/>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://taqq505.github.io/nmos-simple-tools-web/ja/</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://taqq505.github.io/nmos-simple-tools-web/ja/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://taqq505.github.io/nmos-simple-tools-web/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://taqq505.github.io/nmos-simple-tools-web/en/"/>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <url>
+    <loc>https://taqq505.github.io/nmos-simple-tools-web/en/bcc/</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://taqq505.github.io/nmos-simple-tools-web/ja/bcc/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://taqq505.github.io/nmos-simple-tools-web/en/bcc/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://taqq505.github.io/nmos-simple-tools-web/en/bcc/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://taqq505.github.io/nmos-simple-tools-web/ja/bcc/</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://taqq505.github.io/nmos-simple-tools-web/ja/bcc/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://taqq505.github.io/nmos-simple-tools-web/en/bcc/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://taqq505.github.io/nmos-simple-tools-web/en/bcc/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://taqq505.github.io/nmos-simple-tools-web/en/controller/</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://taqq505.github.io/nmos-simple-tools-web/ja/controller/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://taqq505.github.io/nmos-simple-tools-web/en/controller/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://taqq505.github.io/nmos-simple-tools-web/en/controller/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://taqq505.github.io/nmos-simple-tools-web/ja/controller/</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://taqq505.github.io/nmos-simple-tools-web/ja/controller/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://taqq505.github.io/nmos-simple-tools-web/en/controller/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://taqq505.github.io/nmos-simple-tools-web/en/controller/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://taqq505.github.io/nmos-simple-tools-web/en/port-explorer/</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://taqq505.github.io/nmos-simple-tools-web/ja/port-explorer/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://taqq505.github.io/nmos-simple-tools-web/en/port-explorer/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://taqq505.github.io/nmos-simple-tools-web/en/port-explorer/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://taqq505.github.io/nmos-simple-tools-web/ja/port-explorer/</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://taqq505.github.io/nmos-simple-tools-web/ja/port-explorer/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://taqq505.github.io/nmos-simple-tools-web/en/port-explorer/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://taqq505.github.io/nmos-simple-tools-web/en/port-explorer/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://taqq505.github.io/nmos-simple-tools-web/en/rds-studio/</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://taqq505.github.io/nmos-simple-tools-web/ja/rds-studio/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://taqq505.github.io/nmos-simple-tools-web/en/rds-studio/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://taqq505.github.io/nmos-simple-tools-web/en/rds-studio/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://taqq505.github.io/nmos-simple-tools-web/ja/rds-studio/</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://taqq505.github.io/nmos-simple-tools-web/ja/rds-studio/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://taqq505.github.io/nmos-simple-tools-web/en/rds-studio/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://taqq505.github.io/nmos-simple-tools-web/en/rds-studio/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://taqq505.github.io/nmos-simple-tools-web/en/mmam/</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://taqq505.github.io/nmos-simple-tools-web/ja/mmam/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://taqq505.github.io/nmos-simple-tools-web/en/mmam/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://taqq505.github.io/nmos-simple-tools-web/en/mmam/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://taqq505.github.io/nmos-simple-tools-web/ja/mmam/</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://taqq505.github.io/nmos-simple-tools-web/ja/mmam/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://taqq505.github.io/nmos-simple-tools-web/en/mmam/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://taqq505.github.io/nmos-simple-tools-web/en/mmam/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://taqq505.github.io/nmos-simple-tools-web/en/about/</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://taqq505.github.io/nmos-simple-tools-web/ja/about/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://taqq505.github.io/nmos-simple-tools-web/en/about/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://taqq505.github.io/nmos-simple-tools-web/en/about/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://taqq505.github.io/nmos-simple-tools-web/ja/about/</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://taqq505.github.io/nmos-simple-tools-web/ja/about/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://taqq505.github.io/nmos-simple-tools-web/en/about/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://taqq505.github.io/nmos-simple-tools-web/en/about/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+</urlset>

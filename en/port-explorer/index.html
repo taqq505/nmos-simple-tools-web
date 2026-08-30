@@ -3,8 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="NMOS Port Explorer — IS-04 resource inspector for browsing NMOS nodes, devices, senders, and receivers.">
+  <meta name="description" content="NMOS Port Explorer — browser-based port scanner that discovers NMOS API (IS-04/IS-05) endpoints on a target host.">
   <title>NMOS Port Explorer — NMOS Simple Tools</title>
+  <link rel="canonical" href="https://taqq505.github.io/nmos-simple-tools-web/en/port-explorer/">
+  <link rel="alternate" hreflang="ja" href="https://taqq505.github.io/nmos-simple-tools-web/ja/port-explorer/">
+  <link rel="alternate" hreflang="en" href="https://taqq505.github.io/nmos-simple-tools-web/en/port-explorer/">
+  <link rel="alternate" hreflang="x-default" href="https://taqq505.github.io/nmos-simple-tools-web/en/port-explorer/">
   <link rel="stylesheet" href="../../assets/css/common.css">
   <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
 </head>
@@ -39,10 +43,11 @@
         <div class="tool-hero__info">
           <img class="tool-hero__icon" src="../../assets/icons/port-explorer.svg" alt="" width="56" height="56">
           <h1 class="tool-hero__name">NMOS Port Explorer</h1>
-          <p class="tool-hero__subtitle">IS-04 Resource Inspector — Find NMOS Device Ports</p>
+          <p class="tool-hero__subtitle">NMOS API Port &amp; Endpoint Scanner</p>
           <div class="tool-hero__tags">
             <span class="tag">IS-04</span>
-            <span class="tag">SDP</span>
+            <span class="tag">IS-05</span>
+            <span class="tag">Scanner</span>
             <span class="tag">Browser</span>
           </div>
         </div>
@@ -62,23 +67,32 @@
       <div class="tool-desc__grid">
         <div class="reveal">
           <p class="section-label">Overview</p>
-          <h2 class="section-title">Inspect your IS-04 resources</h2>
+          <h2 class="section-title">Scan a target to discover NMOS APIs</h2>
           <div class="section-body">
-            <p>NMOS Port Explorer is a browser-based IS-04 resource inspector. Point it at an NMOS Query API and immediately browse the full resource tree — nodes, devices, senders, receivers — with all associated parameters exposed.</p>
-            <p>SDP payload inspection makes it especially useful for troubleshooting ST&nbsp;2110 stream configurations and verifying IS-04 registration data during system integration.</p>
+            <p>NMOS Port Explorer is a browser-based tool that scans a target IP address or hostname across a list or range of ports to discover NMOS API endpoints — Node, Registry (Query / Registration), and Connection. For every port found, it reports protocol, supported version, live response status, and an NMOS-likelihood score.</p>
+            <p>It's especially useful when a device's port configuration is unknown, or when auditing a network for unexpected exposed NMOS services during system integration. The tool always displays a reminder to use it only on systems you own or are authorized to test.</p>
           </div>
         </div>
         <div class="reveal">
-          <p class="section-label">Planned Features</p>
+          <p class="section-label">Features</p>
           <ul class="feature-list">
-            <li>Full IS-04 resource tree navigation</li>
-            <li>SDP payload viewer with field-level breakdown</li>
-            <li>Search and filter across all resource types</li>
-            <li>Sender / receiver parameter diff view</li>
-            <li>Export resource snapshots as JSON</li>
-            <li>No installation — browser-based</li>
+            <li>Scan a target IP/hostname across a custom port list or range</li>
+            <li>Detects Node, Registry (Query / Registration), and Connection API endpoints</li>
+            <li>Reports protocol, supported IS-04 / IS-05 version, and live status per port</li>
+            <li>NMOS-likelihood scoring to surface the most promising results first</li>
+            <li>One-click open of the base URL / endpoint, or copy the URL</li>
+            <li>Configurable concurrency and timeout for scanning large port ranges</li>
+            <li>No installation — runs entirely in the browser</li>
           </ul>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="tool-screenshot">
+    <div class="container">
+      <div class="screenshot-frame reveal">
+        <img src="../../assets/images/port-explorer.png" alt="NMOS Port Explorer screenshot" loading="lazy">
       </div>
     </div>
   </section>
@@ -92,13 +106,34 @@
   <section class="quick-start">
     <div class="container">
       <p class="section-label reveal">Quick Start</p>
-      <h2 class="section-title reveal">In development — check back soon</h2>
+      <h2 class="section-title reveal">Run your first scan</h2>
       <div class="steps">
         <div class="step reveal">
-          <span class="step__num">—</span>
+          <span class="step__num">01</span>
           <div class="step__content">
-            <p class="step__title">This tool is under development</p>
-            <p class="step__desc">NMOS Port Explorer is currently in development. Follow the GitHub repository for release announcements.</p>
+            <p class="step__title">Open Port Explorer in your browser</p>
+            <p class="step__desc">No installation required — just navigate to the tool URL.</p>
+          </div>
+        </div>
+        <div class="step reveal">
+          <span class="step__num">02</span>
+          <div class="step__content">
+            <p class="step__title">Enter the target</p>
+            <p class="step__desc">Type the IP address or hostname of the device you want to scan.</p>
+          </div>
+        </div>
+        <div class="step reveal">
+          <span class="step__num">03</span>
+          <div class="step__content">
+            <p class="step__title">Configure the ports</p>
+            <p class="step__desc">Enter a comma-separated port list, or switch to a range. Adjust NMOS Settings and Performance Settings if needed.</p>
+          </div>
+        </div>
+        <div class="step reveal">
+          <span class="step__num">04</span>
+          <div class="step__content">
+            <p class="step__title">Start the scan and review results</p>
+            <p class="step__desc">Click "Start Exploration" to see protocol, version, and status for every discovered endpoint. Use the links on each row to open the base URL, open the endpoint, or copy its URL.</p>
           </div>
         </div>
       </div>

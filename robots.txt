@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://taqq505.github.io/nmos-simple-tools-web/sitemap.xml

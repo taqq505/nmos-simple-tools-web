@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="NMOS Simple Controller — 軽量ブラウザベースNMOS IS-04 / IS-05コントロールインターフェース。">
   <title>NMOS Simple Controller — NMOS Simple Tools</title>
+  <link rel="canonical" href="https://taqq505.github.io/nmos-simple-tools-web/ja/controller/">
+  <link rel="alternate" hreflang="ja" href="https://taqq505.github.io/nmos-simple-tools-web/ja/controller/">
+  <link rel="alternate" hreflang="en" href="https://taqq505.github.io/nmos-simple-tools-web/en/controller/">
+  <link rel="alternate" hreflang="x-default" href="https://taqq505.github.io/nmos-simple-tools-web/en/controller/">
   <link rel="stylesheet" href="../../assets/css/common.css">
   <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
 </head>
@@ -70,15 +74,24 @@
           </div>
         </div>
         <div class="reveal">
-          <p class="section-label">予定機能</p>
+          <p class="section-label">主な機能</p>
           <ul class="feature-list">
-            <li>IS-04レジストリブラウジング — ノード・デバイス・センダー・レシーバー</li>
-            <li>IS-05コネクション制御 — アクティブ化・ステージング・削除</li>
-            <li>ライブリフレッシュ付きコネクション状態表示</li>
-            <li>NMOSリソース全体の検索・フィルタリング</li>
-            <li>インストール不要 — ブラウザベース</li>
+            <li>Stream Deckボタンからワンタッチでコネクションを切り替え</li>
+            <li>IS-04レジストリ連携 — センダー・レシーバーを自動検出</li>
+            <li>任意のセンダー・レシーバーの組み合わせを任意のボタンに割り当て</li>
+            <li>Stream DeckのLCDキーにコネクション状態をライブ表示</li>
+            <li>NMOS Simple BCCと併用可能</li>
+            <li>すべてのElgato Stream Deckモデルに対応</li>
           </ul>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="tool-screenshot">
+    <div class="container">
+      <div class="screenshot-frame reveal">
+        <img src="../../assets/images/controller.png" alt="NMOS Simple Controller スクリーンショット" loading="lazy">
       </div>
     </div>
   </section>
@@ -92,13 +105,34 @@
   <section class="quick-start">
     <div class="container">
       <p class="section-label reveal">クイックスタート</p>
-      <h2 class="section-title reveal">開発中 — 近日公開予定</h2>
+      <h2 class="section-title reveal">Stream Deckにインストール</h2>
       <div class="steps">
         <div class="step reveal">
-          <span class="step__num">—</span>
+          <span class="step__num">01</span>
           <div class="step__content">
-            <p class="step__title">このツールは開発中です</p>
-            <p class="step__desc">NMOS Simple Controllerは現在開発中です。GitHubリポジトリをフォローしてリリースアナウンスをお待ちください。</p>
+            <p class="step__title">プラグインをダウンロード</p>
+            <p class="step__desc">GitHub Releasesページから最新の<code style="font-family:var(--font-mono);font-size:12px;color:var(--grad-from)">.streamDeckPlugin</code>ファイルをダウンロードします。</p>
+          </div>
+        </div>
+        <div class="step reveal">
+          <span class="step__num">02</span>
+          <div class="step__content">
+            <p class="step__title">Stream Deckソフトウェアからインストール</p>
+            <p class="step__desc">ダウンロードしたファイルをダブルクリックすると、Elgato Stream Deckソフトウェアが自動的にプラグインをインストールします。</p>
+          </div>
+        </div>
+        <div class="step reveal">
+          <span class="step__num">03</span>
+          <div class="step__content">
+            <p class="step__title">IS-04レジストリを設定</p>
+            <p class="step__desc">プラグイン設定画面でNMOS Query APIのエンドポイントを入力します。利用可能なセンダー・レシーバーが自動的に検出されます。</p>
+          </div>
+        </div>
+        <div class="step reveal">
+          <span class="step__num">04</span>
+          <div class="step__content">
+            <p class="step__title">コネクションをボタンに割り当て</p>
+            <p class="step__desc">NMOS Simple ControllerアクションをStream Deckのボタンにドラッグし、接続するセンダーとレシーバーを選択します。ボタンを押すと接続が実行されます。</p>
           </div>
         </div>
       </div>
