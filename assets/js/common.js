@@ -20,9 +20,35 @@
   }
 
   // Screenshot carousel: arrow buttons + dots, synced to manual scroll/swipe.
-  document.querySelectorAll('.screenshot-carousel').forEach((carousel) => {
+  // Slides are auto-discovered from assets/images/<slug>-1.png, -2.png, ...
+  // (numbered sequentially with no gaps) so dropping in a new numbered file
+  // is enough to add it to the carousel — no HTML edits needed.
+  function probeImage(src) {
+    return new Promise((resolve) => {
+      const img = new Image();
+      img.onload = () => resolve(true);
+      img.onerror = () => resolve(false);
+      img.src = src;
+    });
+  }
+
+  async function discoverSlides(base, maxProbe) {
+    const found = [];
+    for (let i = 1; i <= maxProbe; i++) {
+      const src = base + '-' + i + '.png';
+      if (await probeImage(src)) found.push(src);
+      else break;
+    }
+    return found;
+  }
+
+  function setUpCarousel(carousel, slides, altBase) {
     const track = carousel.querySelector('.screenshot-carousel__track');
-    const slides = Array.from(track.children);
+    track.innerHTML = slides.map((src, i) =>
+      '<div class="screenshot-carousel__slide"><img src="' + src + '" alt="' +
+      altBase + ' screenshot ' + (i + 1) + '" loading="lazy"></div>'
+    ).join('');
+
     if (slides.length <= 1) {
       carousel.classList.add('screenshot-carousel--single');
       return;
@@ -47,25 +73,43 @@
     }
 
     function goTo(i) {
-      const clamped = Math.max(0, Math.min(slides.length - 1, i));
-      track.scrollTo({ left: clamped * track.clientWidth, behavior: 'smooth' });
+      const wrapped = (i + slides.length) % slides.length;
+      track.scrollTo({ left: wrapped * track.clientWidth, behavior: 'smooth' });
     }
 
     function updateActive() {
       const i = currentIndex();
       dots.forEach((d, di) => d.classList.toggle('is-active', di === i));
-      prevBtn.disabled = i === 0;
-      nextBtn.disabled = i === slides.length - 1;
     }
 
-    prevBtn.addEventListener('click', () => goTo(currentIndex() - 1));
-    nextBtn.addEventListener('click', () => goTo(currentIndex() + 1));
+    const AUTOPLAY_MS = 4000;
+    let autoplayTimer = null;
+    function stopAutoplay() { window.clearInterval(autoplayTimer); }
+    function startAutoplay() {
+      stopAutoplay();
+      autoplayTimer = window.setInterval(() => goTo(currentIndex() + 1), AUTOPLAY_MS);
+    }
+    function restartAutoplay() { startAutoplay(); }
+
+    prevBtn.addEventListener('click', () => { goTo(currentIndex() - 1); restartAutoplay(); });
+    nextBtn.addEventListener('click', () => { goTo(currentIndex() + 1); restartAutoplay(); });
+    dots.forEach((dot) => dot.addEventListener('click', restartAutoplay));
     track.addEventListener('scroll', () => {
       window.clearTimeout(track._scrollTimer);
       track._scrollTimer = window.setTimeout(updateActive, 80);
     }, { passive: true });
+    carousel.addEventListener('mouseenter', stopAutoplay);
+    carousel.addEventListener('mouseleave', startAutoplay);
 
     updateActive();
+    startAutoplay();
+  }
+
+  document.querySelectorAll('.screenshot-carousel[data-slug]').forEach((carousel) => {
+    const slug = carousel.getAttribute('data-slug');
+    const name = carousel.getAttribute('data-name') || slug;
+    const base = '../../assets/images/' + slug;
+    discoverSlides(base, 20).then((slides) => setUpCarousel(carousel, slides, name));
   });
 })();
 
