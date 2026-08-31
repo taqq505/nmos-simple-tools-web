@@ -18,6 +18,55 @@
     };
     window.addEventListener('scroll', onScroll, { passive: true });
   }
+
+  // Screenshot carousel: arrow buttons + dots, synced to manual scroll/swipe.
+  document.querySelectorAll('.screenshot-carousel').forEach((carousel) => {
+    const track = carousel.querySelector('.screenshot-carousel__track');
+    const slides = Array.from(track.children);
+    if (slides.length <= 1) {
+      carousel.classList.add('screenshot-carousel--single');
+      return;
+    }
+
+    const prevBtn = carousel.querySelector('.screenshot-carousel__btn--prev');
+    const nextBtn = carousel.querySelector('.screenshot-carousel__btn--next');
+    const dotsWrap = carousel.querySelector('.screenshot-carousel__dots');
+
+    slides.forEach((_, i) => {
+      const dot = document.createElement('button');
+      dot.type = 'button';
+      dot.className = 'screenshot-carousel__dot' + (i === 0 ? ' is-active' : '');
+      dot.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+      dot.addEventListener('click', () => goTo(i));
+      dotsWrap.appendChild(dot);
+    });
+    const dots = Array.from(dotsWrap.children);
+
+    function currentIndex() {
+      return Math.round(track.scrollLeft / track.clientWidth);
+    }
+
+    function goTo(i) {
+      const clamped = Math.max(0, Math.min(slides.length - 1, i));
+      track.scrollTo({ left: clamped * track.clientWidth, behavior: 'smooth' });
+    }
+
+    function updateActive() {
+      const i = currentIndex();
+      dots.forEach((d, di) => d.classList.toggle('is-active', di === i));
+      prevBtn.disabled = i === 0;
+      nextBtn.disabled = i === slides.length - 1;
+    }
+
+    prevBtn.addEventListener('click', () => goTo(currentIndex() - 1));
+    nextBtn.addEventListener('click', () => goTo(currentIndex() + 1));
+    track.addEventListener('scroll', () => {
+      window.clearTimeout(track._scrollTimer);
+      track._scrollTimer = window.setTimeout(updateActive, 80);
+    }, { passive: true });
+
+    updateActive();
+  });
 })();
 
 // ─── Cookie Consent (Google Consent Mode v2) + Google Analytics ───
