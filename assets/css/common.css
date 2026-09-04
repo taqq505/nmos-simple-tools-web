@@ -271,9 +271,21 @@ img { display: block; max-width: 100%; }
   color: var(--coming-text);
 }
 .tool-card__badge--new {
-  background: linear-gradient(90deg, var(--grad-from), var(--grad-to));
+  background: linear-gradient(90deg, #fb923c, #f43f5e);
   border: 1px solid transparent;
   color: white;
+  box-shadow: 0 0 0 0 rgba(244,63,94,0.55);
+  animation: badge-new-pulse 2s ease-out infinite;
+}
+
+@keyframes badge-new-pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(244,63,94,0.55); }
+  70%  { box-shadow: 0 0 0 7px rgba(244,63,94,0); }
+  100% { box-shadow: 0 0 0 0 rgba(244,63,94,0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tool-card__badge--new { animation: none; }
 }
 
 .tool-card__name {

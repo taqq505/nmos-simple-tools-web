@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="NMOS Simple RDS Mirror — continuously mirror IS-04 senders/receivers between two independent NMOS registries.">
+  <meta name="description" content="NMOS Simple RDS Mirror — continuously mirror IS-04 senders/receivers across independent NMOS registries.">
   <title>NMOS Simple RDS Mirror — NMOS Simple Tools</title>
   <link rel="canonical" href="https://taqq505.github.io/nmos-simple-tools-web/en/rds-mirror/">
   <link rel="alternate" hreflang="ja" href="https://taqq505.github.io/nmos-simple-tools-web/ja/rds-mirror/">
@@ -68,7 +68,7 @@
           <p class="section-label">Overview</p>
           <h2 class="section-title">A mirroring engine between two registries</h2>
           <div class="section-body">
-            <p>NMOS Simple RDS Mirror continuously mirrors selected IS-04 senders/receivers between two independent NMOS registries. Choose, per resource, between Passthrough (copies the resource as-is) and Transform (rewrites the multicast address and label via a per-destination proxy node). It only ever touches control-plane metadata — actual video/audio streams never pass through this tool.</p>
+            <p>NMOS Simple RDS Mirror continuously mirrors selected IS-04 senders/receivers across independent NMOS registries — not limited to a single source/destination pair, so one resource can be fanned out to several destination registries, or chained across more than two. Choose, per resource, between Passthrough (copies the resource as-is) and Transform (rewrites the multicast address and label via a per-destination proxy node). It only ever touches control-plane metadata — actual video/audio streams never pass through this tool.</p>
             <p>It's built to survive the quirks of real-world registries — pagination edge cases on large registries, WebSocket disconnects — and runs either headless (plain Node.js) or as an Electron desktop app.</p>
           </div>
         </div>
