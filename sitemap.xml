@@ -105,6 +105,23 @@
   </url>
 
   <url>
+    <loc>https://taqq505.github.io/nmos-simple-tools-web/en/rds-mirror/</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://taqq505.github.io/nmos-simple-tools-web/ja/rds-mirror/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://taqq505.github.io/nmos-simple-tools-web/en/rds-mirror/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://taqq505.github.io/nmos-simple-tools-web/en/rds-mirror/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://taqq505.github.io/nmos-simple-tools-web/ja/rds-mirror/</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://taqq505.github.io/nmos-simple-tools-web/ja/rds-mirror/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://taqq505.github.io/nmos-simple-tools-web/en/rds-mirror/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://taqq505.github.io/nmos-simple-tools-web/en/rds-mirror/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
     <loc>https://taqq505.github.io/nmos-simple-tools-web/en/about/</loc>
     <xhtml:link rel="alternate" hreflang="ja" href="https://taqq505.github.io/nmos-simple-tools-web/ja/about/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://taqq505.github.io/nmos-simple-tools-web/en/about/"/>

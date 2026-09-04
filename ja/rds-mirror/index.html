@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="ja" class="lang-ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="NMOS Simple RDS Mirror — 独立した2つのNMOSレジストリ間でIS-04センダー/レシーバーを継続的にミラーリングするツール。">
+  <title>NMOS Simple RDS Mirror — NMOS Simple Tools</title>
+  <link rel="canonical" href="https://taqq505.github.io/nmos-simple-tools-web/ja/rds-mirror/">
+  <link rel="alternate" hreflang="ja" href="https://taqq505.github.io/nmos-simple-tools-web/ja/rds-mirror/">
+  <link rel="alternate" hreflang="en" href="https://taqq505.github.io/nmos-simple-tools-web/en/rds-mirror/">
+  <link rel="alternate" hreflang="x-default" href="https://taqq505.github.io/nmos-simple-tools-web/en/rds-mirror/">
+  <link rel="stylesheet" href="../../assets/css/common.css">
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav__inner">
+      <div class="nav__left">
+        <a class="nav__logo" href="../">NMOS<span>//</span> Simple Tools</a>
+        <div class="nav__breadcrumb">
+          <span class="nav__breadcrumb-sep">/</span>
+          <span class="nav__breadcrumb-current">RDS Mirror</span>
+        </div>
+      </div>
+      <div class="nav__links">
+        <a href="../#tools">ツール</a>
+        <a href="../#about">About</a>
+        <a href="https://github.com/taqq505" target="_blank" rel="noopener">GitHub&nbsp;↗</a>
+        <div class="nav__lang">
+          <a href="../../en/rds-mirror/" class="nav__lang-btn">EN</a>
+          <span class="nav__lang-sep">|</span>
+          <a href="." class="nav__lang-btn active">日本語</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <section class="tool-hero">
+    <div class="container">
+      <div class="tool-hero__content">
+        <div class="tool-hero__info">
+          <img class="tool-hero__icon" src="../../assets/icons/rds-mirror.svg" alt="" width="56" height="56">
+          <h1 class="tool-hero__name">NMOS Simple RDS Mirror</h1>
+          <p class="tool-hero__subtitle">レジストリをまたいでセンダー/レシーバーを継続ミラーリング</p>
+          <div class="tool-hero__tags">
+            <span class="tag">IS-04</span>
+            <span class="tag">IS-05</span>
+            <span class="tag">Mirroring</span>
+            <span class="tag">Electron</span>
+          </div>
+        </div>
+        <div class="tool-hero__cta"><a class="btn-primary" href="https://github.com/taqq505/nmos-simple-rds-mirror/releases" target="_blank" rel="noopener">Download ↗</a></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ad-slot-wrap">
+    <div class="ad-slot ad-slot--leaderboard">
+      <span class="ad-slot__label">Advertisement</span>
+    </div>
+  </div>
+
+  <section class="tool-desc">
+    <div class="container">
+      <div class="tool-desc__grid">
+        <div class="reveal">
+          <p class="section-label">概要</p>
+          <h2 class="section-title">2つのレジストリをつなぐミラーリングエンジン</h2>
+          <div class="section-body">
+            <p>NMOS Simple RDS Mirrorは、独立した2つのNMOSレジストリ間で、選択したIS-04センダー/レシーバーを継続的にミラーリングするツールです。リソースをそのまま複製する「Passthrough」と、宛先ごとのプロキシノード経由でマルチキャストアドレスやラベルを書き換える「Transform」を、リソースごとに選択できます。扱うのはあくまで制御プレーンのメタデータのみで、実際の映像/音声ストリームはこのツールを経由しません。</p>
+            <p>大規模レジストリのページネーションの癖やWebSocket切断への耐性など、実運用で遭遇しがちな問題に対応した設計です。ヘッドレス(Node.js単体)でもElectronデスクトップアプリとしても動作します。</p>
+          </div>
+        </div>
+        <div class="reveal">
+          <p class="section-label">主な機能</p>
+          <ul class="feature-list">
+            <li>Passthrough / Transformをリソースごとに選択 — Transformは独自のIS-05 Connection APIを持つプロキシノード経由</li>
+            <li>依存関係クロージャの解決(sender→flow→source、device→node)と参照カウント方式の登録管理</li>
+            <li>大規模・実運用レジストリの癖に強い設計(双方向ページネーション、WebSocket自動再接続)</li>
+            <li>3ペイン(ソース/接続/宛先)のMirrorワークスペース、リソースごとの詳細ドリルダウン</li>
+            <li>連鎖ミラーガード(オプション)、繰り返し障害を追跡するErrorsページ</li>
+            <li>ヘッドレス(node core/server.js)でもElectronでも動作 — トレイ常駐・Windows自動起動対応</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="tool-screenshot">
+    <div class="container">
+      <div class="screenshot-carousel reveal" data-slug="rds-mirror" data-name="NMOS Simple RDS Mirror">
+        <div class="screenshot-carousel__track"></div>
+        <button type="button" class="screenshot-carousel__btn screenshot-carousel__btn--prev" aria-label="前の画像">‹</button>
+        <button type="button" class="screenshot-carousel__btn screenshot-carousel__btn--next" aria-label="次の画像">›</button>
+        <div class="screenshot-carousel__dots"></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ad-slot-wrap" style="display:flex; justify-content:center;">
+    <div class="ad-slot ad-slot--rect" >
+      <span class="ad-slot__label">Advertisement</span>
+    </div>
+  </div>
+
+  <section class="quick-start">
+    <div class="container">
+      <p class="section-label reveal">クイックスタート</p>
+      <h2 class="section-title reveal">ミラージョブを作成する</h2>
+      <div class="steps">
+        <div class="step reveal">
+          <span class="step__num">01</span>
+          <div class="step__content">
+            <p class="step__title">ダウンロードして起動</p>
+            <p class="step__desc">GitHub Releasesページからポータブル.exeを取得してダブルクリック。ヘッドレスで使いたい場合は<code style="font-family:var(--font-mono);font-size:12px;color:var(--grad-from)">npm run core</code>でも起動できます。</p>
+          </div>
+        </div>
+        <div class="step reveal">
+          <span class="step__num">02</span>
+          <div class="step__content">
+            <p class="step__title">ソース/宛先レジストリを登録</p>
+            <p class="step__desc">ミラー元とミラー先、それぞれのNMOS Query APIエンドポイントを登録します。</p>
+          </div>
+        </div>
+        <div class="step reveal">
+          <span class="step__num">03</span>
+          <div class="step__content">
+            <p class="step__title">ミラーするリソースを選択</p>
+            <p class="step__desc">Sourceペインでセンダー/レシーバーを選び、Passthrough(そのまま複製)かTransform(アドレス/ラベル変換)かを指定します。</p>
+          </div>
+        </div>
+        <div class="step reveal">
+          <span class="step__num">04</span>
+          <div class="step__content">
+            <p class="step__title">ジョブを実行して監視</p>
+            <p class="step__desc">Destinationペインでミラー結果を確認。問題が起きた場合はErrorsページに残り続けるので見落としません。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="tool-notes">
+    <div class="container">
+      <p class="section-label reveal">注意点</p>
+      <h2 class="section-title reveal">導入前に知っておきたいこと</h2>
+      <div class="notes-grid">
+        <div class="note-card reveal">
+          <p class="note-card__title">初回起動時にファイアウォールの許可が必要</p>
+          <p class="note-card__desc">Windowsが<code>NMOS Simple RDS Mirror.exe</code>の通信許可を尋ねるダイアログを表示します。Transformモードのプロキシノードへ他の機器(接続先のNMOSノード等)からアクセスさせる必要があるため、「プライベート」「パブリック」<strong>両方</strong>にチェックを入れてください。</p>
+        </div>
+        <div class="note-card reveal">
+          <p class="note-card__title">扱うのはメタデータのみ</p>
+          <p class="note-card__desc">このツールが処理するのはIS-04/IS-05の制御プレーン情報(センダー/レシーバーの登録情報、SDP、接続状態)のみです。実際の映像/音声ストリームはこのツールを経由せず、送信元から受信先へ直接流れます。</p>
+        </div>
+        <div class="note-card reveal">
+          <p class="note-card__title">連鎖ミラーガードは既定オフ</p>
+          <p class="note-card__desc">あるリソースが、別のレジストリからこのツール自身がミラーした結果として存在しているだけの場合にそれを選択させない「連鎖ミラーガード」は、既定では無効です。多段ミラー構成を組む場合は設定から有効化を検討してください。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="related">
+    <div class="container">
+      <p class="section-label reveal">関連ツール</p>
+      <h2 class="section-title reveal">スイートを探索する</h2>
+      <div class="related__grid reveal">
+        <a class="related-card" href="../rds-studio/">
+          <img class="related-card__icon" src="../../assets/icons/rds-studio.svg" alt="" width="32" height="32">
+          <p class="related-card__name">NMOS Simple RDS Studio</p>
+          <p class="related-card__sub">Portable IS-04 Registry</p>
+          <p class="related-card__desc">1つの.exeでIS-04レジストリ(RDS)を起動できるポータブルアプリ + 監視ダッシュボード。</p>
+          <span class="related-card__arrow">→ 詳細を見る</span>
+          <div class="related-card__accent"></div>
+        </a>
+        <a class="related-card" href="../bcc/">
+          <img class="related-card__icon" src="../../assets/icons/bcc.svg" alt="" width="32" height="32">
+          <p class="related-card__name">NMOS Simple BCC</p>
+          <p class="related-card__sub">Browser-based Connection Controller</p>
+          <p class="related-card__desc">Stream Deck連携対応のブラウザベースIS-04 / IS-05コネクションコントローラー。現在公開中。</p>
+          <span class="related-card__arrow">→ 詳細を見る</span>
+          <div class="related-card__accent"></div>
+        </a>
+        <a class="related-card" href="../controller/">
+          <img class="related-card__icon" src="../../assets/icons/controller.png" alt="" width="32" height="32" style="border-radius:8px;">
+          <p class="related-card__name">NMOS Simple Controller</p>
+          <p class="related-card__sub">Lightweight NMOS Control Interface</p>
+          <p class="related-card__desc">IS-04リソース管理とIS-05コネクション制御のための軽量インターフェース。</p>
+          <span class="related-card__arrow">→ 詳細を見る</span>
+          <div class="related-card__accent"></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="ad-slot-wrap">
+    <div class="ad-slot ad-slot--leaderboard">
+      <span class="ad-slot__label">Advertisement</span>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer__inner">
+      <span class="footer__left">NMOS Simple Tools — オープンソース放送ユーティリティ</span>
+      <div class="footer__right">
+        <a href="../privacy/" style="color:inherit;opacity:0.6;font-size:12px;">プライバシーポリシー</a>
+        <span style="opacity:0.3">·</span>
+        <span>IS-04</span> · <span>IS-05</span> · <span>ST 2110</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../../assets/js/common.js"></script>
+</body>
+</html>

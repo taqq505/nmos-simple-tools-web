@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="NMOS Simple RDS Mirror icon">
+  <defs>
+    <linearGradient id="g" x1="72" y1="60" x2="440" y2="460" gradientUnits="userSpaceOnUse">
+      <stop offset="0"   stop-color="#4ee7ff"/>
+      <stop offset="0.5" stop-color="#00c4ff"/>
+      <stop offset="1"   stop-color="#2f6bff"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Rounded square border -->
+  <rect x="60" y="60" width="392" height="392" rx="84"
+        fill="none" stroke="url(#g)" stroke-width="24"/>
+
+  <!-- Center: mirrored/reflected pair of nodes with a bidirectional link -->
+  <!-- Left node -->
+  <circle cx="178" cy="256" r="34" fill="none" stroke="url(#g)" stroke-width="18"/>
+  <!-- Right node -->
+  <circle cx="334" cy="256" r="34" fill="none" stroke="url(#g)" stroke-width="18"/>
+
+  <!-- Link line between the two nodes -->
+  <line x1="212" y1="256" x2="300" y2="256" stroke="url(#g)" stroke-width="16" stroke-linecap="round"/>
+
+  <!-- Arrowheads showing bidirectional mirror -->
+  <path d="M232 238 L212 256 L232 274" fill="none" stroke="url(#g)" stroke-width="16"
+        stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M280 238 L300 256 L280 274" fill="none" stroke="url(#g)" stroke-width="16"
+        stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

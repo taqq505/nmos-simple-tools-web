@@ -3,17 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="NMOS Simple RDS Studio — a single portable .exe that runs a full AMWA IS-04 Registration & Discovery System on Windows, with a live monitoring dashboard.">
-  <title>NMOS Simple RDS Studio — NMOS Simple Tools</title>
-  <link rel="canonical" href="https://taqq505.github.io/nmos-simple-tools-web/en/rds-studio/">
-  <link rel="alternate" hreflang="ja" href="https://taqq505.github.io/nmos-simple-tools-web/ja/rds-studio/">
-  <link rel="alternate" hreflang="en" href="https://taqq505.github.io/nmos-simple-tools-web/en/rds-studio/">
-  <link rel="alternate" hreflang="x-default" href="https://taqq505.github.io/nmos-simple-tools-web/en/rds-studio/">
+  <meta name="description" content="NMOS Simple RDS Mirror — continuously mirror IS-04 senders/receivers between two independent NMOS registries.">
+  <title>NMOS Simple RDS Mirror — NMOS Simple Tools</title>
+  <link rel="canonical" href="https://taqq505.github.io/nmos-simple-tools-web/en/rds-mirror/">
+  <link rel="alternate" hreflang="ja" href="https://taqq505.github.io/nmos-simple-tools-web/ja/rds-mirror/">
+  <link rel="alternate" hreflang="en" href="https://taqq505.github.io/nmos-simple-tools-web/en/rds-mirror/">
+  <link rel="alternate" hreflang="x-default" href="https://taqq505.github.io/nmos-simple-tools-web/en/rds-mirror/">
   <link rel="stylesheet" href="../../assets/css/common.css">
   <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
 </head>
 <body>
-  
 
   <nav class="nav">
     <div class="nav__inner">
@@ -21,7 +20,7 @@
         <a class="nav__logo" href="../">NMOS<span>//</span> Simple Tools</a>
         <div class="nav__breadcrumb">
           <span class="nav__breadcrumb-sep">/</span>
-          <span class="nav__breadcrumb-current">RDS Studio</span>
+          <span class="nav__breadcrumb-current">RDS Mirror</span>
         </div>
       </div>
       <div class="nav__links">
@@ -31,7 +30,7 @@
         <div class="nav__lang">
           <a href="." class="nav__lang-btn active">EN</a>
           <span class="nav__lang-sep">|</span>
-          <a href="../../ja/rds-studio/" class="nav__lang-btn">日本語</a>
+          <a href="../../ja/rds-mirror/" class="nav__lang-btn">日本語</a>
         </div>
       </div>
     </div>
@@ -41,17 +40,17 @@
     <div class="container">
       <div class="tool-hero__content">
         <div class="tool-hero__info">
-          <img class="tool-hero__icon" src="../../assets/icons/rds-studio.svg" alt="" width="56" height="56">
-          <h1 class="tool-hero__name">NMOS Simple RDS Studio</h1>
-          <p class="tool-hero__subtitle">Double-click to launch an RDS — one portable .exe</p>
+          <img class="tool-hero__icon" src="../../assets/icons/rds-mirror.svg" alt="" width="56" height="56">
+          <h1 class="tool-hero__name">NMOS Simple RDS Mirror</h1>
+          <p class="tool-hero__subtitle">Continuously mirror senders/receivers across registries</p>
           <div class="tool-hero__tags">
             <span class="tag">IS-04</span>
-            <span class="tag">Windows</span>
-            <span class="tag">nmos-cpp</span>
+            <span class="tag">IS-05</span>
+            <span class="tag">Mirroring</span>
             <span class="tag">Electron</span>
           </div>
         </div>
-        <div class="tool-hero__cta"><a class="btn-primary" href="https://github.com/taqq505/nmos-simple-rds-studio/releases" target="_blank" rel="noopener">Download ↗</a></div>
+        <div class="tool-hero__cta"><a class="btn-primary" href="https://github.com/taqq505/nmos-simple-rds-mirror/releases" target="_blank" rel="noopener">Download ↗</a></div>
       </div>
     </div>
   </section>
@@ -67,21 +66,21 @@
       <div class="tool-desc__grid">
         <div class="reveal">
           <p class="section-label">Overview</p>
-          <h2 class="section-title">One file, and your network has an RDS</h2>
+          <h2 class="section-title">A mirroring engine between two registries</h2>
           <div class="section-body">
-            <p>NMOS Simple RDS Studio is a single portable .exe that runs a full AMWA IS-04 Registration &amp; Discovery System right on your Windows PC. It bundles <a href="https://github.com/sony/nmos-cpp" target="_blank" rel="noopener">sony/nmos-cpp</a> — a production-grade IS-04 registry — together with a real-time monitoring dashboard built on Electron. No server setup, no configuration files, no installation: download, double-click, and your NMOS network has an RDS.</p>
-            <p>Already running an RDS on your network? Connect to it as a read-only monitor instead — the splash screen auto-discovers registries via mDNS, one click to connect. Either way you get a live dashboard view of nodes, senders, receivers, flows, and connection maps, without ever reading raw JSON.</p>
+            <p>NMOS Simple RDS Mirror continuously mirrors selected IS-04 senders/receivers between two independent NMOS registries. Choose, per resource, between Passthrough (copies the resource as-is) and Transform (rewrites the multicast address and label via a per-destination proxy node). It only ever touches control-plane metadata — actual video/audio streams never pass through this tool.</p>
+            <p>It's built to survive the quirks of real-world registries — pagination edge cases on large registries, WebSocket disconnects — and runs either headless (plain Node.js) or as an Electron desktop app.</p>
           </div>
         </div>
         <div class="reveal">
           <p class="section-label">Features</p>
           <ul class="feature-list">
-            <li>One portable .exe with the nmos-cpp-registry binary embedded — no setup</li>
-            <li>Built-in launch wizard for network interface, ports, domain, and priority</li>
-            <li>Real-time dashboard — overview, nodes, senders, receivers, flows, and connection map</li>
-            <li>WebSocket live updates, with automatic fallback to interval polling</li>
-            <li>Monitor mode — connect read-only to an existing RDS via mDNS auto-discovery</li>
-            <li>Global search (Ctrl+K), dark mode, and toast notifications for node events</li>
+            <li>Passthrough or Transform per resource — Transform serves its own IS-05 Connection API via a proxy node</li>
+            <li>Dependency-closure resolution (sender → flow → source, device → node) with reference-counted registration</li>
+            <li>Resilient against real-world registry quirks — bidirectional pagination, automatic WebSocket reconnect</li>
+            <li>Three-pane Mirror workspace (source / connections / destination) with full per-resource drill-down</li>
+            <li>Optional chain-mirror guard, plus an Errors page that keeps recurring failures visible</li>
+            <li>Runs headless (<code style="font-family:var(--font-mono);font-size:12px;color:var(--grad-from)">node core/server.js</code>) or in Electron — with tray residency and Windows autostart</li>
           </ul>
         </div>
       </div>
@@ -90,7 +89,7 @@
 
   <section class="tool-screenshot">
     <div class="container">
-      <div class="screenshot-carousel reveal" data-slug="rds-studio" data-name="NMOS Simple RDS Studio">
+      <div class="screenshot-carousel reveal" data-slug="rds-mirror" data-name="NMOS Simple RDS Mirror">
         <div class="screenshot-carousel__track"></div>
         <button type="button" class="screenshot-carousel__btn screenshot-carousel__btn--prev" aria-label="Previous screenshot">‹</button>
         <button type="button" class="screenshot-carousel__btn screenshot-carousel__btn--next" aria-label="Next screenshot">›</button>
@@ -108,34 +107,34 @@
   <section class="quick-start">
     <div class="container">
       <p class="section-label reveal">Quick Start</p>
-      <h2 class="section-title reveal">Download, then double-click</h2>
+      <h2 class="section-title reveal">Create your first mirror job</h2>
       <div class="steps">
         <div class="step reveal">
           <span class="step__num">01</span>
           <div class="step__content">
-            <p class="step__title">Download the .exe</p>
-            <p class="step__desc">Grab the latest portable .exe from the GitHub Releases page. No installation required — Windows x64 (ARM64 runs it via the built-in x64 emulation layer).</p>
+            <p class="step__title">Download and launch</p>
+            <p class="step__desc">Get the portable .exe from GitHub Releases and double-click it. To run headless instead, use <code style="font-family:var(--font-mono);font-size:12px;color:var(--grad-from)">npm run core</code>.</p>
           </div>
         </div>
         <div class="step reveal">
           <span class="step__num">02</span>
           <div class="step__content">
-            <p class="step__title">Launch and pick a mode</p>
-            <p class="step__desc">Double-click to start, then choose "Launch" to start a new RDS, or "Monitor" to connect to one already running on your network.</p>
+            <p class="step__title">Register the source and destination registries</p>
+            <p class="step__desc">Add the NMOS Query API endpoints for the registry you're mirroring from and the one you're mirroring to.</p>
           </div>
         </div>
         <div class="step reveal">
           <span class="step__num">03</span>
           <div class="step__content">
-            <p class="step__title">(Launch mode) Configure the network</p>
-            <p class="step__desc">Set the network interface, port, domain, and priority in the wizard. On first launch, Windows shows a firewall prompt — check both Private and Public networks.</p>
+            <p class="step__title">Select what to mirror</p>
+            <p class="step__desc">In the Source pane, pick a sender or receiver and choose Passthrough (copy as-is) or Transform (rewrite address/label).</p>
           </div>
         </div>
         <div class="step reveal">
           <span class="step__num">04</span>
           <div class="step__content">
-            <p class="step__title">Monitor from the dashboard</p>
-            <p class="step__desc">Watch nodes, senders, receivers, and flows from Overview, visualize connections on the Map, and jump to any resource with Ctrl+K global search.</p>
+            <p class="step__title">Run the job and monitor it</p>
+            <p class="step__desc">Check the mirrored result in the Destination pane. Anything that fails stays listed on the Errors page until it's resolved.</p>
           </div>
         </div>
       </div>
@@ -149,15 +148,15 @@
       <div class="notes-grid">
         <div class="note-card reveal">
           <p class="note-card__title">Firewall approval on first launch</p>
-          <p class="note-card__desc">Windows will prompt to allow <code>nmos-cpp-registry.exe</code> to communicate. Check <strong>both</strong> Private and Public networks if you want devices on other subnets to reach it. If you only allowed Private and remote devices can't connect, run <code>netsh advfirewall firewall delete rule name="nmos-cpp-registry.exe"</code> as Administrator and relaunch to choose again. The rule is tied to the executable, not a port, so changing the port later needs no extra firewall setup.</p>
+          <p class="note-card__desc">Windows will prompt to allow <code>NMOS Simple RDS Mirror.exe</code> to communicate. Since a Transform job's proxy node needs to be reachable by other NMOS devices on the network, check <strong>both</strong> Private and Public networks.</p>
         </div>
         <div class="note-card reveal">
-          <p class="note-card__title">mDNS auto-discovery needs Bonjour</p>
-          <p class="note-card__desc">nmos-cpp uses Apple Bonjour for mDNS advertisement on Windows. If it's not installed, the app shows a warning with an install link at startup. Everything else works fine without it, but NMOS nodes will need to be pointed at this RDS by IP address directly.</p>
+          <p class="note-card__title">Metadata only — no media</p>
+          <p class="note-card__desc">This tool only handles IS-04/IS-05 control-plane data — sender/receiver registration, SDP, and connection state. Actual video/audio streams flow directly from source to destination and never pass through this tool.</p>
         </div>
         <div class="note-card reveal">
-          <p class="note-card__title">ARM64 runs via x64 emulation</p>
-          <p class="note-card__desc">On Windows ARM64 devices (Surface Pro X, Snapdragon PCs), the distributed x64 build runs as-is via the built-in emulation layer — no separate ARM64 download needed. A native ARM64 build is planned but on hold pending ARM64 support for a dependency (cpprestsdk) in Conan Center.</p>
+          <p class="note-card__title">Chain-mirror guard is off by default</p>
+          <p class="note-card__desc">The setting that blocks selecting a resource that only exists on a registry because this tool mirrored it there is disabled by default. If you're building a multi-hop mirror chain, consider enabling it in Settings.</p>
         </div>
       </div>
     </div>
@@ -168,19 +167,19 @@
       <p class="section-label reveal">Related Tools</p>
       <h2 class="section-title reveal">Explore the suite</h2>
       <div class="related__grid reveal">
+        <a class="related-card" href="../rds-studio/">
+          <img class="related-card__icon" src="../../assets/icons/rds-studio.svg" alt="" width="32" height="32">
+          <p class="related-card__name">NMOS Simple RDS Studio</p>
+          <p class="related-card__sub">Portable IS-04 Registry</p>
+          <p class="related-card__desc">A portable .exe that runs an IS-04 registry (RDS), plus a live monitoring dashboard.</p>
+          <span class="related-card__arrow">→ View tool</span>
+          <div class="related-card__accent"></div>
+        </a>
         <a class="related-card" href="../bcc/">
           <img class="related-card__icon" src="../../assets/icons/bcc.svg" alt="" width="32" height="32">
           <p class="related-card__name">NMOS Simple BCC</p>
           <p class="related-card__sub">Browser-based Connection Controller</p>
           <p class="related-card__desc">Browser-based IS-04 / IS-05 connection controller with Stream Deck integration. Live now.</p>
-          <span class="related-card__arrow">→ View tool</span>
-          <div class="related-card__accent"></div>
-        </a>
-        <a class="related-card" href="../mmam/">
-          <img class="related-card__icon" src="../../assets/icons/mmam.svg" alt="" width="32" height="32">
-          <p class="related-card__name">MMAM</p>
-          <p class="related-card__sub">Media Multicast Address Manager</p>
-          <p class="related-card__desc">Docker-based multicast address manager for ST 2110 IP media networks. Live now.</p>
           <span class="related-card__arrow">→ View tool</span>
           <div class="related-card__accent"></div>
         </a>

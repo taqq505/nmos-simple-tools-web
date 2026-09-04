@@ -142,6 +142,27 @@
     </div>
   </section>
 
+  <section class="tool-notes">
+    <div class="container">
+      <p class="section-label reveal">注意点</p>
+      <h2 class="section-title reveal">導入前に知っておきたいこと</h2>
+      <div class="notes-grid">
+        <div class="note-card reveal">
+          <p class="note-card__title">初回起動時にファイアウォールの許可が必要</p>
+          <p class="note-card__desc">Windowsが<code>nmos-cpp-registry.exe</code>の通信許可を尋ねるダイアログを表示します。他サブネットの機器からもアクセスさせたい場合は「プライベート」「パブリック」<strong>両方</strong>にチェックしてください。プライベートのみ許可してしまった場合は、管理者権限で <code>netsh advfirewall firewall delete rule name="nmos-cpp-registry.exe"</code> を実行してルールを削除し、再起動すれば選び直せます。ルールはポートではなくexe本体に紐づくため、後からポート番号を変えても再設定は不要です。</p>
+        </div>
+        <div class="note-card reveal">
+          <p class="note-card__title">mDNS(自動検出)にはBonjourが必要</p>
+          <p class="note-card__desc">nmos-cppはWindows上でのmDNS広告にApple Bonjourを使用します。未インストールの場合は起動時に警告とインストールリンクが表示されます。Bonjourがなくても他の機能はすべて正常に動作しますが、NMOSノード側でこのRDSのIPアドレスを直接指定する必要があります。</p>
+        </div>
+        <div class="note-card reveal">
+          <p class="note-card__title">ARM64は x64エミュレーションで動作</p>
+          <p class="note-card__desc">Surface Pro XやSnapdragon搭載PCなどのWindows ARM64機でも、配布されているx64版exeがそのまま動作します(別途ARM64版のダウンロードは不要)。ネイティブARM64ビルドは計画中ですが、依存ライブラリ(cpprestsdk)のARM64対応待ちのため現在保留中です。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="related">
     <div class="container">
       <p class="section-label reveal">関連ツール</p>
