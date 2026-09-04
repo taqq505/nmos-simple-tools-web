@@ -277,6 +277,18 @@ img { display: block; max-width: 100%; }
   box-shadow: 0 0 0 0 rgba(244,63,94,0.55);
   animation: badge-new-pulse 2s ease-out infinite;
 }
+.tool-card__badge--beta {
+  background: #f5f3ff;
+  border: 1px solid #ddd6fe;
+  color: #7c3aed;
+}
+
+.tool-card__badges {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
 
 @keyframes badge-new-pulse {
   0%   { box-shadow: 0 0 0 0 rgba(244,63,94,0.55); }

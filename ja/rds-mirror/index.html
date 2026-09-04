@@ -48,6 +48,7 @@
             <span class="tag">IS-05</span>
             <span class="tag">Mirroring</span>
             <span class="tag">Electron</span>
+            <span class="tag">Beta</span>
           </div>
         </div>
         <div class="tool-hero__cta"><a class="btn-primary" href="https://github.com/taqq505/nmos-simple-rds-mirror/releases" target="_blank" rel="noopener">Download ↗</a></div>
@@ -157,6 +158,14 @@
         <div class="note-card reveal">
           <p class="note-card__title">連鎖ミラーガードは既定オフ</p>
           <p class="note-card__desc">あるリソースが、別のレジストリからこのツール自身がミラーした結果として存在しているだけの場合にそれを選択させない「連鎖ミラーガード」は、既定では無効です。多段ミラー構成を組む場合は設定から有効化を検討してください。</p>
+        </div>
+        <div class="note-card reveal">
+          <p class="note-card__title">現在ベータ版です</p>
+          <p class="note-card__desc">動作確認は主に<a href="https://github.com/sony/nmos-cpp" target="_blank" rel="noopener">sony/nmos-cpp</a>を対象に行っています。メーカーが提供するブロードキャストコントローラー(BC)に内蔵されているRDS実装では、想定通りに動作しないケースがあることを確認しています。問題が発生した場合は<a href="https://github.com/taqq505/nmos-simple-rds-mirror/issues" target="_blank" rel="noopener">GitHub</a>での報告をお待ちしています。</p>
+        </div>
+        <div class="note-card reveal">
+          <p class="note-card__title">1つのセンダーだけをミラーしても、機器の全フローが見えることがある</p>
+          <p class="note-card__desc">一部のブロードキャストコントローラーは、NMOSレジストリ上の登録情報だけでなく、対象デバイスに直接アクセスして全フローを取得する実装になっている場合があります。そのようなコントローラーでは、RDS Mirrorで1つのセンダーだけを選んでミラーしたつもりでも、同じデバイス上の他のフローまで見えてしまうことがあります。RDS Mirror側の不具合ではなく、接続先のブロードキャストコントローラーの実装仕様に起因するため、正式リリース後も解消されない可能性があります。</p>
         </div>
       </div>
     </div>

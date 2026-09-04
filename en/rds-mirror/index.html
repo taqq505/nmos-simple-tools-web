@@ -48,6 +48,7 @@
             <span class="tag">IS-05</span>
             <span class="tag">Mirroring</span>
             <span class="tag">Electron</span>
+            <span class="tag">Beta</span>
           </div>
         </div>
         <div class="tool-hero__cta"><a class="btn-primary" href="https://github.com/taqq505/nmos-simple-rds-mirror/releases" target="_blank" rel="noopener">Download ↗</a></div>
@@ -157,6 +158,14 @@
         <div class="note-card reveal">
           <p class="note-card__title">Chain-mirror guard is off by default</p>
           <p class="note-card__desc">The setting that blocks selecting a resource that only exists on a registry because this tool mirrored it there is disabled by default. If you're building a multi-hop mirror chain, consider enabling it in Settings.</p>
+        </div>
+        <div class="note-card reveal">
+          <p class="note-card__title">Currently in beta</p>
+          <p class="note-card__desc">Verification is done primarily against <a href="https://github.com/sony/nmos-cpp" target="_blank" rel="noopener">sony/nmos-cpp</a>. RDS implementations embedded in vendor-provided broadcast controllers (BCs) have been observed not to behave as expected in some cases. If you run into an issue, please report it on <a href="https://github.com/taqq505/nmos-simple-rds-mirror/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+        </div>
+        <div class="note-card reveal">
+          <p class="note-card__title">Mirroring one sender can still expose the whole device's flows</p>
+          <p class="note-card__desc">Some broadcast controllers don't rely solely on the NMOS registry's per-resource data — they connect directly to the underlying device and enumerate all of its flows. With controllers like that, even if you select and mirror just a single sender in RDS Mirror, every other flow on that same device may become visible too. This isn't a bug in RDS Mirror itself but a consequence of how those specific controllers are implemented, so it may persist even after a stable release.</p>
         </div>
       </div>
     </div>
