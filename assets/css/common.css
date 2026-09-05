@@ -611,6 +611,39 @@ img { display: block; max-width: 100%; }
 }
 .btn-primary:hover { opacity: 0.88; color: white; }
 
+/* ─── Tool Detail: Beta Banner ─── */
+
+.beta-banner {
+  background: #f5f3ff;
+  border-bottom: 1px solid #ddd6fe;
+  padding: 16px 0;
+}
+
+.beta-banner__inner {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.beta-banner__badge {
+  flex-shrink: 0;
+}
+
+.beta-banner__text {
+  font-size: 13px;
+  line-height: 1.7;
+  color: #5b21b6;
+}
+
+.beta-banner__text a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+  .beta-banner__inner { flex-direction: column; align-items: flex-start; gap: 8px; }
+}
+
 /* ─── Tool Detail: Notes / Caveats ─── */
 
 .tool-notes {

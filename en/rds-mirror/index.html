@@ -41,20 +41,28 @@
       <div class="tool-hero__content">
         <div class="tool-hero__info">
           <img class="tool-hero__icon" src="../../assets/icons/rds-mirror.svg" alt="" width="56" height="56">
-          <h1 class="tool-hero__name">NMOS Simple RDS Mirror</h1>
+          <h1 class="tool-hero__name">NMOS Simple RDS Mirror <span class="tool-card__badge tool-card__badge--beta" style="vertical-align:middle;">Beta</span></h1>
           <p class="tool-hero__subtitle">Continuously mirror senders/receivers across registries</p>
           <div class="tool-hero__tags">
             <span class="tag">IS-04</span>
             <span class="tag">IS-05</span>
             <span class="tag">Mirroring</span>
             <span class="tag">Electron</span>
-            <span class="tag">Beta</span>
           </div>
         </div>
         <div class="tool-hero__cta"><a class="btn-primary" href="https://github.com/taqq505/nmos-simple-rds-mirror/releases" target="_blank" rel="noopener">Download ↗</a></div>
       </div>
     </div>
   </section>
+
+  <div class="beta-banner">
+    <div class="container">
+      <div class="beta-banner__inner">
+        <span class="tool-card__badge tool-card__badge--beta beta-banner__badge">Beta</span>
+        <p class="beta-banner__text">Verification is done primarily against <a href="https://github.com/sony/nmos-cpp" target="_blank" rel="noopener">sony/nmos-cpp</a>. RDS implementations embedded in vendor-provided broadcast controllers (BCs) have been observed not to behave as expected in some cases. If you run into an issue, please report it on <a href="https://github.com/taqq505/nmos-simple-rds-mirror/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+      </div>
+    </div>
+  </div>
 
   <div class="ad-slot-wrap">
     <div class="ad-slot ad-slot--leaderboard">
@@ -158,10 +166,6 @@
         <div class="note-card reveal">
           <p class="note-card__title">Chain-mirror guard is off by default</p>
           <p class="note-card__desc">The setting that blocks selecting a resource that only exists on a registry because this tool mirrored it there is disabled by default. If you're building a multi-hop mirror chain, consider enabling it in Settings.</p>
-        </div>
-        <div class="note-card reveal">
-          <p class="note-card__title">Currently in beta</p>
-          <p class="note-card__desc">Verification is done primarily against <a href="https://github.com/sony/nmos-cpp" target="_blank" rel="noopener">sony/nmos-cpp</a>. RDS implementations embedded in vendor-provided broadcast controllers (BCs) have been observed not to behave as expected in some cases. If you run into an issue, please report it on <a href="https://github.com/taqq505/nmos-simple-rds-mirror/issues" target="_blank" rel="noopener">GitHub</a>.</p>
         </div>
         <div class="note-card reveal">
           <p class="note-card__title">Mirroring one sender can still expose the whole device's flows</p>

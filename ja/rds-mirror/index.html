@@ -41,20 +41,28 @@
       <div class="tool-hero__content">
         <div class="tool-hero__info">
           <img class="tool-hero__icon" src="../../assets/icons/rds-mirror.svg" alt="" width="56" height="56">
-          <h1 class="tool-hero__name">NMOS Simple RDS Mirror</h1>
+          <h1 class="tool-hero__name">NMOS Simple RDS Mirror <span class="tool-card__badge tool-card__badge--beta" style="vertical-align:middle;">Beta</span></h1>
           <p class="tool-hero__subtitle">レジストリをまたいでセンダー/レシーバーを継続ミラーリング</p>
           <div class="tool-hero__tags">
             <span class="tag">IS-04</span>
             <span class="tag">IS-05</span>
             <span class="tag">Mirroring</span>
             <span class="tag">Electron</span>
-            <span class="tag">Beta</span>
           </div>
         </div>
         <div class="tool-hero__cta"><a class="btn-primary" href="https://github.com/taqq505/nmos-simple-rds-mirror/releases" target="_blank" rel="noopener">Download ↗</a></div>
       </div>
     </div>
   </section>
+
+  <div class="beta-banner">
+    <div class="container">
+      <div class="beta-banner__inner">
+        <span class="tool-card__badge tool-card__badge--beta beta-banner__badge">Beta</span>
+        <p class="beta-banner__text">動作確認は主に<a href="https://github.com/sony/nmos-cpp" target="_blank" rel="noopener">sony/nmos-cpp</a>を対象に行っています。メーカーが提供するブロードキャストコントローラー(BC)に内蔵されているRDS実装では、想定通りに動作しないケースがあることを確認しています。問題が発生した場合は<a href="https://github.com/taqq505/nmos-simple-rds-mirror/issues" target="_blank" rel="noopener">GitHub</a>での報告をお待ちしています。</p>
+      </div>
+    </div>
+  </div>
 
   <div class="ad-slot-wrap">
     <div class="ad-slot ad-slot--leaderboard">
@@ -158,10 +166,6 @@
         <div class="note-card reveal">
           <p class="note-card__title">連鎖ミラーガードは既定オフ</p>
           <p class="note-card__desc">あるリソースが、別のレジストリからこのツール自身がミラーした結果として存在しているだけの場合にそれを選択させない「連鎖ミラーガード」は、既定では無効です。多段ミラー構成を組む場合は設定から有効化を検討してください。</p>
-        </div>
-        <div class="note-card reveal">
-          <p class="note-card__title">現在ベータ版です</p>
-          <p class="note-card__desc">動作確認は主に<a href="https://github.com/sony/nmos-cpp" target="_blank" rel="noopener">sony/nmos-cpp</a>を対象に行っています。メーカーが提供するブロードキャストコントローラー(BC)に内蔵されているRDS実装では、想定通りに動作しないケースがあることを確認しています。問題が発生した場合は<a href="https://github.com/taqq505/nmos-simple-rds-mirror/issues" target="_blank" rel="noopener">GitHub</a>での報告をお待ちしています。</p>
         </div>
         <div class="note-card reveal">
           <p class="note-card__title">1つのセンダーだけをミラーしても、機器の全フローが見えることがある</p>
