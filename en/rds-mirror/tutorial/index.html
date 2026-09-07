@@ -76,7 +76,7 @@
     .shot-card img { width: 100%; height: auto; display: block; }
 
     /* click-target box + numbered badge (arrow substitute) */
-    .shot-img-wrap { position: relative; line-height: 0; }
+    .shot-img-wrap { position: relative; line-height: 0; cursor: zoom-in; }
     .callout {
       position: absolute;
       border: 2px solid var(--grad-from);
@@ -167,6 +167,43 @@
       transition: border-color .15s, color .15s;
     }
     .toc a:hover { border-color: var(--grad-from); color: var(--text-1); }
+
+    /* click-to-enlarge lightbox */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 5vh 5vw;
+      background: rgba(4,6,10,0.88);
+      cursor: zoom-out;
+    }
+    .lightbox.is-open { display: flex; }
+    .lightbox__frame {
+      position: relative;
+      max-width: 100%;
+      max-height: 100%;
+      line-height: 0;
+      box-shadow: 0 20px 70px rgba(0,0,0,0.5);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+    .lightbox__frame img { display: block; max-width: 100%; max-height: 90vh; width: auto; height: auto; }
+    .lightbox__close {
+      position: absolute;
+      top: -14px; right: -14px;
+      width: 34px; height: 34px;
+      border-radius: 50%;
+      border: none;
+      background: var(--text-1);
+      color: var(--bg-2);
+      font-size: 16px;
+      line-height: 1;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.35);
+    }
   </style>
 </head>
 <body>
@@ -459,6 +496,38 @@
     </div>
   </footer>
 
+  <div class="lightbox" id="lightbox">
+    <div class="lightbox__frame" id="lightbox-frame">
+      <button type="button" class="lightbox__close" id="lightbox-close" aria-label="Close">✕</button>
+    </div>
+  </div>
+
   <script src="../../../assets/js/common.js"></script>
+  <script>
+    (function () {
+      var lightbox = document.getElementById('lightbox');
+      var frame = document.getElementById('lightbox-frame');
+      var closeBtn = document.getElementById('lightbox-close');
+
+      function open(wrap) {
+        var clone = wrap.cloneNode(true);
+        clone.removeAttribute('style');
+        frame.innerHTML = '';
+        frame.appendChild(clone);
+        frame.appendChild(closeBtn);
+        lightbox.classList.add('is-open');
+      }
+      function close() {
+        lightbox.classList.remove('is-open');
+      }
+
+      document.querySelectorAll('.shot-img-wrap').forEach(function (wrap) {
+        wrap.addEventListener('click', function () { open(wrap); });
+      });
+      closeBtn.addEventListener('click', close);
+      lightbox.addEventListener('click', function (e) { if (e.target === lightbox) close(); });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+    })();
+  </script>
 </body>
 </html>
