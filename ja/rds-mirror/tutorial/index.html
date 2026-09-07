@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="ja" class="lang-ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>チュートリアル — NMOS Simple RDS Mirror</title>
+  <link rel="stylesheet" href="../../../assets/css/common.css">
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <style>
+    /* ─── このページ専用: ステップ形式のチュートリアル ─── */
+    .tutorial-step {
+      padding: 56px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .tutorial-step:last-of-type { border-bottom: none; }
+
+    .step-head {
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+      max-width: 760px;
+      margin-bottom: 32px;
+    }
+    .step-num {
+      flex-shrink: 0;
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--grad-from), var(--grad-to));
+      color: #fff;
+      font-family: var(--font-mono);
+      font-size: 16px;
+      font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 14px rgba(14,165,233,0.28);
+    }
+    .step-head__text { padding-top: 2px; }
+    .step-head__eyebrow {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--grad-from);
+      margin-bottom: 6px;
+    }
+    .step-head__title {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text-1);
+      margin-bottom: 10px;
+      line-height: 1.35;
+    }
+    .step-head__body {
+      font-size: 14.5px;
+      color: var(--text-2);
+      line-height: 1.75;
+    }
+
+    .shot-row {
+      display: grid;
+      gap: 22px;
+      grid-template-columns: repeat(var(--cols, 3), 1fr);
+    }
+    @media (max-width: 900px) {
+      .shot-row { grid-template-columns: 1fr; }
+    }
+
+    .shot-card {
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-md);
+      overflow: hidden;
+      background: #0b0d12;
+    }
+    .shot-card img { width: 100%; height: auto; display: block; }
+    .shot-card__cap {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      padding: 12px 14px;
+      background: var(--bg-2);
+      border-top: 1px solid var(--border);
+    }
+    .shot-card__cap b {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--grad-from);
+      flex-shrink: 0;
+    }
+    .shot-card__cap span {
+      font-size: 12.5px;
+      color: var(--text-2);
+      line-height: 1.5;
+    }
+
+    .tip-box {
+      margin-top: 24px;
+      padding: 14px 18px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-mid);
+      background: var(--bg-3);
+      font-size: 13px;
+      color: var(--text-2);
+      line-height: 1.7;
+      max-width: 760px;
+    }
+    .tip-box b { color: var(--text-1); }
+
+    .sanitize-note {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      letter-spacing: 0.04em;
+      color: var(--text-3);
+      margin-top: 22px;
+    }
+
+    .toc {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 22px;
+    }
+    .toc a {
+      font-size: 12px;
+      font-family: var(--font-mono);
+      color: var(--text-2);
+      border: 1px solid var(--border-mid);
+      border-radius: 999px;
+      padding: 6px 14px;
+      text-decoration: none;
+      transition: border-color .15s, color .15s;
+    }
+    .toc a:hover { border-color: var(--grad-from); color: var(--text-1); }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav__inner">
+      <div class="nav__left">
+        <a class="nav__logo" href="../../">NMOS<span>//</span> Simple Tools</a>
+        <div class="nav__breadcrumb">
+          <span class="nav__breadcrumb-sep">/</span>
+          <span class="nav__breadcrumb-current">RDS Mirror — チュートリアル</span>
+        </div>
+      </div>
+      <div class="nav__links">
+        <a href="../">製品ページ</a>
+        <a href="../manual/">使い方ガイド</a>
+        <a href="https://github.com/taqq505/nmos-simple-rds-mirror" target="_blank" rel="noopener">GitHub&nbsp;↗</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="tool-hero">
+    <div class="container">
+      <div class="tool-hero__content">
+        <div class="tool-hero__info">
+          <img class="tool-hero__icon" src="../../../assets/icons/rds-mirror.svg" alt="" width="56" height="56">
+          <h1 class="tool-hero__name">チュートリアル</h1>
+          <p class="tool-hero__subtitle">RDSを2つ登録し、リソースを1つミラーして詳細を確認するまで — 実際の画面で辿る</p>
+          <div class="tool-hero__tags">
+            <span class="tag">Registry</span>
+            <span class="tag">Passthrough</span>
+            <span class="tag">Transform</span>
+            <span class="tag">Chain Guard</span>
+          </div>
+          <div class="toc">
+            <a href="#step1">1. Dashboard</a>
+            <a href="#step2">2. RDS登録</a>
+            <a href="#step3">3. Passthroughミラー</a>
+            <a href="#step4">4. Transformミラー</a>
+            <a href="#step5">5. 詳細と出自</a>
+            <a href="#step6">6. 連鎖ガードとJobs</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════ STEP 1 ═══════════════════════════════════════ -->
+
+  <section class="tutorial-step" id="step1">
+    <div class="container">
+      <div class="step-head reveal">
+        <span class="step-num">1</span>
+        <div class="step-head__text">
+          <p class="step-head__eyebrow">Flow 01 — 起動直後</p>
+          <h2 class="step-head__title">Dashboardで全体を把握する</h2>
+          <p class="step-head__body">起動すると最初に表示されるのがDashboardです。登録済みのRDS、実行中のジョブ、ミラー済みリソース数、プロキシノードの生存状況が一目で分かります。まだ何も登録していない状態からスタートします。</p>
+        </div>
+      </div>
+      <div class="shot-row reveal" style="--cols:1; max-width:820px;">
+        <div class="shot-card">
+          <img src="../../../assets/images/rds-mirror-tutorial/dashboard.png" alt="Dashboard画面。RDS Registries 2件、Active Jobs 1/1、Mirrored Resources 1、Proxy Nodes 1が表示されている">
+          <div class="shot-card__cap"><b>①</b><span>上段のカードで件数を、下段でRDSごとの到達性とジョブ一覧を確認できる。</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════ STEP 2 ═══════════════════════════════════════ -->
+
+  <section class="tutorial-step" id="step2">
+    <div class="container">
+      <div class="step-head reveal">
+        <span class="step-num">2</span>
+        <div class="step-head__text">
+          <p class="step-head__eyebrow">Flow 02 — RDS Registry</p>
+          <h2 class="step-head__title">ミラー元・ミラー先のRDSを登録する</h2>
+          <p class="step-head__body">左サイドバーの <b style="color:var(--text-1)">RDS Registry</b> から、ミラーで使う2つのレジストリを登録します。最初はSTUDIO-Aが1件だけ登録されている状態から始め、右上の <b style="color:var(--text-1)">+ Add registry</b> でSTUDIO-Bを追加します。Query API URLとRegistration API URLを入力してSaveするだけです。</p>
+        </div>
+      </div>
+      <div class="shot-row reveal" style="--cols:3;">
+        <div class="shot-card">
+          <img src="../../../assets/images/rds-mirror-tutorial/registry-one.png" alt="RDS Registryページ。STUDIO-Aのみ登録済み">
+          <div class="shot-card__cap"><b>①</b><span>STUDIO-Aが1件だけ登録された状態。ここから2件目を追加する。</span></div>
+        </div>
+        <div class="shot-card">
+          <img src="../../../assets/images/rds-mirror-tutorial/registry-add-form.png" alt="Add registryフォーム。Label・Query API URL・Registration API URLを入力中">
+          <div class="shot-card__cap"><b>②</b><span>Label・Query API URL・Registration API URLを入力してSave。</span></div>
+        </div>
+        <div class="shot-card">
+          <img src="../../../assets/images/rds-mirror-tutorial/registry-two.png" alt="RDS Registryページ。STUDIO-AとSTUDIO-Bの2件が登録済み">
+          <div class="shot-card__cap"><b>③</b><span>STUDIO-A / STUDIO-Bの2件が揃った。これでミラー元・先が用意できた。</span></div>
+        </div>
+      </div>
+      <span class="sanitize-note">※ 画像中のURLはすべてlocalhost上の検証用アドレスです</span>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════ STEP 3 ═══════════════════════════════════════ -->
+
+  <section class="tutorial-step" id="step3">
+    <div class="container">
+      <div class="step-head reveal">
+        <span class="step-num">3</span>
+        <div class="step-head__text">
+          <p class="step-head__eyebrow">Flow 03 — Mirror workspace</p>
+          <h2 class="step-head__title">そのままの構造でミラーする(Passthrough)</h2>
+          <p class="step-head__body">左サイドバーの <b style="color:var(--text-1)">Mirror</b> へ移動し、SOURCEにSTUDIO-A、DESTINATIONにSTUDIO-Bを選びます。左パネルでコピーしたいsender/receiverをクリックして選択し、中央の <b style="color:var(--text-1)">Copy selection</b> を押すだけで、同じUUID・同じ構造のまま右側に登録されます。</p>
+        </div>
+      </div>
+      <div class="shot-row reveal" style="--cols:2;">
+        <div class="shot-card">
+          <img src="../../../assets/images/rds-mirror-tutorial/mirror-source.png" alt="SOURCEにSTUDIO-Aを選択し、CAM-1 Encoderの配下にsender/receiverが並んでいる">
+          <div class="shot-card__cap"><b>①</b><span>SOURCEでSTUDIO-Aを選ぶと、ノード・デバイスごとにリソースが一覧表示される。</span></div>
+        </div>
+        <div class="shot-card">
+          <img src="../../../assets/images/rds-mirror-tutorial/mirror-dest.png" alt="DESTINATIONにSTUDIO-Bを選択した状態">
+          <div class="shot-card__cap"><b>②</b><span>DESTINATIONでSTUDIO-Bを選ぶ。この時点では右側はまだ空。</span></div>
+        </div>
+        <div class="shot-card">
+          <img src="../../../assets/images/rds-mirror-tutorial/mirror-select-resource.png" alt="左パネルでCAM-1 Videoのsenderを選択(紫の枠)し、Copy selectionボタンが有効化されている">
+          <div class="shot-card__cap"><b>③</b><span>ミラーしたい行(ここではCAM-1 Video)をクリックして選択する。</span></div>
+        </div>
+        <div class="shot-card">
+          <img src="../../../assets/images/rds-mirror-tutorial/mirror-copied.png" alt="Copy selection後、接続線でつながれた左右の同じCAM-1 Videoリソース">
+          <div class="shot-card__cap"><b>④</b><span>Copy selectionを押すと右側に登録され、中央に接続線が引かれる。</span></div>
+        </div>
+      </div>
+      <div class="tip-box reveal">
+        <b>Passthroughモード</b>とは、sender/receiverのUUIDや構造をそのまま複製する方式です。宛先側でIPアドレスやラベルを書き換えたい場合は、次のTransformモードを使います。
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════ STEP 4 ═══════════════════════════════════════ -->
+
+  <section class="tutorial-step" id="step4">
+    <div class="container">
+      <div class="step-head reveal">
+        <span class="step-num">4</span>
+        <div class="step-head__text">
+          <p class="step-head__eyebrow">Flow 04 — Transform config</p>
+          <h2 class="step-head__title">宛先IP/portを書き換えてミラーする(Transform)</h2>
+          <p class="step-head__body">接続線中央のアイコンをクリックすると設定パネルが開きます。<b style="color:var(--text-1)">Transform</b> タブに切り替え、宛先のDestination(G)にIP/portを入力すると、<b style="color:var(--text-1)">Preview SDP / active JSON</b> で実際に配信されるSDPとactive JSONを保存前に確認できます。Saveすると、宛先RDS上に専用のプロキシノード経由でリソースが登録されます。</p>
+        </div>
+      </div>
+      <div class="shot-row reveal" style="--cols:3;">
+        <div class="shot-card">
+          <img src="../../../assets/images/rds-mirror-tutorial/transform-filled.png" alt="Transformタブ選択後、Destination(G)にIPアドレスとportを入力した設定パネル">
+          <div class="shot-card__cap"><b>①</b><span>Transformタブに切り替え、宛先のIP/portを入力する。</span></div>
+        </div>
+        <div class="shot-card">
+          <img src="../../../assets/images/rds-mirror-tutorial/transform-preview.png" alt="Preview SDP / active JSONを押した後、書き換え後のSDPとactive JSONがプレビュー表示されている">
+          <div class="shot-card__cap"><b>②</b><span>Preview SDP / active JSONで、保存前に実際の配信内容を確認できる。</span></div>
+        </div>
+        <div class="shot-card">
+          <img src="../../../assets/images/rds-mirror-tutorial/transform-saved.png" alt="Save transform後、宛先側にRDS Mirror Proxyという仮想デバイス配下でCAM-1 Videoが登録され、点線の接続線でつながっている">
+          <div class="shot-card__cap"><b>③</b><span>Saveすると宛先に「RDS Mirror Proxy」仮想デバイスが作られ、点線の接続線でTransformだと分かる。</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════ STEP 5 ═══════════════════════════════════════ -->
+
+  <section class="tutorial-step" id="step5">
+    <div class="container">
+      <div class="step-head reveal">
+        <span class="step-num">5</span>
+        <div class="step-head__text">
+          <p class="step-head__eyebrow">Flow 05 — Resource detail</p>
+          <h2 class="step-head__title">リソースをダブルクリックして出自を確認する</h2>
+          <p class="step-head__body">どのsender/receiverの行もダブルクリックすると詳細モーダルが開きます。それがネイティブに登録されたものか、他のRDSからミラーされてきたものか(どのジョブ経由・元のIDは何か)がバッジで分かり、生のJSONも確認できます。</p>
+        </div>
+      </div>
+      <div class="shot-row reveal" style="--cols:2;">
+        <div class="shot-card">
+          <img src="../../../assets/images/rds-mirror-tutorial/detail-original.png" alt="ORIGINALバッジ。このRDSにネイティブに登録されているリソースの詳細モーダル">
+          <div class="shot-card__cap"><b>①</b><span><b style="color:var(--text-1)">ORIGINAL</b> — このRDSにネイティブに登録されたリソース。</span></div>
+        </div>
+        <div class="shot-card">
+          <img src="../../../assets/images/rds-mirror-tutorial/detail-mirrored.png" alt="TRANSFORM(PROXY)バッジ。どのジョブ・どのRDSからミラーされたリソースかを示す詳細モーダル">
+          <div class="shot-card__cap"><b>②</b><span><b style="color:var(--text-1)">TRANSFORM (PROXY)</b> — どのジョブ・どのRDSからミラーされたかが分かる。</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════ STEP 6 ═══════════════════════════════════════ -->
+
+  <section class="tutorial-step" style="border-bottom:none;" id="step6">
+    <div class="container">
+      <div class="step-head reveal">
+        <span class="step-num">6</span>
+        <div class="step-head__text">
+          <p class="step-head__eyebrow">Flow 06 — Chain-mirror guard / Jobs</p>
+          <h2 class="step-head__title">連鎖ミラーを防ぎ、Jobsで状態を見張る</h2>
+          <p class="step-head__body">ミラーされてきたリソースを、さらに別のRDSへミラーしようとするとどうなるか。既定では連鎖ミラーはブロックされ、行・デバイス・ノードの各階層に「mirrored-in」「chain blocked」の印が付き、選択しようとすると理由を説明するトーストが出ます(Settingsの「Allow chain mirroring」でオンに変更可能)。Jobsページでは、動いている各ジョブの状態(有効/無効・ハートビート・リソース数)をまとめて確認できます。</p>
+        </div>
+      </div>
+      <div class="shot-row reveal" style="--cols:3;">
+        <div class="shot-card">
+          <img src="../../../assets/images/rds-mirror-tutorial/chain-guard.png" alt="STUDIO-Bを新たにSOURCEに選ぶと、そこにミラーされてきたリソースにmirrored-inとchain blockedのタグが付いている">
+          <div class="shot-card__cap"><b>①</b><span>ミラーされてきたリソースには「mirrored-in」「chain blocked」の印が付く。</span></div>
+        </div>
+        <div class="shot-card">
+          <img src="../../../assets/images/rds-mirror-tutorial/chain-guard-toast.png" alt="chain-blockedな行をクリックすると、Chain mirroring is offという説明トーストが表示される">
+          <div class="shot-card__cap"><b>②</b><span>クリックすると、ブロックされている理由と設定変更方法を説明するトーストが出る。</span></div>
+        </div>
+        <div class="shot-card">
+          <img src="../../../assets/images/rds-mirror-tutorial/jobs-page.png" alt="Jobsページ。STUDIO-A→STUDIO-Bジョブがenabled状態で、リソース数やハートビート状況とともに一覧表示されている">
+          <div class="shot-card__cap"><b>③</b><span>Jobsページで、動いているジョブの有効/無効・ハートビートをまとめて確認できる。</span></div>
+        </div>
+      </div>
+      <span class="sanitize-note">※ Logs・Settingsページの詳細はここでは扱いません。必要であれば使い方ガイドやREADMEを参照してください</span>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer__inner">
+      <span class="footer__left">NMOS Simple Tools — オープンソース放送ユーティリティ</span>
+      <div class="footer__right">
+        <a href="../">← RDS Mirror 製品ページへ戻る</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../../../assets/js/common.js"></script>
+</body>
+</html>
