@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="ja" class="lang-ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>スクロール試作 — NMOS Simple RDS Mirror</title>
+  <link rel="stylesheet" href="../../../assets/css/common.css">
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <style>
+    .trial-note {
+      background: var(--bg-3);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 0;
+      font-size: 12.5px;
+      color: var(--text-2);
+      text-align: center;
+    }
+    .trial-note b { color: var(--text-1); }
+
+    .trial-hero {
+      padding: 64px 0 40px;
+      text-align: center;
+    }
+    .trial-hero h1 {
+      font-family: var(--font-display);
+      font-size: 30px;
+      font-weight: 700;
+      color: var(--text-1);
+      margin-bottom: 10px;
+    }
+    .trial-hero p {
+      font-size: 14px;
+      color: var(--text-2);
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    /* ─── scrollytelling レイアウト ─── */
+    .scrolly {
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 48px;
+      align-items: start;
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 24px 40px;
+    }
+    @media (max-width: 880px) {
+      .scrolly { grid-template-columns: 1fr; }
+      .scrolly__sticky { position: static !important; margin-bottom: 24px; }
+    }
+
+    .scrolly__steps { display: flex; flex-direction: column; }
+    .scrolly__step {
+      min-height: 78vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 40px 0;
+      opacity: 0.32;
+      transform: translateY(6px);
+      transition: opacity .35s ease, transform .35s ease;
+    }
+    .scrolly__step.is-active { opacity: 1; transform: translateY(0); }
+    .scrolly__step:last-child { min-height: 60vh; }
+
+    .scrolly__eyebrow {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--grad-from);
+      margin-bottom: 8px;
+    }
+    .scrolly__title {
+      font-family: var(--font-display);
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--text-1);
+      margin-bottom: 12px;
+      line-height: 1.3;
+    }
+    .scrolly__body {
+      font-size: 14.5px;
+      color: var(--text-2);
+      line-height: 1.8;
+    }
+    .scrolly__body b { color: var(--text-1); }
+
+    .scrolly__sticky {
+      position: sticky;
+      top: 90px;
+      height: 82vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+    }
+    .scrolly__stage {
+      position: relative;
+      width: 100%;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-md), 0 24px 60px rgba(0,0,0,0.12);
+      overflow: hidden;
+      background: #0b0d12;
+      aspect-ratio: 1360 / 860;
+    }
+    .scrolly__img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transform: scale(1.015);
+      transition: opacity .5s ease, transform .6s ease;
+    }
+    .scrolly__img.is-current { opacity: 1; transform: scale(1); }
+
+    .scrolly__dots {
+      display: flex;
+      gap: 8px;
+    }
+    .scrolly__dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--border-mid);
+      transition: background .25s ease, transform .25s ease;
+    }
+    .scrolly__dot.is-current {
+      background: linear-gradient(135deg, var(--grad-from), var(--grad-to));
+      transform: scale(1.3);
+    }
+
+    .scrolly__progress {
+      position: fixed;
+      top: 0; left: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--grad-from), var(--grad-to));
+      z-index: 200;
+      width: 0%;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="scrolly__progress" id="progress"></div>
+
+  <div class="trial-note">
+    <b>試作版</b> — スクロールに連動して右側の画面が切り替わる案の検証用ページです。まだ本採用ではありません。
+  </div>
+
+  <nav class="nav">
+    <div class="nav__inner">
+      <div class="nav__left">
+        <a class="nav__logo" href="../../">NMOS<span>//</span> Simple Tools</a>
+        <div class="nav__breadcrumb">
+          <span class="nav__breadcrumb-sep">/</span>
+          <span class="nav__breadcrumb-current">RDS Mirror — スクロール試作</span>
+        </div>
+      </div>
+      <div class="nav__links">
+        <a href="../tutorial/">通常版チュートリアル</a>
+        <a href="../">製品ページ</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="trial-hero">
+    <h1>スクロールで進むチュートリアル(試作)</h1>
+    <p>左のテキストをスクロールすると、右側の画面が自動で切り替わります。</p>
+  </div>
+
+  <div class="scrolly">
+    <div class="scrolly__steps" id="steps">
+
+      <section class="scrolly__step" data-step="1">
+        <p class="scrolly__eyebrow">Flow 01 — 起動直後</p>
+        <h2 class="scrolly__title">Dashboardで全体を把握する</h2>
+        <p class="scrolly__body">起動すると最初に表示されるのがDashboardです。登録済みのRDS、実行中のジョブ、ミラー済みリソース数が一目で分かります。</p>
+      </section>
+
+      <section class="scrolly__step" data-step="2">
+        <p class="scrolly__eyebrow">Flow 02 — RDS Registry</p>
+        <h2 class="scrolly__title">ミラー元・先のRDSを登録する</h2>
+        <p class="scrolly__body">左サイドバーの <b>RDS Registry</b> から2つのレジストリを登録します。Query API URLとRegistration API URLを入力してSaveするだけです。</p>
+      </section>
+
+      <section class="scrolly__step" data-step="3">
+        <p class="scrolly__eyebrow">Flow 03 — Mirror workspace</p>
+        <h2 class="scrolly__title">そのままの構造でミラーする(Passthrough)</h2>
+        <p class="scrolly__body">SOURCEとDESTINATIONを選び、コピーしたいリソースをクリックして <b>Copy selection</b> を押すだけで、同じ構造のまま右側に登録されます。</p>
+      </section>
+
+      <section class="scrolly__step" data-step="4">
+        <p class="scrolly__eyebrow">Flow 04 — Transform config</p>
+        <h2 class="scrolly__title">宛先IP/portを書き換える(Transform)</h2>
+        <p class="scrolly__body">接続線のアイコンから設定パネルを開き、Transformタブで宛先IP/portを入力。保存前にSDPをプレビューして確認できます。</p>
+      </section>
+
+      <section class="scrolly__step" data-step="5">
+        <p class="scrolly__eyebrow">Flow 05 — Resource detail</p>
+        <h2 class="scrolly__title">出自をダブルクリックで確認する</h2>
+        <p class="scrolly__body">どの行もダブルクリックすれば、ネイティブか他RDSからのミラーかがバッジで分かり、生のJSONも確認できます。</p>
+      </section>
+
+      <section class="scrolly__step" data-step="6">
+        <p class="scrolly__eyebrow">Flow 06 — Chain-mirror guard</p>
+        <h2 class="scrolly__title">連鎖ミラーを防ぐ</h2>
+        <p class="scrolly__body">ミラーされてきたリソースはさらに別のRDSへミラーできないようブロックされ、クリックすると理由を説明するトーストが出ます。</p>
+      </section>
+
+    </div>
+
+    <div class="scrolly__sticky">
+      <div class="scrolly__stage" id="stage">
+        <img class="scrolly__img" data-step="1" src="../../../assets/images/rds-mirror-tutorial/dashboard.png" alt="">
+        <img class="scrolly__img" data-step="2" src="../../../assets/images/rds-mirror-tutorial/registry-two.png" alt="">
+        <img class="scrolly__img" data-step="3" src="../../../assets/images/rds-mirror-tutorial/mirror-copied.png" alt="">
+        <img class="scrolly__img" data-step="4" src="../../../assets/images/rds-mirror-tutorial/transform-saved.png" alt="">
+        <img class="scrolly__img" data-step="5" src="../../../assets/images/rds-mirror-tutorial/detail-mirrored.png" alt="">
+        <img class="scrolly__img" data-step="6" src="../../../assets/images/rds-mirror-tutorial/chain-guard-toast.png" alt="">
+      </div>
+      <div class="scrolly__dots" id="dots">
+        <span class="scrolly__dot" data-step="1"></span>
+        <span class="scrolly__dot" data-step="2"></span>
+        <span class="scrolly__dot" data-step="3"></span>
+        <span class="scrolly__dot" data-step="4"></span>
+        <span class="scrolly__dot" data-step="5"></span>
+        <span class="scrolly__dot" data-step="6"></span>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer__inner">
+      <span class="footer__left">NMOS Simple Tools — 試作ページ(スクロール連動チュートリアル案)</span>
+      <div class="footer__right">
+        <a href="../">← RDS Mirror 製品ページへ戻る</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../../../assets/js/common.js"></script>
+  <script>
+    (function () {
+      var steps = Array.prototype.slice.call(document.querySelectorAll('.scrolly__step'));
+      var imgs = Array.prototype.slice.call(document.querySelectorAll('.scrolly__img'));
+      var dots = Array.prototype.slice.call(document.querySelectorAll('.scrolly__dot'));
+      var progress = document.getElementById('progress');
+
+      function setActive(stepNum) {
+        steps.forEach(function (s) { s.classList.toggle('is-active', s.dataset.step === stepNum); });
+        imgs.forEach(function (i) { i.classList.toggle('is-current', i.dataset.step === stepNum); });
+        dots.forEach(function (d) { d.classList.toggle('is-current', d.dataset.step === stepNum); });
+      }
+
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) setActive(entry.target.dataset.step);
+        });
+      }, { threshold: 0, rootMargin: '-45% 0px -45% 0px' });
+      steps.forEach(function (s) { observer.observe(s); });
+
+      setActive('1');
+
+      function onScroll() {
+        var doc = document.documentElement;
+        var scrolled = doc.scrollTop;
+        var max = doc.scrollHeight - doc.clientHeight;
+        progress.style.width = (max > 0 ? (scrolled / max) * 100 : 0) + '%';
+      }
+      document.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    })();
+  </script>
+</body>
+</html>
