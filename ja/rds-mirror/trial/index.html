@@ -8,273 +8,476 @@
   <link rel="stylesheet" href="../../../assets/css/common.css">
   <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
   <style>
-    .trial-note {
-      background: var(--bg-3);
-      border-bottom: 1px solid var(--border);
-      padding: 14px 0;
-      font-size: 12.5px;
-      color: var(--text-2);
-      text-align: center;
-    }
-    .trial-note b { color: var(--text-1); }
-
-    .trial-hero {
-      padding: 64px 0 40px;
-      text-align: center;
-    }
-    .trial-hero h1 {
-      font-family: var(--font-display);
-      font-size: 30px;
-      font-weight: 700;
-      color: var(--text-1);
-      margin-bottom: 10px;
-    }
-    .trial-hero p {
-      font-size: 14px;
-      color: var(--text-2);
-      max-width: 480px;
-      margin: 0 auto;
+    html, body {
+      height: 100%;
+      overflow: hidden;
+      overscroll-behavior: none;
     }
 
-    /* ─── scrollytelling レイアウト ─── */
-    .scrolly {
-      display: grid;
-      grid-template-columns: 1fr 1.1fr;
-      gap: 48px;
-      align-items: start;
-      max-width: 1180px;
-      margin: 0 auto;
-      padding: 0 24px 40px;
-    }
-    @media (max-width: 880px) {
-      .scrolly { grid-template-columns: 1fr; }
-      .scrolly__sticky { position: static !important; margin-bottom: 24px; }
-    }
-
-    .scrolly__steps { display: flex; flex-direction: column; }
-    .scrolly__step {
-      min-height: 78vh;
+    .deck {
+      position: relative;
+      height: 100vh;
+      height: 100dvh;
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      padding: 40px 0;
-      opacity: 0.32;
-      transform: translateY(6px);
-      transition: opacity .35s ease, transform .35s ease;
+      background: var(--bg);
     }
-    .scrolly__step.is-active { opacity: 1; transform: translateY(0); }
-    .scrolly__step:last-child { min-height: 60vh; }
 
-    .scrolly__eyebrow {
+    .deck__bar {
+      flex-shrink: 0;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      border-bottom: 1px solid var(--border);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-3);
+    }
+    .deck__bar a { color: var(--text-2); text-decoration: none; }
+    .deck__bar a:hover { color: var(--grad-from); }
+    .deck__bar-left { display: flex; align-items: center; gap: 10px; }
+    .deck__bar-right { display: flex; align-items: center; gap: 16px; }
+    .deck__counter { color: var(--text-2); }
+
+    .deck__progress-track {
+      flex-shrink: 0;
+      height: 3px;
+      background: var(--border);
+    }
+    .deck__progress-fill {
+      height: 100%;
+      width: 12.5%;
+      background: linear-gradient(90deg, var(--grad-from), var(--grad-to));
+      transition: width .4s ease;
+    }
+
+    .deck__stage {
+      position: relative;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      padding: 24px clamp(16px, 5vw, 64px) 16px;
+      min-height: 0;
+    }
+
+    .deck__frame {
+      position: relative;
+      width: 100%;
+      max-width: 1080px;
+      flex: 1;
+      min-height: 0;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-md), 0 30px 70px rgba(0,0,0,0.14);
+      overflow: hidden;
+      background: #0b0d12;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .deck__frame img {
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      display: block;
+      will-change: opacity, transform;
+    }
+
+    /* タイトル・エンドスライド用 */
+    .deck__title-slide {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: 16px;
+      width: 100%;
+      height: 100%;
+      color: #fff;
+      background:
+        radial-gradient(circle at 30% 20%, rgba(14,165,233,0.35), transparent 55%),
+        radial-gradient(circle at 75% 75%, rgba(124,58,237,0.35), transparent 55%),
+        #0b0d12;
+    }
+    .deck__title-slide.is-visible { display: flex; }
+    .deck__title-slide img.deck__icon { width: 56px; height: 56px; margin-bottom: 4px; }
+    .deck__title-slide h1 {
+      font-family: var(--font-display);
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 800;
+    }
+    .deck__title-slide p { font-size: 14px; opacity: 0.75; max-width: 460px; }
+    .deck__title-slide .deck__cta-row { display: flex; gap: 12px; margin-top: 10px; }
+    .deck__title-slide .deck__pill {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 999px;
+      padding: 5px 12px;
+      opacity: 0.85;
+    }
+    .deck__hint {
+      margin-top: 8px;
+      font-size: 12px;
+      opacity: 0.6;
+      animation: deck-bob 1.6s ease-in-out infinite;
+    }
+    @keyframes deck-bob {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(6px); }
+    }
+
+    .deck__end-links { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-top: 6px; }
+    .deck__end-links a {
+      font-family: var(--font-mono);
+      font-size: 12.5px;
+      color: #fff;
+      text-decoration: none;
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 999px;
+      padding: 8px 16px;
+      transition: background .2s ease;
+    }
+    .deck__end-links a:hover { background: rgba(255,255,255,0.12); }
+    .deck__end-links a.is-primary {
+      background: linear-gradient(135deg, var(--grad-from), var(--grad-to));
+      border-color: transparent;
+    }
+
+    .deck__caption {
+      flex-shrink: 0;
+      width: 100%;
+      max-width: 780px;
+      text-align: center;
+      min-height: 64px;
+    }
+    .deck__eyebrow {
       font-family: var(--font-mono);
       font-size: 11px;
       letter-spacing: 0.08em;
       text-transform: uppercase;
       color: var(--grad-from);
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
-    .scrolly__title {
+    .deck__caption-title {
       font-family: var(--font-display);
-      font-size: 24px;
+      font-size: 18px;
       font-weight: 700;
       color: var(--text-1);
-      margin-bottom: 12px;
-      line-height: 1.3;
+      margin-bottom: 6px;
     }
-    .scrolly__body {
-      font-size: 14.5px;
+    .deck__caption-body {
+      font-size: 13.5px;
       color: var(--text-2);
-      line-height: 1.8;
+      line-height: 1.7;
     }
-    .scrolly__body b { color: var(--text-1); }
+    .deck__caption-body b { color: var(--text-1); }
 
-    .scrolly__sticky {
-      position: sticky;
-      top: 90px;
-      height: 82vh;
+    .deck__dots {
+      flex-shrink: 0;
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 18px;
-    }
-    .scrolly__stage {
-      position: relative;
-      width: 100%;
-      border-radius: var(--radius-lg);
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow-md), 0 24px 60px rgba(0,0,0,0.12);
-      overflow: hidden;
-      background: #0b0d12;
-      aspect-ratio: 1360 / 860;
-    }
-    .scrolly__img {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      opacity: 0;
-      transform: scale(1.015);
-      transition: opacity .5s ease, transform .6s ease;
-    }
-    .scrolly__img.is-current { opacity: 1; transform: scale(1); }
-
-    .scrolly__dots {
-      display: flex;
       gap: 8px;
+      padding: 14px 0 18px;
     }
-    .scrolly__dot {
+    .deck__dot {
       width: 8px; height: 8px;
       border-radius: 50%;
       background: var(--border-mid);
+      border: none;
+      cursor: pointer;
+      padding: 0;
       transition: background .25s ease, transform .25s ease;
     }
-    .scrolly__dot.is-current {
+    .deck__dot.is-current {
       background: linear-gradient(135deg, var(--grad-from), var(--grad-to));
-      transform: scale(1.3);
+      transform: scale(1.35);
     }
 
-    .scrolly__progress {
-      position: fixed;
-      top: 0; left: 0;
-      height: 3px;
-      background: linear-gradient(90deg, var(--grad-from), var(--grad-to));
-      z-index: 200;
-      width: 0%;
+    .deck__arrow {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 34px; height: 34px;
+      border-radius: 50%;
+      border: 1px solid var(--border-mid);
+      background: var(--bg-2);
+      color: var(--text-2);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      box-shadow: var(--shadow-sm);
+      z-index: 5;
+      transition: opacity .2s ease;
+    }
+    .deck__arrow:hover { color: var(--grad-from); }
+    .deck__arrow--up { top: 58px; }
+    .deck__arrow--down { bottom: 132px; }
+    .deck__arrow[disabled] { opacity: 0.25; cursor: default; pointer-events: none; }
+
+    @keyframes deck-shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-8px); }
+      75% { transform: translateX(8px); }
+    }
+    .deck__frame.is-shaking { animation: deck-shake .3s ease; }
+
+    @media (max-width: 640px) {
+      .deck__arrow { display: none; }
+      .deck__caption-body { font-size: 13px; }
     }
   </style>
 </head>
 <body>
 
-  <div class="scrolly__progress" id="progress"></div>
-
-  <div class="trial-note">
-    <b>試作版</b> — スクロールに連動して右側の画面が切り替わる案の検証用ページです。まだ本採用ではありません。
-  </div>
-
-  <nav class="nav">
-    <div class="nav__inner">
-      <div class="nav__left">
-        <a class="nav__logo" href="../../">NMOS<span>//</span> Simple Tools</a>
-        <div class="nav__breadcrumb">
-          <span class="nav__breadcrumb-sep">/</span>
-          <span class="nav__breadcrumb-current">RDS Mirror — スクロール試作</span>
-        </div>
+  <div class="deck" id="deck">
+    <div class="deck__bar">
+      <div class="deck__bar-left">
+        <span>NMOS// Simple Tools / RDS Mirror — <span style="color:var(--text-1)">スクロール試作</span></span>
       </div>
-      <div class="nav__links">
-        <a href="../tutorial/">通常版チュートリアル</a>
+      <div class="deck__bar-right">
+        <span class="deck__counter" id="counter">1 / 8</span>
+        <a href="../tutorial/">通常版</a>
         <a href="../">製品ページ</a>
       </div>
     </div>
-  </nav>
 
-  <div class="trial-hero">
-    <h1>スクロールで進むチュートリアル(試作)</h1>
-    <p>左のテキストをスクロールすると、右側の画面が自動で切り替わります。</p>
-  </div>
-
-  <div class="scrolly">
-    <div class="scrolly__steps" id="steps">
-
-      <section class="scrolly__step" data-step="1">
-        <p class="scrolly__eyebrow">Flow 01 — 起動直後</p>
-        <h2 class="scrolly__title">Dashboardで全体を把握する</h2>
-        <p class="scrolly__body">起動すると最初に表示されるのがDashboardです。登録済みのRDS、実行中のジョブ、ミラー済みリソース数が一目で分かります。</p>
-      </section>
-
-      <section class="scrolly__step" data-step="2">
-        <p class="scrolly__eyebrow">Flow 02 — RDS Registry</p>
-        <h2 class="scrolly__title">ミラー元・先のRDSを登録する</h2>
-        <p class="scrolly__body">左サイドバーの <b>RDS Registry</b> から2つのレジストリを登録します。Query API URLとRegistration API URLを入力してSaveするだけです。</p>
-      </section>
-
-      <section class="scrolly__step" data-step="3">
-        <p class="scrolly__eyebrow">Flow 03 — Mirror workspace</p>
-        <h2 class="scrolly__title">そのままの構造でミラーする(Passthrough)</h2>
-        <p class="scrolly__body">SOURCEとDESTINATIONを選び、コピーしたいリソースをクリックして <b>Copy selection</b> を押すだけで、同じ構造のまま右側に登録されます。</p>
-      </section>
-
-      <section class="scrolly__step" data-step="4">
-        <p class="scrolly__eyebrow">Flow 04 — Transform config</p>
-        <h2 class="scrolly__title">宛先IP/portを書き換える(Transform)</h2>
-        <p class="scrolly__body">接続線のアイコンから設定パネルを開き、Transformタブで宛先IP/portを入力。保存前にSDPをプレビューして確認できます。</p>
-      </section>
-
-      <section class="scrolly__step" data-step="5">
-        <p class="scrolly__eyebrow">Flow 05 — Resource detail</p>
-        <h2 class="scrolly__title">出自をダブルクリックで確認する</h2>
-        <p class="scrolly__body">どの行もダブルクリックすれば、ネイティブか他RDSからのミラーかがバッジで分かり、生のJSONも確認できます。</p>
-      </section>
-
-      <section class="scrolly__step" data-step="6">
-        <p class="scrolly__eyebrow">Flow 06 — Chain-mirror guard</p>
-        <h2 class="scrolly__title">連鎖ミラーを防ぐ</h2>
-        <p class="scrolly__body">ミラーされてきたリソースはさらに別のRDSへミラーできないようブロックされ、クリックすると理由を説明するトーストが出ます。</p>
-      </section>
-
+    <div class="deck__progress-track">
+      <div class="deck__progress-fill" id="progress-fill"></div>
     </div>
 
-    <div class="scrolly__sticky">
-      <div class="scrolly__stage" id="stage">
-        <img class="scrolly__img" data-step="1" src="../../../assets/images/rds-mirror-tutorial/dashboard.png" alt="">
-        <img class="scrolly__img" data-step="2" src="../../../assets/images/rds-mirror-tutorial/registry-two.png" alt="">
-        <img class="scrolly__img" data-step="3" src="../../../assets/images/rds-mirror-tutorial/mirror-copied.png" alt="">
-        <img class="scrolly__img" data-step="4" src="../../../assets/images/rds-mirror-tutorial/transform-saved.png" alt="">
-        <img class="scrolly__img" data-step="5" src="../../../assets/images/rds-mirror-tutorial/detail-mirrored.png" alt="">
-        <img class="scrolly__img" data-step="6" src="../../../assets/images/rds-mirror-tutorial/chain-guard-toast.png" alt="">
+    <div class="deck__stage">
+      <button type="button" class="deck__arrow deck__arrow--up" id="btn-up" aria-label="前へ" disabled>↑</button>
+
+      <div class="deck__frame" id="frame">
+        <div class="deck__title-slide is-visible" id="title-slide">
+          <img class="deck__icon" src="../../../assets/icons/rds-mirror.svg" alt="">
+          <h1>RDS Mirror チュートリアル</h1>
+          <p>2つのRDSを登録し、リソースをミラーして詳細を確認するまで。スクロール1回で1ステップ進みます。</p>
+          <div class="deck__cta-row">
+            <span class="deck__pill">6 STEPS</span>
+            <span class="deck__pill">約2分</span>
+          </div>
+          <p class="deck__hint">↓ スクロールして開始</p>
+        </div>
+        <img id="stage-img" alt="">
+        <div class="deck__title-slide" id="end-slide">
+          <h1>お疲れさまでした</h1>
+          <p>ここまでの流れで、RDSの登録からPassthrough / Transformミラー、出自の確認、連鎖ミラーガードまで一通り触れました。</p>
+          <div class="deck__end-links">
+            <a class="is-primary" href="https://github.com/taqq505/nmos-simple-rds-mirror/releases" target="_blank" rel="noopener">ダウンロード ↗</a>
+            <a href="../tutorial/">通常版チュートリアルを見る</a>
+            <a href="../">製品ページへ戻る</a>
+          </div>
+          <p class="deck__hint">↑ スクロールで戻る</p>
+        </div>
       </div>
-      <div class="scrolly__dots" id="dots">
-        <span class="scrolly__dot" data-step="1"></span>
-        <span class="scrolly__dot" data-step="2"></span>
-        <span class="scrolly__dot" data-step="3"></span>
-        <span class="scrolly__dot" data-step="4"></span>
-        <span class="scrolly__dot" data-step="5"></span>
-        <span class="scrolly__dot" data-step="6"></span>
+
+      <button type="button" class="deck__arrow deck__arrow--down" id="btn-down" aria-label="次へ">↓</button>
+
+      <div class="deck__caption" id="caption">
+        <p class="deck__eyebrow" id="cap-eyebrow"></p>
+        <p class="deck__caption-title" id="cap-title"></p>
+        <p class="deck__caption-body" id="cap-body"></p>
       </div>
+
+      <div class="deck__dots" id="dots"></div>
     </div>
   </div>
-
-  <footer class="footer">
-    <div class="footer__inner">
-      <span class="footer__left">NMOS Simple Tools — 試作ページ(スクロール連動チュートリアル案)</span>
-      <div class="footer__right">
-        <a href="../">← RDS Mirror 製品ページへ戻る</a>
-      </div>
-    </div>
-  </footer>
 
   <script src="../../../assets/js/common.js"></script>
   <script>
     (function () {
-      var steps = Array.prototype.slice.call(document.querySelectorAll('.scrolly__step'));
-      var imgs = Array.prototype.slice.call(document.querySelectorAll('.scrolly__img'));
-      var dots = Array.prototype.slice.call(document.querySelectorAll('.scrolly__dot'));
-      var progress = document.getElementById('progress');
+      var SLIDES = [
+        { kind: 'title' },
+        {
+          kind: 'shot',
+          img: '../../../assets/images/rds-mirror-tutorial/dashboard.png',
+          eyebrow: 'FLOW 01 — 起動直後',
+          title: 'Dashboardで全体を把握する',
+          body: '起動すると最初に表示されるのがDashboardです。登録済みのRDS、実行中のジョブ、ミラー済みリソース数が一目で分かります。'
+        },
+        {
+          kind: 'shot',
+          img: '../../../assets/images/rds-mirror-tutorial/registry-two.png',
+          eyebrow: 'FLOW 02 — RDS Registry',
+          title: 'ミラー元・先のRDSを登録する',
+          body: '左サイドバーの <b>RDS Registry</b> から2つのレジストリを登録します。Query API URLとRegistration API URLを入力してSaveするだけです。'
+        },
+        {
+          kind: 'shot',
+          img: '../../../assets/images/rds-mirror-tutorial/mirror-copied.png',
+          eyebrow: 'FLOW 03 — Mirror workspace',
+          title: 'そのままの構造でミラーする(Passthrough)',
+          body: 'SOURCEとDESTINATIONを選び、コピーしたいリソースをクリックして <b>Copy selection</b> を押すだけで、同じ構造のまま右側に登録されます。'
+        },
+        {
+          kind: 'shot',
+          img: '../../../assets/images/rds-mirror-tutorial/transform-saved.png',
+          eyebrow: 'FLOW 04 — Transform config',
+          title: '宛先IP/portを書き換える(Transform)',
+          body: '接続線のアイコンから設定パネルを開き、Transformタブで宛先IP/portを入力。保存前にSDPをプレビューして確認できます。'
+        },
+        {
+          kind: 'shot',
+          img: '../../../assets/images/rds-mirror-tutorial/detail-mirrored.png',
+          eyebrow: 'FLOW 05 — Resource detail',
+          title: '出自をダブルクリックで確認する',
+          body: 'どの行もダブルクリックすれば、ネイティブか他RDSからのミラーかがバッジで分かり、生のJSONも確認できます。'
+        },
+        {
+          kind: 'shot',
+          img: '../../../assets/images/rds-mirror-tutorial/chain-guard-toast.png',
+          eyebrow: 'FLOW 06 — Chain-mirror guard',
+          title: '連鎖ミラーを防ぐ',
+          body: 'ミラーされてきたリソースはさらに別のRDSへミラーできないようブロックされ、クリックすると理由を説明するトーストが出ます。'
+        },
+        { kind: 'end' }
+      ];
 
-      function setActive(stepNum) {
-        steps.forEach(function (s) { s.classList.toggle('is-active', s.dataset.step === stepNum); });
-        imgs.forEach(function (i) { i.classList.toggle('is-current', i.dataset.step === stepNum); });
-        dots.forEach(function (d) { d.classList.toggle('is-current', d.dataset.step === stepNum); });
+      var LAST = SLIDES.length - 1;
+      var current = 0;
+      var locked = false;
+
+      var frame = document.getElementById('frame');
+      var stageImg = document.getElementById('stage-img');
+      var titleSlide = document.getElementById('title-slide');
+      var endSlide = document.getElementById('end-slide');
+      var caption = document.getElementById('caption');
+      var capEyebrow = document.getElementById('cap-eyebrow');
+      var capTitle = document.getElementById('cap-title');
+      var capBody = document.getElementById('cap-body');
+      var dotsWrap = document.getElementById('dots');
+      var progressFill = document.getElementById('progress-fill');
+      var counter = document.getElementById('counter');
+      var btnUp = document.getElementById('btn-up');
+      var btnDown = document.getElementById('btn-down');
+
+      SLIDES.forEach(function (_, i) {
+        var dot = document.createElement('button');
+        dot.type = 'button';
+        dot.className = 'deck__dot';
+        dot.addEventListener('click', function () { goTo(i); });
+        dotsWrap.appendChild(dot);
+      });
+      var dots = Array.prototype.slice.call(dotsWrap.children);
+
+      function render(step, animateImg) {
+        var s = SLIDES[step];
+
+        titleSlide.classList.toggle('is-visible', s.kind === 'title');
+        endSlide.classList.toggle('is-visible', s.kind === 'end');
+        stageImg.style.display = s.kind === 'shot' ? 'block' : 'none';
+        caption.style.visibility = s.kind === 'shot' ? 'visible' : 'hidden';
+
+        if (s.kind === 'shot') {
+          stageImg.src = s.img;
+          capEyebrow.textContent = s.eyebrow;
+          capTitle.textContent = s.title;
+          capBody.innerHTML = s.body;
+        }
+
+        dots.forEach(function (d, i) { d.classList.toggle('is-current', i === step); });
+        progressFill.style.width = ((step + 1) / SLIDES.length * 100) + '%';
+        counter.textContent = (step + 1) + ' / ' + SLIDES.length;
+        btnUp.disabled = step === 0;
+        btnDown.disabled = step === LAST;
       }
 
-      var observer = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) setActive(entry.target.dataset.step);
+      function shakeBoundary() {
+        frame.classList.remove('is-shaking');
+        void frame.offsetWidth;
+        frame.classList.add('is-shaking');
+      }
+
+      function goTo(next) {
+        if (locked || next === current) return;
+        if (next < 0 || next > LAST) { shakeBoundary(); return; }
+        locked = true;
+
+        var dir = next > current ? 1 : -1;
+        var outEls = [];
+        if (SLIDES[current].kind === 'shot') outEls.push(stageImg, caption);
+        else if (SLIDES[current].kind === 'title') outEls.push(titleSlide);
+        else outEls.push(endSlide);
+
+        outEls.forEach(function (el) {
+          el.style.transition = 'opacity .32s ease, transform .32s ease';
+          el.style.opacity = '0';
+          el.style.transform = 'translateY(' + (-dir * 26) + 'px) scale(0.985)';
         });
-      }, { threshold: 0, rootMargin: '-45% 0px -45% 0px' });
-      steps.forEach(function (s) { observer.observe(s); });
 
-      setActive('1');
+        setTimeout(function () {
+          current = next;
+          render(current);
 
-      function onScroll() {
-        var doc = document.documentElement;
-        var scrolled = doc.scrollTop;
-        var max = doc.scrollHeight - doc.clientHeight;
-        progress.style.width = (max > 0 ? (scrolled / max) * 100 : 0) + '%';
+          var inEls = [];
+          if (SLIDES[current].kind === 'shot') inEls.push(stageImg, caption);
+          else if (SLIDES[current].kind === 'title') inEls.push(titleSlide);
+          else inEls.push(endSlide);
+
+          inEls.forEach(function (el) {
+            el.style.transition = 'none';
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(' + (dir * 26) + 'px) scale(1.015)';
+          });
+          // force reflow so the "entry position" isn't animated
+          void frame.offsetWidth;
+
+          requestAnimationFrame(function () {
+            inEls.forEach(function (el) {
+              el.style.transition = 'opacity .42s cubic-bezier(.22,.68,0,1), transform .42s cubic-bezier(.22,.68,0,1)';
+              el.style.opacity = '1';
+              el.style.transform = 'translateY(0) scale(1)';
+            });
+          });
+
+          setTimeout(function () { locked = false; }, 420);
+        }, 300);
       }
-      document.addEventListener('scroll', onScroll, { passive: true });
-      onScroll();
+
+      // ── 1 wheel tick = 1 step ──
+      var wheelCooldown = false;
+      window.addEventListener('wheel', function (e) {
+        e.preventDefault();
+        if (locked || wheelCooldown) return;
+        if (Math.abs(e.deltaY) < 6) return;
+        wheelCooldown = true;
+        setTimeout(function () { wheelCooldown = false; }, 250);
+        goTo(current + (e.deltaY > 0 ? 1 : -1));
+      }, { passive: false });
+
+      // ── touch swipe ──
+      var touchStartY = null;
+      window.addEventListener('touchstart', function (e) { touchStartY = e.touches[0].clientY; }, { passive: true });
+      window.addEventListener('touchmove', function (e) { e.preventDefault(); }, { passive: false });
+      window.addEventListener('touchend', function (e) {
+        if (touchStartY === null) return;
+        var dy = touchStartY - e.changedTouches[0].clientY;
+        touchStartY = null;
+        if (Math.abs(dy) < 40) return;
+        goTo(current + (dy > 0 ? 1 : -1));
+      }, { passive: true });
+
+      // ── keyboard ──
+      document.addEventListener('keydown', function (e) {
+        if (['ArrowDown', 'PageDown', ' '].indexOf(e.key) !== -1) { e.preventDefault(); goTo(current + 1); }
+        else if (['ArrowUp', 'PageUp'].indexOf(e.key) !== -1) { e.preventDefault(); goTo(current - 1); }
+      });
+
+      btnUp.addEventListener('click', function () { goTo(current - 1); });
+      btnDown.addEventListener('click', function () { goTo(current + 1); });
+
+      render(0);
     })();
   </script>
 </body>
