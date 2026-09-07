@@ -74,6 +74,38 @@
       background: #0b0d12;
     }
     .shot-card img { width: 100%; height: auto; display: block; }
+
+    /* クリック箇所を示す枠+吹き出し番号(矢印代わり) */
+    .shot-img-wrap { position: relative; line-height: 0; }
+    .callout {
+      position: absolute;
+      border: 2px solid var(--grad-from);
+      border-radius: 8px;
+      box-shadow: 0 0 0 3px rgba(14,165,233,0.18), 0 0 18px rgba(14,165,233,0.35);
+      pointer-events: none;
+    }
+    .callout__badge {
+      position: absolute;
+      top: -13px; left: -13px;
+      width: 26px; height: 26px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--grad-from), var(--grad-to));
+      color: #fff;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.35);
+    }
+    .callout__badge::after {
+      content: '';
+      position: absolute;
+      top: 100%; left: 50%;
+      width: 9px; height: 9px;
+      transform: translate(-50%, -60%) rotate(45deg);
+      background: var(--grad-to);
+    }
+
     .shot-card__cap {
       display: flex;
       align-items: baseline;
@@ -196,8 +228,11 @@
       </div>
       <div class="shot-row reveal" style="--cols:1; max-width:820px;">
         <div class="shot-card">
-          <img src="../../../assets/images/rds-mirror-tutorial/dashboard.png" alt="Dashboard画面。RDS Registries 2件、Active Jobs 1/1、Mirrored Resources 1、Proxy Nodes 1が表示されている">
-          <div class="shot-card__cap"><b>①</b><span>上段のカードで件数を、下段でRDSごとの到達性とジョブ一覧を確認できる。</span></div>
+          <div class="shot-img-wrap">
+            <img src="../../../assets/images/rds-mirror-tutorial/dashboard.png" alt="Dashboard画面。RDS Registries 2件、Active Jobs 1/1、Mirrored Resources 1、Proxy Nodes 1が表示されている">
+            <div class="callout" style="left:0.88%; top:14.97%; width:13.46%; height:4.37%;"><span class="callout__badge">1</span></div>
+          </div>
+          <div class="shot-card__cap"><b>①</b><span>上段のカードで件数を、下段でRDSごとの到達性とジョブ一覧を確認できる。次は左の<b style="color:var(--text-1)">Mirror</b>へ進む。</span></div>
         </div>
       </div>
     </div>
@@ -217,16 +252,27 @@
       </div>
       <div class="shot-row reveal" style="--cols:3;">
         <div class="shot-card">
-          <img src="../../../assets/images/rds-mirror-tutorial/registry-one.png" alt="RDS Registryページ。STUDIO-Aのみ登録済み">
-          <div class="shot-card__cap"><b>①</b><span>STUDIO-Aが1件だけ登録された状態。ここから2件目を追加する。</span></div>
+          <div class="shot-img-wrap">
+            <img src="../../../assets/images/rds-mirror-tutorial/registry-one.png" alt="RDS Registryページ。STUDIO-Aのみ登録済み">
+            <div class="callout" style="left:89.29%; top:3.26%; width:8.36%; height:3.84%;"><span class="callout__badge">1</span></div>
+          </div>
+          <div class="shot-card__cap"><b>①</b><span>STUDIO-Aが1件だけ登録された状態。右上の<b style="color:var(--text-1)">+ Add registry</b>から2件目を追加する。</span></div>
         </div>
         <div class="shot-card">
-          <img src="../../../assets/images/rds-mirror-tutorial/registry-add-form.png" alt="Add registryフォーム。Label・Query API URL・Registration API URLを入力中">
-          <div class="shot-card__cap"><b>②</b><span>Label・Query API URL・Registration API URLを入力してSave。</span></div>
+          <div class="shot-img-wrap">
+            <img src="../../../assets/images/rds-mirror-tutorial/registry-add-form.png" alt="Add registryフォーム。Label・Query API URL・Registration API URLを入力中">
+            <div class="callout" style="left:38.16%; top:40.6%; width:23.68%; height:4.07%;"><span class="callout__badge">2</span></div>
+            <div class="callout" style="left:38.16%; top:48.47%; width:23.68%; height:4.07%;"><span class="callout__badge">3</span></div>
+            <div class="callout" style="left:38.16%; top:56.34%; width:23.68%; height:4.07%;"><span class="callout__badge">4</span></div>
+            <div class="callout" style="left:38.16%; top:61.8%; width:23.68%; height:3.84%;"><span class="callout__badge">5</span></div>
+          </div>
+          <div class="shot-card__cap"><b>②〜⑤</b><span>Label・Query API URL・Registration API URLを入力し、Saveを押す。</span></div>
         </div>
         <div class="shot-card">
-          <img src="../../../assets/images/rds-mirror-tutorial/registry-two.png" alt="RDS Registryページ。STUDIO-AとSTUDIO-Bの2件が登録済み">
-          <div class="shot-card__cap"><b>③</b><span>STUDIO-A / STUDIO-Bの2件が揃った。これでミラー元・先が用意できた。</span></div>
+          <div class="shot-img-wrap">
+            <img src="../../../assets/images/rds-mirror-tutorial/registry-two.png" alt="RDS Registryページ。STUDIO-AとSTUDIO-Bの2件が登録済み">
+          </div>
+          <div class="shot-card__cap"><b>⑥</b><span>STUDIO-A / STUDIO-Bの2件が揃った。これでミラー元・先が用意できた。</span></div>
         </div>
       </div>
       <span class="sanitize-note">※ 画像中のURLはすべてlocalhost上の検証用アドレスです</span>
@@ -247,20 +293,33 @@
       </div>
       <div class="shot-row reveal" style="--cols:2;">
         <div class="shot-card">
-          <img src="../../../assets/images/rds-mirror-tutorial/mirror-source.png" alt="SOURCEにSTUDIO-Aを選択し、CAM-1 Encoderの配下にsender/receiverが並んでいる">
-          <div class="shot-card__cap"><b>①</b><span>SOURCEでSTUDIO-Aを選ぶと、ノード・デバイスごとにリソースが一覧表示される。</span></div>
+          <div class="shot-img-wrap">
+            <img src="../../../assets/images/rds-mirror-tutorial/mirror-source.png" alt="SOURCEにSTUDIO-Aを選択し、CAM-1 Encoderの配下にsender/receiverが並んでいる">
+            <div class="callout" style="left:19.04%; top:18.34%; width:24.4%; height:4.07%;"><span class="callout__badge">1</span></div>
+          </div>
+          <div class="shot-card__cap"><b>①</b><span>SOURCEのプルダウンでSTUDIO-Aを選ぶと、ノード・デバイスごとにリソースが一覧表示される。</span></div>
         </div>
         <div class="shot-card">
-          <img src="../../../assets/images/rds-mirror-tutorial/mirror-dest.png" alt="DESTINATIONにSTUDIO-Bを選択した状態">
-          <div class="shot-card__cap"><b>②</b><span>DESTINATIONでSTUDIO-Bを選ぶ。この時点では右側はまだ空。</span></div>
+          <div class="shot-img-wrap">
+            <img src="../../../assets/images/rds-mirror-tutorial/mirror-dest.png" alt="DESTINATIONにSTUDIO-Bを選択した状態">
+            <div class="callout" style="left:71.85%; top:18.34%; width:24.4%; height:4.07%;"><span class="callout__badge">2</span></div>
+          </div>
+          <div class="shot-card__cap"><b>②</b><span>DESTINATIONのプルダウンでSTUDIO-Bを選ぶ。この時点では右側はまだ空。</span></div>
         </div>
         <div class="shot-card">
-          <img src="../../../assets/images/rds-mirror-tutorial/mirror-select-resource.png" alt="左パネルでCAM-1 Videoのsenderを選択(紫の枠)し、Copy selectionボタンが有効化されている">
-          <div class="shot-card__cap"><b>③</b><span>ミラーしたい行(ここではCAM-1 Video)をクリックして選択する。</span></div>
+          <div class="shot-img-wrap">
+            <img src="../../../assets/images/rds-mirror-tutorial/mirror-select-resource.png" alt="左パネルでCAM-1 Videoのsenderを選択(紫の枠)し、Copy selectionボタンが有効化されている">
+            <div class="callout" style="left:21.4%; top:55.19%; width:19.7%; height:3.93%;"><span class="callout__badge">3</span></div>
+            <div class="callout" style="left:49.93%; top:14.74%; width:15.44%; height:9.77%;"><span class="callout__badge">4</span></div>
+          </div>
+          <div class="shot-card__cap"><b>③④</b><span>ミラーしたい行(CAM-1 Video)をクリックして選択し、<b style="color:var(--text-1)">Copy selection</b>を押す。</span></div>
         </div>
         <div class="shot-card">
-          <img src="../../../assets/images/rds-mirror-tutorial/mirror-copied.png" alt="Copy selection後、接続線でつながれた左右の同じCAM-1 Videoリソース">
-          <div class="shot-card__cap"><b>④</b><span>Copy selectionを押すと右側に登録され、中央に接続線が引かれる。</span></div>
+          <div class="shot-img-wrap">
+            <img src="../../../assets/images/rds-mirror-tutorial/mirror-copied.png" alt="Copy selection後、接続線でつながれた左右の同じCAM-1 Videoリソース">
+            <div class="callout" style="left:56.54%; top:51.02%; width:2.21%; height:3.49%;"><span class="callout__badge">5</span></div>
+          </div>
+          <div class="shot-card__cap"><b>⑤</b><span>右側に登録され、接続線が引かれる。線の中央のアイコンをクリックすると次のTransform設定に進める。</span></div>
         </div>
       </div>
       <div class="tip-box reveal">
@@ -283,16 +342,25 @@
       </div>
       <div class="shot-row reveal" style="--cols:3;">
         <div class="shot-card">
-          <img src="../../../assets/images/rds-mirror-tutorial/transform-filled.png" alt="Transformタブ選択後、Destination(G)にIPアドレスとportを入力した設定パネル">
-          <div class="shot-card__cap"><b>①</b><span>Transformタブに切り替え、宛先のIP/portを入力する。</span></div>
+          <div class="shot-img-wrap">
+            <img src="../../../assets/images/rds-mirror-tutorial/transform-filled.png" alt="Transformタブ選択後、Destination(G)にIPアドレスとportを入力した設定パネル">
+            <div class="callout" style="left:51.03%; top:52.28%; width:11.03%; height:4.07%;"><span class="callout__badge">1</span></div>
+            <div class="callout" style="left:62.5%; top:52.28%; width:5.29%; height:4.07%;"><span class="callout__badge">2</span></div>
+          </div>
+          <div class="shot-card__cap"><b>①②</b><span>Transformタブに切り替え、宛先のIPとportを入力する。</span></div>
         </div>
         <div class="shot-card">
-          <img src="../../../assets/images/rds-mirror-tutorial/transform-preview.png" alt="Preview SDP / active JSONを押した後、書き換え後のSDPとactive JSONがプレビュー表示されている">
-          <div class="shot-card__cap"><b>②</b><span>Preview SDP / active JSONで、保存前に実際の配信内容を確認できる。</span></div>
+          <div class="shot-img-wrap">
+            <img src="../../../assets/images/rds-mirror-tutorial/transform-preview.png" alt="Preview SDP / active JSONを押した後、書き換え後のSDPとactive JSONがプレビュー表示されている">
+            <div class="callout" style="left:30.81%; top:71.21%; width:38.38%; height:4.07%;"><span class="callout__badge">3</span></div>
+          </div>
+          <div class="shot-card__cap"><b>③</b><span><b style="color:var(--text-1)">Preview SDP / active JSON</b>を押すと、保存前に実際の配信内容を確認できる。</span></div>
         </div>
         <div class="shot-card">
-          <img src="../../../assets/images/rds-mirror-tutorial/transform-saved.png" alt="Save transform後、宛先側にRDS Mirror Proxyという仮想デバイス配下でCAM-1 Videoが登録され、点線の接続線でつながっている">
-          <div class="shot-card__cap"><b>③</b><span>Saveすると宛先に「RDS Mirror Proxy」仮想デバイスが作られ、点線の接続線でTransformだと分かる。</span></div>
+          <div class="shot-img-wrap">
+            <img src="../../../assets/images/rds-mirror-tutorial/transform-saved.png" alt="Save transform後、宛先側にRDS Mirror Proxyという仮想デバイス配下でCAM-1 Videoが登録され、点線の接続線でつながっている">
+          </div>
+          <div class="shot-card__cap"><b>④</b><span>Saveすると宛先に「RDS Mirror Proxy」仮想デバイスが作られ、点線の接続線でTransformだと分かる。</span></div>
         </div>
       </div>
     </div>
@@ -312,11 +380,15 @@
       </div>
       <div class="shot-row reveal" style="--cols:2;">
         <div class="shot-card">
-          <img src="../../../assets/images/rds-mirror-tutorial/detail-original.png" alt="ORIGINALバッジ。このRDSにネイティブに登録されているリソースの詳細モーダル">
-          <div class="shot-card__cap"><b>①</b><span><b style="color:var(--text-1)">ORIGINAL</b> — このRDSにネイティブに登録されたリソース。</span></div>
+          <div class="shot-img-wrap">
+            <img src="../../../assets/images/rds-mirror-tutorial/detail-original.png" alt="ORIGINALバッジ。このRDSにネイティブに登録されているリソースの詳細モーダル">
+          </div>
+          <div class="shot-card__cap"><b>①</b><span><b style="color:var(--text-1)">ORIGINAL</b> — このRDSにネイティブに登録されたリソース(行をダブルクリックで開く)。</span></div>
         </div>
         <div class="shot-card">
-          <img src="../../../assets/images/rds-mirror-tutorial/detail-mirrored.png" alt="TRANSFORM(PROXY)バッジ。どのジョブ・どのRDSからミラーされたリソースかを示す詳細モーダル">
+          <div class="shot-img-wrap">
+            <img src="../../../assets/images/rds-mirror-tutorial/detail-mirrored.png" alt="TRANSFORM(PROXY)バッジ。どのジョブ・どのRDSからミラーされたリソースかを示す詳細モーダル">
+          </div>
           <div class="shot-card__cap"><b>②</b><span><b style="color:var(--text-1)">TRANSFORM (PROXY)</b> — どのジョブ・どのRDSからミラーされたかが分かる。</span></div>
         </div>
       </div>
@@ -337,15 +409,22 @@
       </div>
       <div class="shot-row reveal" style="--cols:3;">
         <div class="shot-card">
-          <img src="../../../assets/images/rds-mirror-tutorial/chain-guard.png" alt="STUDIO-Bを新たにSOURCEに選ぶと、そこにミラーされてきたリソースにmirrored-inとchain blockedのタグが付いている">
-          <div class="shot-card__cap"><b>①</b><span>ミラーされてきたリソースには「mirrored-in」「chain blocked」の印が付く。</span></div>
+          <div class="shot-img-wrap">
+            <img src="../../../assets/images/rds-mirror-tutorial/chain-guard.png" alt="STUDIO-Bを新たにSOURCEに選ぶと、そこにミラーされてきたリソースにmirrored-inとchain blockedのタグが付いている">
+            <div class="callout" style="left:21.4%; top:49.23%; width:19.7%; height:3.93%;"><span class="callout__badge">1</span></div>
+          </div>
+          <div class="shot-card__cap"><b>①</b><span>ミラーされてきたリソースには「mirrored-in」「chain blocked」の印が付く。試しにクリックしてみる。</span></div>
         </div>
         <div class="shot-card">
-          <img src="../../../assets/images/rds-mirror-tutorial/chain-guard-toast.png" alt="chain-blockedな行をクリックすると、Chain mirroring is offという説明トーストが表示される">
+          <div class="shot-img-wrap">
+            <img src="../../../assets/images/rds-mirror-tutorial/chain-guard-toast.png" alt="chain-blockedな行をクリックすると、Chain mirroring is offという説明トーストが表示される">
+          </div>
           <div class="shot-card__cap"><b>②</b><span>クリックすると、ブロックされている理由と設定変更方法を説明するトーストが出る。</span></div>
         </div>
         <div class="shot-card">
-          <img src="../../../assets/images/rds-mirror-tutorial/jobs-page.png" alt="Jobsページ。STUDIO-A→STUDIO-Bジョブがenabled状態で、リソース数やハートビート状況とともに一覧表示されている">
+          <div class="shot-img-wrap">
+            <img src="../../../assets/images/rds-mirror-tutorial/jobs-page.png" alt="Jobsページ。STUDIO-A→STUDIO-Bジョブがenabled状態で、リソース数やハートビート状況とともに一覧表示されている">
+          </div>
           <div class="shot-card__cap"><b>③</b><span>Jobsページで、動いているジョブの有効/無効・ハートビートをまとめて確認できる。</span></div>
         </div>
       </div>
