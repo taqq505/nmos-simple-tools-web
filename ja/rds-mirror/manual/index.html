@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ja" class="lang-ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>使い方ガイド — NMOS Simple RDS Mirror</title>
+  <link rel="stylesheet" href="../../../assets/css/common.css">
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <style>
+    /* ─── このページ専用: 注釈付きスクリーンショット ─── */
+    .shot {
+      position: relative;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-md), 0 20px 60px rgba(0,0,0,0.08);
+      overflow: hidden;
+      background: #0b0d12;
+      line-height: 0;
+    }
+    .shot img { width: 100%; height: auto; display: block; }
+
+    .callout {
+      position: absolute;
+      border: 2px solid var(--grad-from);
+      border-radius: 8px;
+      box-shadow: 0 0 0 3px rgba(14,165,233,0.18), 0 0 18px rgba(14,165,233,0.35);
+      pointer-events: none;
+    }
+    .callout__badge {
+      position: absolute;
+      top: -13px; left: -13px;
+      width: 26px; height: 26px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--grad-from), var(--grad-to));
+      color: #fff;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.35);
+    }
+    /* 吹き出しの「しっぽ」= 矢印代わり */
+    .callout__badge::after {
+      content: '';
+      position: absolute;
+      top: 100%; left: 50%;
+      width: 9px; height: 9px;
+      transform: translate(-50%, -60%) rotate(45deg);
+      background: var(--grad-to);
+    }
+
+    .shot-legend {
+      counter-reset: shot-step;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 18px;
+    }
+    .shot-legend li {
+      list-style: none;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 13.5px;
+      color: var(--text-2);
+      line-height: 1.6;
+    }
+    .shot-legend__num {
+      flex-shrink: 0;
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--grad-from), var(--grad-to));
+      color: #fff;
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+      font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      margin-top: 1px;
+    }
+    .shot-legend b { color: var(--text-1); }
+    .shot-legend code { font-family: var(--font-mono); font-size: 12px; color: var(--grad-from); }
+
+    .guide-block { padding: 56px 0; border-bottom: 1px solid var(--border); }
+    .guide-block__head { max-width: 640px; margin-bottom: 28px; }
+    .guide-block__grid {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+    @media (max-width: 900px) {
+      .guide-block__grid { grid-template-columns: 1fr; }
+    }
+
+    .sanitize-note {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      letter-spacing: 0.04em;
+      color: var(--text-3);
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav__inner">
+      <div class="nav__left">
+        <a class="nav__logo" href="../../">NMOS<span>//</span> Simple Tools</a>
+        <div class="nav__breadcrumb">
+          <span class="nav__breadcrumb-sep">/</span>
+          <span class="nav__breadcrumb-current">RDS Mirror — 使い方ガイド</span>
+        </div>
+      </div>
+      <div class="nav__links">
+        <a href="../">製品ページ</a>
+        <a href="https://github.com/taqq505/nmos-simple-rds-mirror" target="_blank" rel="noopener">GitHub&nbsp;↗</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="tool-hero">
+    <div class="container">
+      <div class="tool-hero__content">
+        <div class="tool-hero__info">
+          <img class="tool-hero__icon" src="../../../assets/icons/rds-mirror.svg" alt="" width="56" height="56">
+          <h1 class="tool-hero__name">使い方ガイド</h1>
+          <p class="tool-hero__subtitle">NMOS Simple RDS Mirror — 3つの画面でおさえる基本操作</p>
+          <div class="tool-hero__tags">
+            <span class="tag">Dashboard</span>
+            <span class="tag">Mirror</span>
+            <span class="tag">Map</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════ -->
+
+  <section class="guide-block">
+    <div class="container">
+      <div class="guide-block__head reveal">
+        <p class="section-label">STEP 1 — 全体状況の把握</p>
+        <h2 class="section-title">Dashboardで、登録済みRDSとジョブの状態を確認する</h2>
+        <p class="section-body">起動すると最初に表示されるのがDashboardです。登録されているRDS、有効なミラージョブ、実際にミラーされているリソース数が、ここで一目で分かります。</p>
+      </div>
+      <div class="guide-block__grid">
+        <div class="shot reveal">
+          <img src="../../../assets/images/rds-mirror-2.png" alt="Dashboard画面のスクリーンショット">
+          <div class="callout" style="left:0.7%; top:16.8%; width:12.2%; height:3.2%;">
+            <span class="callout__badge">1</span>
+          </div>
+          <div class="callout" style="left:16%; top:12.8%; width:20.2%; height:11%;">
+            <span class="callout__badge">2</span>
+          </div>
+        </div>
+        <ol class="shot-legend reveal">
+          <li><span class="shot-legend__num">1</span><span>左サイドバーの <b>Mirror</b> から、実際にリソースを選んでミラー設定を行う画面へ移動する。</span></li>
+          <li><span class="shot-legend__num">2</span><span>登録済みRDSの数と、ジョブが全て正常に動いているか(<code>6&nbsp;/&nbsp;6</code>のような表示)を、ここでまず確認する。</span></li>
+        </ol>
+      </div>
+      <span class="sanitize-note">※ 画像中のIPアドレスはサンプル用に加工しています</span>
+    </div>
+  </section>
+
+  <section class="guide-block">
+    <div class="container">
+      <div class="guide-block__head reveal">
+        <p class="section-label">STEP 2 — ミラーの実行</p>
+        <h2 class="section-title">Mirrorワークスペースで、ソースからリソースを選んでコピーする</h2>
+        <p class="section-body">左に選択元(SOURCE)、右に宛先(DESTINATION)のRDSを選ぶと、それぞれのセンダー/レシーバーが一覧表示されます。左でリソースを選んで中央のCopy selectionを押すと、右側に登録され、接続線がつながります。</p>
+      </div>
+      <div class="guide-block__grid">
+        <div class="shot reveal">
+          <img src="../../../assets/images/rds-mirror-1.png" alt="Mirror画面のスクリーンショット">
+          <div class="callout" style="left:17.3%; top:20%; width:25.4%; height:3.6%;">
+            <span class="callout__badge">1</span>
+          </div>
+          <div class="callout" style="left:50%; top:17.6%; width:14.3%; height:6.4%;">
+            <span class="callout__badge">2</span>
+          </div>
+          <div class="callout" style="left:71.5%; top:20%; width:25.4%; height:3.6%;">
+            <span class="callout__badge">3</span>
+          </div>
+        </div>
+        <ol class="shot-legend reveal">
+          <li><span class="shot-legend__num">1</span><span><b>SOURCE</b>のプルダウンから、ミラー元にしたいRDSを選ぶ。左パネルに、そのRDSが持つセンダー/レシーバーがノード・デバイスごとに並ぶ。</span></li>
+          <li><span class="shot-legend__num">2</span><span>左パネルでミラーしたい行をクリックして選択し、中央の <b>Copy selection</b> を押す。</span></li>
+          <li><span class="shot-legend__num">3</span><span><b>DESTINATION</b>のプルダウンから宛先RDSを選ぶ。コピーが終わると、ここにも同じリソースが表示され、線でつながる。</span></li>
+        </ol>
+      </div>
+      <span class="sanitize-note">※ 画像中のIPアドレスはサンプル用に加工しています</span>
+    </div>
+  </section>
+
+  <section class="guide-block" style="border-bottom:none;">
+    <div class="container">
+      <div class="guide-block__head reveal">
+        <p class="section-label">STEP 3 — 構成の俯瞰</p>
+        <h2 class="section-title">Mapで、RDS間のミラー構成をまとめて見る</h2>
+        <p class="section-body">複数のRDSを組み合わせて運用していると、「どこからどこへ何本ミラーしているか」が分かりにくくなります。Mapは、その全体像をノードと線で可視化するページです。ノードや線をクリックすると、該当するMirror画面へジャンプします。</p>
+      </div>
+      <div class="guide-block__grid">
+        <div class="shot reveal">
+          <img src="../../../assets/images/rds-mirror-3.png" alt="Map画面のスクリーンショット">
+          <div class="callout" style="left:0.7%; top:24.4%; width:12%; height:3.5%;">
+            <span class="callout__badge">1</span>
+          </div>
+          <div class="callout" style="left:36%; top:53.5%; width:8.5%; height:13.5%;">
+            <span class="callout__badge">2</span>
+          </div>
+        </div>
+        <ol class="shot-legend reveal">
+          <li><span class="shot-legend__num">1</span><span>左サイドバーの <b>Map</b> から、この俯瞰図を開く。</span></li>
+          <li><span class="shot-legend__num">2</span><span>各ノードがRDSを表す。円周の数字はミラー元/ミラー先としての件数、線はジョブを表し、点線はTransformモードを示す。ノードや線をクリックするとMirror画面へ移動する。</span></li>
+        </ol>
+      </div>
+      <span class="sanitize-note">※ 画像中のIPアドレスはサンプル用に加工しています</span>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer__inner">
+      <span class="footer__left">NMOS Simple Tools — オープンソース放送ユーティリティ</span>
+      <div class="footer__right">
+        <a href="../">← RDS Mirror 製品ページへ戻る</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../../../assets/js/common.js"></script>
+</body>
+</html>
