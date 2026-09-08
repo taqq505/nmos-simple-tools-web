@@ -432,10 +432,10 @@ img { display: block; max-width: 100%; }
   max-width: 100%;
 }
 :lang(ja) .ad-slot-wrap::after {
-  content: "広告で邪魔してごめんね。収入は次のアプリ開発のAI使用料に充てさせてください。";
+  content: "広告表示にご協力いただきありがとうございます。収益は次のアプリ開発のAI利用料に充てさせていただきます。";
 }
 :lang(en) .ad-slot-wrap::after {
-  content: "Sorry for the ad — the revenue goes straight into AI costs for building the next tool.";
+  content: "Thank you for bearing with this ad — the proceeds go toward AI costs for building the next tool.";
 }
 
 .ad-slot {
