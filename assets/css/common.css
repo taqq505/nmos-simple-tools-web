@@ -412,10 +412,30 @@ img { display: block; max-width: 100%; }
   padding: 16px var(--side-pad);
   max-width: calc(var(--content-width) + 2 * var(--side-pad));
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .ad-slot-wrap--center {
   display: flex;
   justify-content: center;
+}
+
+/* A small, honest note under every ad slot — not part of the ad itself,
+   so it survives once real ad markup replaces the placeholder inside. */
+.ad-slot-wrap::after {
+  margin-top: 6px;
+  font-size: 10px;
+  color: var(--ad-label);
+  opacity: 0.85;
+  text-align: center;
+  max-width: 100%;
+}
+:lang(ja) .ad-slot-wrap::after {
+  content: "広告で邪魔してごめんね。収入は次のアプリ開発のAI使用料に充てさせてください。";
+}
+:lang(en) .ad-slot-wrap::after {
+  content: "Sorry for the ad — the revenue goes straight into AI costs for building the next tool.";
 }
 
 .ad-slot {
