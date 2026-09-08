@@ -169,15 +169,6 @@
       border-color: transparent;
     }
 
-    /* 広告スライド */
-    .deck__ad-slide {
-      display: none;
-      align-items: center;
-      justify-content: center;
-      background: #0b0d12;
-    }
-    .deck__ad-slide.is-visible { display: flex; }
-
     /* 前へ/次へ — フレームの角に固定し、キャプション文と絶対に重ならない */
     .deck__arrow {
       position: absolute;
@@ -253,7 +244,6 @@
       background: linear-gradient(135deg, var(--grad-from), var(--grad-to));
       transform: scale(1.5);
     }
-    .deck__dot.is-ad { background: var(--border); }
 
     @keyframes deck-shake {
       0%, 100% { transform: translateX(0); }
@@ -273,7 +263,7 @@
     <div class="deck__bar">
       <span>NMOS// Simple Tools / RDS Mirror — <span style="color:var(--text-1)">チュートリアル</span></span>
       <div class="deck__bar-right">
-        <span class="deck__counter" id="counter">1 / 20</span>
+        <span class="deck__counter" id="counter">1 / 18</span>
         <a href="../">製品ページ</a>
         <a href="../manual/">使い方ガイド</a>
         <a href="../../../en/rds-mirror/tutorial/">EN</a>
@@ -299,12 +289,6 @@
 
         <img id="stage-img" alt="">
         <div id="callouts"></div>
-
-        <div class="deck__ad-slide" id="ad-slide">
-          <div class="ad-slot ad-slot--rect">
-            <span class="ad-slot__label">Advertisement</span>
-          </div>
-        </div>
 
         <div class="deck__title-slide" id="end-slide">
           <h1>お疲れさまでした</h1>
@@ -338,7 +322,6 @@
 
       var SLIDES = [
         { kind: 'title' },
-        { kind: 'ad' },
 
         { kind: 'shot', img: IMG + 'dashboard.png',
           eyebrow: 'FLOW 01 — 起動直後',
@@ -441,7 +424,6 @@
           title: 'Jobsで状態を確認',
           body: 'Jobsページで、動いているジョブの有効/無効・ハートビートをまとめて確認できる。' },
 
-        { kind: 'ad' },
         { kind: 'end' }
       ];
 
@@ -453,7 +435,6 @@
       var stageImg = document.getElementById('stage-img');
       var calloutsWrap = document.getElementById('callouts');
       var titleSlide = document.getElementById('title-slide');
-      var adSlide = document.getElementById('ad-slide');
       var endSlide = document.getElementById('end-slide');
       var caption = document.getElementById('caption');
       var capEyebrow = document.getElementById('cap-eyebrow');
@@ -468,7 +449,7 @@
       SLIDES.forEach(function (s, i) {
         var dot = document.createElement('button');
         dot.type = 'button';
-        dot.className = 'deck__dot' + (s.kind === 'ad' ? ' is-ad' : '');
+        dot.className = 'deck__dot';
         dot.addEventListener('click', function () { goTo(i); });
         dotsWrap.appendChild(dot);
       });
@@ -496,7 +477,6 @@
         var s = SLIDES[step];
 
         titleSlide.classList.toggle('is-visible', s.kind === 'title');
-        adSlide.classList.toggle('is-visible', s.kind === 'ad');
         endSlide.classList.toggle('is-visible', s.kind === 'end');
         stageImg.style.display = s.kind === 'shot' ? 'block' : 'none';
         caption.style.visibility = s.kind === 'shot' ? 'visible' : 'hidden';
@@ -528,7 +508,6 @@
         var s = SLIDES[step];
         if (s.kind === 'shot') return [stageImg, calloutsWrap, caption];
         if (s.kind === 'title') return [titleSlide];
-        if (s.kind === 'ad') return [adSlide];
         return [endSlide];
       }
 
