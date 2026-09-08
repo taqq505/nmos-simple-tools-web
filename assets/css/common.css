@@ -597,7 +597,7 @@ img { display: block; max-width: 100%; }
 }
 
 .tool-hero__tags { display: flex; flex-wrap: wrap; gap: 5px; }
-.tool-hero__cta  { flex-shrink: 0; align-self: flex-end; }
+.tool-hero__cta  { flex-shrink: 0; align-self: flex-end; display: flex; flex-direction: column; align-items: stretch; gap: 8px; }
 
 .btn-primary {
   display: inline-flex;
@@ -614,6 +614,24 @@ img { display: block; max-width: 100%; }
   cursor: pointer;
 }
 .btn-primary:hover { opacity: 0.88; color: white; }
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 10px 20px;
+  background: var(--bg-2);
+  color: var(--grad-from);
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-mid);
+  transition: border-color 0.2s, background 0.2s;
+  cursor: pointer;
+  text-decoration: none;
+}
+.btn-secondary:hover { border-color: var(--grad-from); background: var(--bg-3); }
 
 /* ─── Tool Detail: Beta Banner ─── */
 
