@@ -170,6 +170,35 @@
       border-color: transparent;
     }
 
+    /* Section-boundary flash card — momentarily shown when a new group of
+       steps begins. Feedback flagged the Passthrough→Transform transition
+       in particular as easy to miss, so the mode name gets called out big. */
+    .deck__flash {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(11,13,18,0.94);
+      opacity: 0;
+      pointer-events: none;
+      z-index: 9;
+      transition: opacity .22s ease;
+    }
+    .deck__flash.is-visible { opacity: 1; }
+    .deck__flash__eyebrow {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--grad-from);
+      margin-bottom: 10px;
+    }
+    .deck__flash__title {
+      font-family: var(--font-display);
+      font-size: clamp(22px, 4vw, 34px);
+      font-weight: 800;
+      color: #fff;
+    }
+
     /* prev/next — pinned to the frame's corners so they can never overlap the caption */
     .deck__arrow {
       position: absolute;
@@ -302,6 +331,13 @@
 
         <button type="button" class="deck__arrow deck__arrow--up" id="btn-up" aria-label="Previous" disabled>↑</button>
         <button type="button" class="deck__arrow deck__arrow--down" id="btn-down" aria-label="Next">↓</button>
+
+        <div class="deck__flash" id="flash">
+          <div style="text-align:center;">
+            <p class="deck__flash__eyebrow" id="flash-eyebrow"></p>
+            <p class="deck__flash__title" id="flash-title"></p>
+          </div>
+        </div>
       </div>
 
       <div class="deck__caption" id="caption">
@@ -323,18 +359,21 @@
         { kind: 'title' },
 
         { kind: 'shot', img: IMG + 'dashboard.png',
+          group: 'f1', flowEyebrow: 'FLOW 01', flowTitle: 'Dashboard',
           eyebrow: 'FLOW 01 — Right after launch',
           title: 'Get the big picture from Dashboard',
           body: 'The top cards show counts; the bottom section shows per-RDS reachability and the job list. Next, head to <b>Mirror</b> on the left.',
           callouts: [{ left:0.88, top:14.97, width:13.46, height:4.37 }] },
 
         { kind: 'shot', img: IMG + 'registry-one.png',
+          group: 'f2', flowEyebrow: 'FLOW 02', flowTitle: 'RDS Registry',
           eyebrow: 'FLOW 02 — RDS Registry (1/3)',
           title: 'Open RDS Registry',
           body: 'Only STUDIO-A is registered so far. Add a second one via <b>+ Add registry</b> in the top-right.',
           callouts: [{ left:89.29, top:3.26, width:8.36, height:3.84 }] },
 
         { kind: 'shot', img: IMG + 'registry-add-form.png',
+          group: 'f2', flowEyebrow: 'FLOW 02', flowTitle: 'RDS Registry',
           eyebrow: 'FLOW 02 — RDS Registry (2/3)',
           title: 'Enter the name and URLs',
           body: 'Give it a <b>Label</b> (e.g. STUDIO-B), enter the destination RDS\'s address for both <b>Query API URL</b> and <b>Registration API URL</b>, then press <b>Save</b>.',
@@ -346,23 +385,27 @@
           ] },
 
         { kind: 'shot', img: IMG + 'registry-two.png',
+          group: 'f2', flowEyebrow: 'FLOW 02', flowTitle: 'RDS Registry',
           eyebrow: 'FLOW 02 — RDS Registry (3/3)',
           title: 'Registered',
           body: 'Both STUDIO-A and STUDIO-B are now registered — source and destination are ready.' },
 
         { kind: 'shot', img: IMG + 'mirror-source.png',
+          group: 'f3', flowEyebrow: 'FLOW 03 — PASSTHROUGH', flowTitle: 'Copies the resource as-is',
           eyebrow: 'FLOW 03 — Mirror workspace (1/4)',
           title: 'Pick SOURCE',
           body: 'Pick STUDIO-A in the SOURCE dropdown — resources are listed by node and device.',
           callouts: [{ left:19.04, top:18.34, width:24.4, height:4.07 }] },
 
         { kind: 'shot', img: IMG + 'mirror-dest.png',
+          group: 'f3', flowEyebrow: 'FLOW 03 — PASSTHROUGH', flowTitle: 'Copies the resource as-is',
           eyebrow: 'FLOW 03 — Mirror workspace (2/4)',
           title: 'Pick DESTINATION',
           body: 'Pick STUDIO-B in the DESTINATION dropdown. The right side is still empty at this point.',
           callouts: [{ left:71.85, top:18.34, width:24.4, height:4.07 }] },
 
         { kind: 'shot', img: IMG + 'mirror-select-resource.png',
+          group: 'f3', flowEyebrow: 'FLOW 03 — PASSTHROUGH', flowTitle: 'Copies the resource as-is',
           eyebrow: 'FLOW 03 — Mirror workspace (3/4)',
           title: 'Select a resource and copy',
           body: 'Click the row you want to mirror (CAM-1 Video), then press <b>Copy selection</b>.',
@@ -372,12 +415,14 @@
           ] },
 
         { kind: 'shot', img: IMG + 'mirror-copied.png',
+          group: 'f3', flowEyebrow: 'FLOW 03 — PASSTHROUGH', flowTitle: 'Copies the resource as-is',
           eyebrow: 'FLOW 03 — Mirror workspace (4/4)',
           title: 'Mirrored',
           body: 'It\'s registered on the right, with a connection line drawn between them. Click the icon on the line to move on to Transform.',
           callouts: [{ left:56.54, top:51.02, width:2.21, height:3.49 }] },
 
         { kind: 'shot', img: IMG + 'transform-filled.png',
+          group: 'f4', flowEyebrow: 'FLOW 04 — TRANSFORM', flowTitle: 'Rewrites address & label',
           eyebrow: 'FLOW 04 — Transform config (1/3)',
           title: 'Enter the IP and port',
           body: 'Switch to the Transform tab and enter the destination IP and port.',
@@ -387,38 +432,45 @@
           ] },
 
         { kind: 'shot', img: IMG + 'transform-preview.png',
+          group: 'f4', flowEyebrow: 'FLOW 04 — TRANSFORM', flowTitle: 'Rewrites address & label',
           eyebrow: 'FLOW 04 — Transform config (2/3)',
           title: 'Preview the SDP',
           body: 'Press <b>Preview SDP / active JSON</b> to check the actual output before saving.',
           callouts: [{ left:30.81, top:71.21, width:38.38, height:4.07 }] },
 
         { kind: 'shot', img: IMG + 'transform-saved.png',
+          group: 'f4', flowEyebrow: 'FLOW 04 — TRANSFORM', flowTitle: 'Rewrites address & label',
           eyebrow: 'FLOW 04 — Transform config (3/3)',
           title: 'Transform done',
           body: 'Saving creates a virtual "RDS Mirror Proxy" device on the destination — the dashed connection line marks it as Transform.' },
 
         { kind: 'shot', img: IMG + 'detail-original.png',
+          group: 'f5', flowEyebrow: 'FLOW 05', flowTitle: 'Resource Detail',
           eyebrow: 'FLOW 05 — Resource detail (1/2)',
           title: 'ORIGINAL detail',
           body: 'Double-click any row to open its detail modal. <b>ORIGINAL</b> means it\'s natively registered on this RDS.' },
 
         { kind: 'shot', img: IMG + 'detail-mirrored.png',
+          group: 'f5', flowEyebrow: 'FLOW 05', flowTitle: 'Resource Detail',
           eyebrow: 'FLOW 05 — Resource detail (2/2)',
           title: 'TRANSFORM (PROXY) detail',
           body: '<b>TRANSFORM (PROXY)</b> — shows which job, and which RDS, it was mirrored from.' },
 
         { kind: 'shot', img: IMG + 'chain-guard.png',
+          group: 'f6', flowEyebrow: 'FLOW 06', flowTitle: 'Chain-Mirror Guard',
           eyebrow: 'FLOW 06 — Chain-mirror guard (1/3)',
           title: 'Chain mirroring gets blocked',
           body: 'A resource that was mirrored in gets "mirrored-in" and "chain blocked" markers. Try clicking it.',
           callouts: [{ left:21.4, top:49.23, width:19.7, height:3.93 }] },
 
         { kind: 'shot', img: IMG + 'chain-guard-toast.png',
+          group: 'f6', flowEyebrow: 'FLOW 06', flowTitle: 'Chain-Mirror Guard',
           eyebrow: 'FLOW 06 — Chain-mirror guard (2/3)',
           title: 'The reason shows up in a toast',
           body: 'Clicking it shows a toast explaining why it\'s blocked and how to change the setting.' },
 
         { kind: 'shot', img: IMG + 'jobs-page.png',
+          group: 'f6', flowEyebrow: 'FLOW 06', flowTitle: 'Chain-Mirror Guard',
           eyebrow: 'FLOW 06 — Chain-mirror guard (3/3)',
           title: 'Check status in Jobs',
           body: 'The Jobs page rounds up every running job\'s enabled/disabled state and heartbeat status.' },
@@ -435,6 +487,10 @@
       var calloutsWrap = document.getElementById('callouts');
       var titleSlide = document.getElementById('title-slide');
       var endSlide = document.getElementById('end-slide');
+      var flash = document.getElementById('flash');
+      var flashEyebrow = document.getElementById('flash-eyebrow');
+      var flashTitle = document.getElementById('flash-title');
+      var flashTimer = null;
       var caption = document.getElementById('caption');
       var capEyebrow = document.getElementById('cap-eyebrow');
       var capTitle = document.getElementById('cap-title');
@@ -497,6 +553,14 @@
         btnDown.disabled = step === LAST;
       }
 
+      function showFlash(s) {
+        if (flashTimer) clearTimeout(flashTimer);
+        flashEyebrow.textContent = s.flowEyebrow;
+        flashTitle.textContent = s.flowTitle;
+        flash.classList.add('is-visible');
+        flashTimer = setTimeout(function () { flash.classList.remove('is-visible'); }, 650);
+      }
+
       function shakeBoundary() {
         frame.classList.remove('is-shaking');
         void frame.offsetWidth;
@@ -516,6 +580,7 @@
         locked = true;
 
         var dir = next > current ? 1 : -1;
+        var prevGroup = SLIDES[current].group;
         var outEls = elsFor(current);
 
         outEls.forEach(function (el) {
@@ -527,6 +592,10 @@
         setTimeout(function () {
           current = next;
           render(current);
+
+          if (SLIDES[current].group && SLIDES[current].group !== prevGroup) {
+            showFlash(SLIDES[current]);
+          }
 
           var inEls = elsFor(current);
           inEls.forEach(function (el) {

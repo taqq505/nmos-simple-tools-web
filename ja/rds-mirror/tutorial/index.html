@@ -169,6 +169,34 @@
       border-color: transparent;
     }
 
+    /* セクション境界で一瞬出す見出しカード(Passthrough⇄Transformの切り替わりが
+       特に分かりにくいとの指摘があり、モード名を大きく見せて区切りを作る) */
+    .deck__flash {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(11,13,18,0.94);
+      opacity: 0;
+      pointer-events: none;
+      z-index: 9;
+      transition: opacity .22s ease;
+    }
+    .deck__flash.is-visible { opacity: 1; }
+    .deck__flash__eyebrow {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--grad-from);
+      margin-bottom: 10px;
+    }
+    .deck__flash__title {
+      font-family: var(--font-display);
+      font-size: clamp(22px, 4vw, 34px);
+      font-weight: 800;
+      color: #fff;
+    }
+
     /* 前へ/次へ — フレームの角に固定し、キャプション文と絶対に重ならない */
     .deck__arrow {
       position: absolute;
@@ -303,6 +331,13 @@
 
         <button type="button" class="deck__arrow deck__arrow--up" id="btn-up" aria-label="前へ" disabled>↑</button>
         <button type="button" class="deck__arrow deck__arrow--down" id="btn-down" aria-label="次へ">↓</button>
+
+        <div class="deck__flash" id="flash">
+          <div style="text-align:center;">
+            <p class="deck__flash__eyebrow" id="flash-eyebrow"></p>
+            <p class="deck__flash__title" id="flash-title"></p>
+          </div>
+        </div>
       </div>
 
       <div class="deck__caption" id="caption">
@@ -324,18 +359,21 @@
         { kind: 'title' },
 
         { kind: 'shot', img: IMG + 'dashboard.png',
+          group: 'f1', flowEyebrow: 'FLOW 01', flowTitle: 'Dashboard',
           eyebrow: 'FLOW 01 — 起動直後',
           title: 'Dashboardで全体を確認',
           body: '上段のカードで件数を、下段でRDSごとの到達性とジョブ一覧を確認できる。次は左の<b>Mirror</b>へ進む。',
           callouts: [{ left:0.88, top:14.97, width:13.46, height:4.37 }] },
 
         { kind: 'shot', img: IMG + 'registry-one.png',
+          group: 'f2', flowEyebrow: 'FLOW 02', flowTitle: 'RDS Registry',
           eyebrow: 'FLOW 02 — RDS Registry (1/3)',
           title: 'RDS Registryを開く',
           body: 'STUDIO-Aが1件だけ登録された状態。右上の <b>+ Add registry</b> から2件目を追加する。',
           callouts: [{ left:89.29, top:3.26, width:8.36, height:3.84 }] },
 
         { kind: 'shot', img: IMG + 'registry-add-form.png',
+          group: 'f2', flowEyebrow: 'FLOW 02', flowTitle: 'RDS Registry',
           eyebrow: 'FLOW 02 — RDS Registry (2/3)',
           title: '名前とURLを入力',
           body: '<b>Label</b>に分かりやすい名前(例: STUDIO-B)、<b>Query API URL</b>と<b>Registration API URL</b>に宛先RDSのアドレスを入力し、<b>Save</b>を押す。',
@@ -347,23 +385,27 @@
           ] },
 
         { kind: 'shot', img: IMG + 'registry-two.png',
+          group: 'f2', flowEyebrow: 'FLOW 02', flowTitle: 'RDS Registry',
           eyebrow: 'FLOW 02 — RDS Registry (3/3)',
           title: '登録完了',
           body: 'STUDIO-A / STUDIO-Bの2件が揃った。これでミラー元・先が用意できた。' },
 
         { kind: 'shot', img: IMG + 'mirror-source.png',
+          group: 'f3', flowEyebrow: 'FLOW 03 — PASSTHROUGH', flowTitle: 'そのまま複製するモード',
           eyebrow: 'FLOW 03 — Mirror workspace (1/4)',
           title: 'SOURCEを選ぶ',
           body: 'SOURCEのプルダウンでSTUDIO-Aを選ぶと、ノード・デバイスごとにリソースが一覧表示される。',
           callouts: [{ left:19.04, top:18.34, width:24.4, height:4.07 }] },
 
         { kind: 'shot', img: IMG + 'mirror-dest.png',
+          group: 'f3', flowEyebrow: 'FLOW 03 — PASSTHROUGH', flowTitle: 'そのまま複製するモード',
           eyebrow: 'FLOW 03 — Mirror workspace (2/4)',
           title: 'DESTINATIONを選ぶ',
           body: 'DESTINATIONのプルダウンでSTUDIO-Bを選ぶ。この時点では右側はまだ空。',
           callouts: [{ left:71.85, top:18.34, width:24.4, height:4.07 }] },
 
         { kind: 'shot', img: IMG + 'mirror-select-resource.png',
+          group: 'f3', flowEyebrow: 'FLOW 03 — PASSTHROUGH', flowTitle: 'そのまま複製するモード',
           eyebrow: 'FLOW 03 — Mirror workspace (3/4)',
           title: 'リソースを選んでコピー',
           body: 'ミラーしたい行(CAM-1 Video)をクリックして選択し、<b>Copy selection</b>を押す。',
@@ -373,12 +415,14 @@
           ] },
 
         { kind: 'shot', img: IMG + 'mirror-copied.png',
+          group: 'f3', flowEyebrow: 'FLOW 03 — PASSTHROUGH', flowTitle: 'そのまま複製するモード',
           eyebrow: 'FLOW 03 — Mirror workspace (4/4)',
           title: 'ミラー完了',
           body: '右側に登録され、接続線が引かれる。線の中央のアイコンをクリックすると次のTransform設定に進める。',
           callouts: [{ left:56.54, top:51.02, width:2.21, height:3.49 }] },
 
         { kind: 'shot', img: IMG + 'transform-filled.png',
+          group: 'f4', flowEyebrow: 'FLOW 04 — TRANSFORM', flowTitle: 'アドレス/ラベルを書き換えるモード',
           eyebrow: 'FLOW 04 — Transform config (1/3)',
           title: 'IPとportを入力',
           body: 'Transformタブに切り替え、宛先のIPとportを入力する。',
@@ -388,38 +432,45 @@
           ] },
 
         { kind: 'shot', img: IMG + 'transform-preview.png',
+          group: 'f4', flowEyebrow: 'FLOW 04 — TRANSFORM', flowTitle: 'アドレス/ラベルを書き換えるモード',
           eyebrow: 'FLOW 04 — Transform config (2/3)',
           title: 'SDPをプレビュー',
           body: '<b>Preview SDP / active JSON</b>を押すと、保存前に実際の配信内容を確認できる。',
           callouts: [{ left:30.81, top:71.21, width:38.38, height:4.07 }] },
 
         { kind: 'shot', img: IMG + 'transform-saved.png',
+          group: 'f4', flowEyebrow: 'FLOW 04 — TRANSFORM', flowTitle: 'アドレス/ラベルを書き換えるモード',
           eyebrow: 'FLOW 04 — Transform config (3/3)',
           title: 'Transform完了',
           body: 'Saveすると宛先に「RDS Mirror Proxy」仮想デバイスが作られ、点線の接続線でTransformだと分かる。' },
 
         { kind: 'shot', img: IMG + 'detail-original.png',
+          group: 'f5', flowEyebrow: 'FLOW 05', flowTitle: 'リソースの詳細',
           eyebrow: 'FLOW 05 — Resource detail (1/2)',
           title: 'ORIGINALの詳細',
           body: '行をダブルクリックすると詳細が開く。<b>ORIGINAL</b>はこのRDSにネイティブに登録されたリソース。' },
 
         { kind: 'shot', img: IMG + 'detail-mirrored.png',
+          group: 'f5', flowEyebrow: 'FLOW 05', flowTitle: 'リソースの詳細',
           eyebrow: 'FLOW 05 — Resource detail (2/2)',
           title: 'TRANSFORM (PROXY)の詳細',
           body: '<b>TRANSFORM (PROXY)</b>— どのジョブ・どのRDSからミラーされたかが分かる。' },
 
         { kind: 'shot', img: IMG + 'chain-guard.png',
+          group: 'f6', flowEyebrow: 'FLOW 06', flowTitle: '連鎖ミラーガード',
           eyebrow: 'FLOW 06 — Chain-mirror guard (1/3)',
           title: '連鎖ミラーはブロックされる',
           body: 'ミラーされてきたリソースには「mirrored-in」「chain blocked」の印が付く。試しにクリックしてみる。',
           callouts: [{ left:21.4, top:49.23, width:19.7, height:3.93 }] },
 
         { kind: 'shot', img: IMG + 'chain-guard-toast.png',
+          group: 'f6', flowEyebrow: 'FLOW 06', flowTitle: '連鎖ミラーガード',
           eyebrow: 'FLOW 06 — Chain-mirror guard (2/3)',
           title: '理由がトーストで分かる',
           body: 'クリックすると、ブロックされている理由と設定変更方法を説明するトーストが出る。' },
 
         { kind: 'shot', img: IMG + 'jobs-page.png',
+          group: 'f6', flowEyebrow: 'FLOW 06', flowTitle: '連鎖ミラーガード',
           eyebrow: 'FLOW 06 — Chain-mirror guard (3/3)',
           title: 'Jobsで状態を確認',
           body: 'Jobsページで、動いているジョブの有効/無効・ハートビートをまとめて確認できる。' },
@@ -436,6 +487,10 @@
       var calloutsWrap = document.getElementById('callouts');
       var titleSlide = document.getElementById('title-slide');
       var endSlide = document.getElementById('end-slide');
+      var flash = document.getElementById('flash');
+      var flashEyebrow = document.getElementById('flash-eyebrow');
+      var flashTitle = document.getElementById('flash-title');
+      var flashTimer = null;
       var caption = document.getElementById('caption');
       var capEyebrow = document.getElementById('cap-eyebrow');
       var capTitle = document.getElementById('cap-title');
@@ -498,6 +553,14 @@
         btnDown.disabled = step === LAST;
       }
 
+      function showFlash(s) {
+        if (flashTimer) clearTimeout(flashTimer);
+        flashEyebrow.textContent = s.flowEyebrow;
+        flashTitle.textContent = s.flowTitle;
+        flash.classList.add('is-visible');
+        flashTimer = setTimeout(function () { flash.classList.remove('is-visible'); }, 650);
+      }
+
       function shakeBoundary() {
         frame.classList.remove('is-shaking');
         void frame.offsetWidth;
@@ -517,6 +580,7 @@
         locked = true;
 
         var dir = next > current ? 1 : -1;
+        var prevGroup = SLIDES[current].group;
         var outEls = elsFor(current);
 
         outEls.forEach(function (el) {
@@ -528,6 +592,10 @@
         setTimeout(function () {
           current = next;
           render(current);
+
+          if (SLIDES[current].group && SLIDES[current].group !== prevGroup) {
+            showFlash(SLIDES[current]);
+          }
 
           var inEls = elsFor(current);
           inEls.forEach(function (el) {
