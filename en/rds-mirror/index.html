@@ -172,8 +172,8 @@
           <p class="note-card__desc">This tool only handles IS-04/IS-05 control-plane data — sender/receiver registration, SDP, and connection state. Actual video/audio streams flow directly from source to destination and never pass through this tool.</p>
         </div>
         <div class="note-card reveal">
-          <p class="note-card__title">Chain-mirror guard is off by default</p>
-          <p class="note-card__desc">The setting that blocks selecting a resource that only exists on a registry because this tool mirrored it there is disabled by default. If you're building a multi-hop mirror chain, consider enabling it in Settings.</p>
+          <p class="note-card__title">Chain-mirror guard is on by default</p>
+          <p class="note-card__desc">Selecting a resource as a new source when it only exists on a registry because this tool mirrored it there is blocked by default (chain-mirror guard). If you're building a multi-hop mirror chain, enable "Allow chain mirroring" in Settings.</p>
         </div>
         <div class="note-card reveal">
           <p class="note-card__title">Mirroring one sender can still expose the whole device's flows</p>
